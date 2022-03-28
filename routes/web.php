@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'index')->middleware('guest')->name('learnque');
 
 Route::view('dashboard', 'pages.dashboard')->middleware('auth')->name('dashboard');
+Route::view('ptr', 'pages.ptr-form');
 
 // Route::view('courses', 'pages.courses')->middleware('auth');
 // Route::view('my-courses', 'pages.my-courses')->middleware('auth');
