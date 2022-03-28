@@ -42,9 +42,9 @@ import UpdateNewsNoticeComponent from "./components/NewsNotices/NewsNoticeUpdate
 
 import AvatarHeaderComponent from "./components/AvatarHeaderComponent.vue";
 // import LiveClass from "./components/LiveClass/CreateClass.vue";
-import LiveClassListComponent from "./components/LiveClass/LiveClassListComponent.vue";
-import CreateLiveClassComponent from "./components/LiveClass/CreateLiveClassComponent.vue";
-import UpdateLiveClassComponent from "./components/LiveClass/UpdateLiveClassComponent.vue";
+// import LiveClassListComponent from "./components/LiveClass/LiveClassListComponent.vue";
+// import CreateLiveClassComponent from "./components/LiveClass/CreateLiveClassComponent.vue";
+// import UpdateLiveClassComponent from "./components/LiveClass/UpdateLiveClassComponent.vue";
 
 /**
  * importing students components
@@ -53,6 +53,8 @@ import ClassroomList from "./components/Users/ClassroomList.vue";
 import StudentClassroomView from "./components/Users/ClassroomView.vue";
 // import StudentClassroomList from "./components/Users/StudentClassroomList.vue";
 // import StudentClassroomView from "./components/Users/StudentClassroomView.vue";
+
+import EnrolmentComponent from "./components/Users/EnrolmentComponent.vue";
 
 const app = createApp({});
 
@@ -83,9 +85,9 @@ app.component("user-edit-profile", UserEditProfile);
 app.component("classroom-items-grid-list", ClassroomItemsGridList);
 app.component("classroom-view", ClassroomView);
 
-app.component("live-class-list-component", LiveClassListComponent);
-app.component("create-live-class-component", CreateLiveClassComponent);
-app.component("edit-live-class-component", UpdateLiveClassComponent);
+// app.component("live-class-list-component", LiveClassListComponent);
+// app.component("create-live-class-component", CreateLiveClassComponent);
+// app.component("edit-live-class-component", UpdateLiveClassComponent);
 // End of Admin components
 
 // Students components
@@ -108,6 +110,8 @@ app.component("edit-news-notice-component", UpdateNewsNoticeComponent);
  */
 app.component("copy-write", CopyWrite);
 app.component("login-component", UserLogin);
+
+app.component("enrolment-component", EnrolmentComponent);
 
 app.component("home-course-list-component", HomeCourseListComponent);
 

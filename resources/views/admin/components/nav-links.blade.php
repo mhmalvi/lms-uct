@@ -5,15 +5,9 @@
     </a>
 </li>
 <li class="sidebar-menu-item">
-    <a class="sidebar-menu-button" href="{{route('admin.classrooms')}}">
+    <a class="sidebar-menu-button" href="{{ route('admin.classrooms') }}">
         <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">class</span>
         <span class="sidebar-menu-text">Classrooms</span>
-    </a>
-</li>
-<li class="sidebar-menu-item">
-    <a class="sidebar-menu-button" href="{{route('admin.liveclass.index')}}">
-        <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">video_call</span>
-        <span class="sidebar-menu-text">Live Class</span>
     </a>
 </li>
 <li class="sidebar-menu-item">
