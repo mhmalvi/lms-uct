@@ -1,0 +1,39 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=500",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "@tailwindcss/forms": "^0.2.1",
+        "alpinejs": "^2.7.3",
+        "autoprefixer": "^10.4.0",
+        "axios": "^0.21",
+        "lodash": "^4.17.19",
+        "postcss": "^8.4.1",
+        "postcss-import": "^12.0.1",
+        "tailwindcss": "^2.2.19",
+        "vue-loader": "^16.8.3"
+    },
+    "dependencies": {
+        "@fullcalendar/bootstrap": "^5.10.1",
+        "@fullcalendar/core": "^5.10.1",
+        "@fullcalendar/daygrid": "^5.10.1",
+        "@fullcalendar/interaction": "^5.10.1",
+        "@fullcalendar/timegrid": "^5.10.1",
+        "@fullcalendar/vue3": "^5.10.1",
+        "@vueup/vue-quill": "^1.0.0-beta.7",
+        "laravel-mix": "^6.0.43",
+        "sweetalert2": "^11.2.0",
+        "vue": "^3.2.22",
+        "vue-router": "^4.0.12",
+        "vue3-colorpicker": "^2.0.4",
+        "vue3-date-time-picker": "^2.3.6",
+        "vuex": "^4.0.2"
+    }
+}
