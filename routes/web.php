@@ -47,9 +47,7 @@ require __DIR__ . '/auth.php';
 Route::get('enrolment', [EnrollmentsController::class, 'index']);
 Route::post('enrolment', [EnrollmentsController::class, 'store'])->name('enrollment.store');
 
-Route::middleware('auth:web,admin')->group(function () {
-    Route::view('dashboard', 'pages.dashboard')->name('dashboard');
-
+Route::middleware(('auth:web,admin'))->group(function () {
     /**
      * User profile routes
      */
@@ -59,8 +57,12 @@ Route::middleware('auth:web,admin')->group(function () {
         Route::put('avatar/update', [ProfileController::class, 'avatarUpdate']);
         Route::delete('avatar/delete', [ProfileController::class, 'avatarDelete']);
     });
+});
 
-    Route::prefix('classrooms')->name('classrooms.')->group(function () {
+Route::middleware('auth:web')->group(function () {
+    Route::view('dashboard', 'pages.dashboard')->name('dashboard');
+
+    Route::prefix('classroom')->name('classroom.')->group(function () {
         Route::get('/', [ClassroomsController::class, 'index'])->name('index');
         Route::get('{classroom:unique_id}/posts/list', [ClassroomPostsController::class, 'getPaginatedList']);
         Route::get('{classroom:unique_id}/teachers/list', [ClassroomPostsController::class, 'getTeacherList']);

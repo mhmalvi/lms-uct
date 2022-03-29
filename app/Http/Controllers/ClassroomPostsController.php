@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Classroom\PostCreateRequest;
 use App\Http\Resources\ClassroomMembersCollection;
 use App\Http\Resources\ClassroomPostsCollection;
-use App\Http\Resources\UsersCollection;
 use App\Models\Classroom;
 use App\Models\ClassroomMember;
-use Illuminate\Http\Request;
 
 class ClassroomPostsController extends Controller
 {

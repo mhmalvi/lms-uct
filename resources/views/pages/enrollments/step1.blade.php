@@ -22,9 +22,10 @@
                                         <div class="form-group"><label for="courses">Course/UoC</label>
                                             <select id="courses" class="form-control" name="selected_course">
                                                 <option value="">Select a course...</option>
-                                                <option value="Course 1">Course 1</option>
-                                                <option value="Course 2">Course 2</option>
-                                                <option value="Course 3">Course 3</option>
+                                                <option value="HLTAID003 – Provide first aid">HLTAID003 – Provide first
+                                                    aid</option>
+                                                <option value="123 - Course 2">123 - Course 2</option>
+                                                <option value="098 - Course 3">098 - Course 3</option>
                                             </select>
                                         </div>
                                     </div>

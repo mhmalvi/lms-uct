@@ -54,8 +54,6 @@ import StudentClassroomView from "./components/Users/ClassroomView.vue";
 // import StudentClassroomList from "./components/Users/StudentClassroomList.vue";
 // import StudentClassroomView from "./components/Users/StudentClassroomView.vue";
 
-import EnrolmentComponent from "./components/Users/EnrolmentComponent.vue";
-
 const app = createApp({});
 
 axios.defaults.baseURL = document.head.querySelector(
@@ -110,8 +108,6 @@ app.component("edit-news-notice-component", UpdateNewsNoticeComponent);
  */
 app.component("copy-write", CopyWrite);
 app.component("login-component", UserLogin);
-
-app.component("enrolment-component", EnrolmentComponent);
 
 app.component("home-course-list-component", HomeCourseListComponent);
 
