@@ -5,7 +5,7 @@ use App\Http\Controllers\ClassroomMembersController;
 use App\Http\Controllers\ClassroomsController;
 use App\Http\Controllers\ClassroomPostsController;
 use App\Http\Controllers\CoursesController;
-use App\Http\Controllers\EnrolmentsController;
+use App\Http\Controllers\EnrollmentsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,7 +44,8 @@ Route::get('course/{course:uuid}', [CoursesController::class, 'show']);
 
 require __DIR__ . '/auth.php';
 
-Route::get('enrolment', [EnrolmentsController::class, 'index']);
+Route::get('enrolment', [EnrollmentsController::class, 'index']);
+Route::post('enrolment', [EnrollmentsController::class, 'store'])->name('enrollment.store');
 
 Route::middleware('auth:web,admin')->group(function () {
     Route::view('dashboard', 'pages.dashboard')->name('dashboard');
