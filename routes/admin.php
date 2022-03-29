@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\EnrollUsersController;
 use App\Http\Controllers\Admin\NewsNoticesController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\LiveClassesController;
+use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\TeachersController;
 use Illuminate\Support\Facades\Route;
@@ -134,4 +135,12 @@ Route::prefix("news_notices")->name('news_and_notices.')->group(function () {
     Route::get('edit/{news_notice:slug}', [NewsNoticesController::class, 'edit']);
     Route::patch('edit/{news_notice}', [NewsNoticesController::class, 'update']);
     Route::delete('destroy/{news_notice}', [NewsNoticesController::class, 'destroy']);
+});
+
+/**
+ * Posts
+ */
+Route::prefix("posts")->name("posts.")->group(function () {
+    Route::get("/", [PostsController::class, 'index'])->name('index');
+    Route::get("/create", [PostsController::class, 'create'])->name('create');
 });
