@@ -38,21 +38,6 @@
 </head>
 
 <body>
-    <!-- This code is use for color chooser, you can delete -->
-    <div id="switch-color" class="color-switcher">
-        <div class="open"><i class="fas fa-cog"></i></div>
-        <h4>COLOR OPTION</h4>
-        <ul>
-            <li><a class="color-2" onclick="setActiveStyleSheet('color-2'); return false;" href="#"><i
-                        class="fas fa-cog"></i></a></li>
-            <li><a class="color-3" onclick="setActiveStyleSheet('color-3'); return false;" href="#"><i
-                        class="fas fa-cog"></i></a></li>
-            <li><a class="color-4" onclick="setActiveStyleSheet('color-4'); return false;" href="#"><i
-                        class="fas fa-cog"></i></a></li>
-            <li><a class="color-5" onclick="setActiveStyleSheet('color-5'); return false;" href="#"><i
-                        class="fas fa-cog"></i></a></li>
-        </ul>
-    </div>
     <div class="clearfix"></div>
     <div class="wrapper">
         <div class="steps-area steps-area-fixed">
@@ -83,8 +68,8 @@
                                                             <div class="row">
                                                                 <div class="col-6"><label
                                                                         for="name">Name</label><input type="text"
-                                                                        class="form-control" name="name"
-                                                                        placeholder="Name" /></div>
+                                                                        class="form-control required" name="name"
+                                                                        required placeholder="Name" /></div>
                                                                 <div class="col-6"><label
                                                                         for="date">Date</label><input type="date"
                                                                         class="form-control" name="date"
@@ -167,20 +152,24 @@
                                                                 the area. Circle the appropriate sign that
                                                                 should be placed in this area.</label>
                                                             <div class="row">
+                                                                <div class="col-4">
+                                                                    <label>
+                                                                        <input type="radio"
+                                                                            class="input-form-check-input"
+                                                                            name="radio_1" />
+                                                                        <img src="{{ asset('/images/enrolments/1.png') }}"
+                                                                            alt="Option 1" />
+                                                                    </label>
+                                                                </div>
                                                                 <div class="col-4"><label><input type="radio"
                                                                             class="input-form-check-input"
                                                                             name="radio_1" /><img
-                                                                            src="{{ asset('/assets/images/1.png') }}"
-                                                                            alt="Option 1" /></label></div>
-                                                                <div class="col-4"><label><input type="radio"
-                                                                            class="input-form-check-input"
-                                                                            name="radio_1" /><img
-                                                                            src="{{ asset('/assets/images/2.png') }}"
+                                                                            src="{{ asset('/images/enrolments/2.png') }}"
                                                                             alt="Option 2" /></label></div>
                                                                 <div class="col-4"><label><input type="radio"
                                                                             class="input-form-check-input"
                                                                             name="radio_1" /><img
-                                                                            src="{{ asset('/assets/images/3.png') }}"
+                                                                            src="{{ asset('/images/enrolments/3.png') }}"
                                                                             alt="Option 3" /></label></div>
                                                             </div>
                                                         </div>
@@ -191,17 +180,17 @@
                                                                 <div class="col-4"><label><input type="radio"
                                                                             class="input-form-check-input"
                                                                             name="radio_2" /><img
-                                                                            src="{{ asset('/assets/images/21.png') }}"
+                                                                            src="{{ asset('/images/enrolments/21.png') }}"
                                                                             alt="Option 1" /></label></div>
                                                                 <div class="col-4"><label><input type="radio"
                                                                             class="input-form-check-input"
                                                                             name="radio_2" /><img
-                                                                            src="{{ asset('/assets/images/22.png') }}"
+                                                                            src="{{ asset('/images/enrolments/22.png') }}"
                                                                             alt="Option 2" /></label></div>
                                                                 <div class="col-4"><label><input type="radio"
                                                                             class="input-form-check-input"
                                                                             name="radio_2" /><img
-                                                                            src="{{ asset('/assets/images/23.png') }}"
+                                                                            src="{{ asset('/images/enrolments/23.png') }}"
                                                                             alt="Option 3" /></label></div>
                                                             </div>
                                                         </div>
@@ -944,7 +933,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/conditionize.flexible.jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/wizard-main.js') }}"></script>
     <script src="{{ asset('assets/js/switch.js') }}"></script>
     <script>
         $("#files").change(function() {
