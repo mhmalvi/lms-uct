@@ -10,14 +10,6 @@ import UserLogin from "./components/Auth/Users/LoginComponent.vue";
 import AdminLogin from "./components/Auth/Admin/LoginComponent.vue";
 
 // Import the components here
-import CreateCategories from "./components/Categories/CreateCategories.vue";
-import ListCategories from "./components/Categories/ListCategories.vue";
-import EditCategory from "./components/Categories/EditCategory.vue";
-
-import CourseList from "./components/Courses/ListCourses.vue";
-import CreateCourses from "./components/Courses/CreateCourses.vue";
-import UpdateCourse from "./components/Courses/UpdateCourse.vue";
-
 import EnrollUserForm from "./components/Users/EnrollUserForm.vue";
 import StudentsList from "./components/Users/StudentsList.vue";
 import StudentEditForm from "./components/Users/StudentEditForm.vue";
@@ -46,6 +38,9 @@ import LiveClassListComponent from "./components/LiveClass/LiveClassListComponen
 import CreateLiveClassComponent from "./components/LiveClass/CreateLiveClassComponent.vue";
 import UpdateLiveClassComponent from "./components/LiveClass/UpdateLiveClassComponent.vue";
 
+//Posts
+import PostcreateComponent from "./components/Posts/CreateComponent.vue";
+
 /**
  * importing students components
  */
@@ -63,14 +58,6 @@ axios.defaults.baseURL = document.head.querySelector(
 // Register all components here
 
 // Admin components
-app.component("create-categories", CreateCategories);
-app.component("list-categories", ListCategories);
-app.component("edit-category", EditCategory);
-
-app.component("course-list", CourseList);
-app.component("create-courses", CreateCourses);
-app.component("update-course", UpdateCourse);
-
 app.component("enrole-user-form", EnrollUserForm);
 app.component("students-list", StudentsList);
 app.component("student-edit-form", StudentEditForm);
@@ -86,6 +73,8 @@ app.component("classroom-view", ClassroomView);
 app.component("live-class-list-component", LiveClassListComponent);
 app.component("create-live-class-component", CreateLiveClassComponent);
 app.component("edit-live-class-component", UpdateLiveClassComponent);
+
+app.component("create-post", PostcreateComponent);
 // End of Admin components
 
 // Students components

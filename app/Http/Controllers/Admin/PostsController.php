@@ -22,4 +22,12 @@ class PostsController extends Controller
     {
         return view('admin.pages.posts.create');
     }
+
+    /**
+     * Store
+     */
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
 }

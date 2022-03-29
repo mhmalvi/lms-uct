@@ -143,4 +143,5 @@ Route::prefix("news_notices")->name('news_and_notices.')->group(function () {
 Route::prefix("posts")->name("posts.")->group(function () {
     Route::get("/", [PostsController::class, 'index'])->name('index');
     Route::get("/create", [PostsController::class, 'create'])->name('create');
+    Route::post("/store", [PostsController::class, 'store']);
 });

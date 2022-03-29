@@ -37,8 +37,8 @@
 @section('content')
     <div class="container page__container">
         <div class="row">
-            <div class="col-md-12">
-                
+            <div class="col-md-10 mx-auto py-5">
+                <create-post></create-post>
             </div>
         </div>
     </div>
