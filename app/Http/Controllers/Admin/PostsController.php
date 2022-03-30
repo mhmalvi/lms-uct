@@ -32,6 +32,14 @@ class PostsController extends Controller
     }
 
     /**
+     * Show
+     */
+    public function show(Post $post)
+    {
+        return view('admin.pages.posts.show', compact('post'));
+    }
+
+    /**
      * Store
      */
     public function store(PostCreateRequest $request)

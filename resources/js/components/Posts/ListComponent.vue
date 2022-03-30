@@ -15,33 +15,37 @@
     </div>
     <div class="row" v-else>
       <div class="col-md-8 mx-auto">
-        <div class="card" v-for="(post, index) in state.posts" :key="index">
-          <div class="card-body">
-            <div class="d-flex justify-content-between">
-              <h3>
-                {{ post.title }}
-              </h3>
-              <div v-if="admin">
-                <a
-                  href="javascript:void(0)"
-                  @click="attemptDelete(post.id)"
-                  class="btn-link"
-                  >Delete</a
-                >
-              </div>
-            </div>
-
-            <p class="card-text" v-html="post.description"></p>
-
-            <div v-if="post.thumbnail_url">
+        <a
+          :href="getPostLink(post.id)"
+          v-for="(post, index) in state.posts"
+          :key="index"
+        >
+          <div class="card">
+            <div v-if="post.thumbnail_url" class="post-image-wrapper">
               <img
                 :src="post.thumbnail_url"
                 alt="Thumbnail"
-                class="card-img-bottom"
+                class="card-img-top"
               />
             </div>
+
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <h3>
+                  {{ post.title }}
+                </h3>
+                <div v-if="admin">
+                  <a
+                    href="javascript:void(0)"
+                    @click="attemptDelete(post.id)"
+                    class="btn-link"
+                    >Delete</a
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>
@@ -105,11 +109,23 @@ export default {
       }
     };
 
+    const getPostLink = (post_id) => {
+      return (admin ? "/admin" : "") + "/posts/" + post_id;
+    };
+
     return {
       state,
       admin,
       attemptDelete,
+      getPostLink,
     };
   },
 };
 </script>
+
+<style scoped>
+.post-image-wrapper {
+  max-height: 200px;
+  overflow: hidden;
+}
+</style>
