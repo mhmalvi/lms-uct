@@ -24,7 +24,7 @@ class EnrollmentsController extends Controller
 
         $form = new EnrollmentForm;
 
-        $form->uid = time() . uniqid();
+        $form->uid = rand(100000, 999999);
         $form->course_code = $course_code;
         $form->course_title = $course_title;
         $form->form_data = json_encode(
