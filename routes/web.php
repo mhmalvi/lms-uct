@@ -77,7 +77,9 @@ Route::middleware('auth:web,admin')->group(function () {
 });
 
 Route::middleware('auth:web')->prefix('posts')->name('posts.')->group(function () {
-    Route::get('/', [PostsController::class, 'index']);
+    Route::get('/', [PostsController::class, 'index'])->name('index');
 
     Route::get('all', [PostsController::class, 'getList']);
+
+    Route::get('{post}', [PostsController::class, 'show']);
 });

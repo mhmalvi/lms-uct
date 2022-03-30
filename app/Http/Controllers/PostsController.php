@@ -16,4 +16,9 @@ class PostsController extends Controller
     {
         return Post::latest()->paginate(10);
     }
+
+    public function show(Post $post)
+    {
+        return view('user.pages.posts.view', compact('post'));
+    }
 }

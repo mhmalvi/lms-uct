@@ -1,21 +1,13 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h3>
-            {{ post.title }}
-          </h3>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h3>
+        {{ post.title }}
+      </h3>
 
-          <span v-html="post.description"></span>
+      <span v-html="post.description"></span>
 
-          <img
-            :src="post.thumbnail_url"
-            alt="Thumbnail"
-            class="card-thumbnail"
-          />
-        </div>
-      </div>
+      <img :src="post.thumbnail_url" alt="Thumbnail" class="card-thumbnail" />
     </div>
   </div>
 </template>
