@@ -2,6 +2,10 @@
 
 namespace App\Http\Requests\Post;
 
+use App\Models\Post;
+use App\Services\ImageHandler;
+use Illuminate\Support\Str;
+
 class PostCreateRequest extends PostRequest
 {
     /**
@@ -11,7 +15,7 @@ class PostCreateRequest extends PostRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +26,26 @@ class PostCreateRequest extends PostRequest
     public function rules()
     {
         return [
-            //
+            'title' => "required",
+            'description' => "required",
+            'thumbnail' => "required",
         ];
+    }
+
+    public function save()
+    {
+        $post = new Post();
+
+        $post->title = $this->title;
+        $post->description = $this->description;
+        $image_handler = new ImageHandler();
+        $image = $image_handler->setImage($this->thumbnail)
+            ->setName(Str::slug($this->title))
+            ->setPath('posts')
+            ->storeFromImageData();
+
+        $post->thumbnail = $image;
+
+        $post->save();
     }
 }

@@ -7,7 +7,11 @@
         class="form-control"
         v-model="form.data.title"
         id="title"
+        placeholder="Post title"
       />
+      <small class="text-danger" v-if="validation.errors.title">
+        {{ validation.errors.title[0] }}
+      </small>
     </div>
     <div class="form-group">
       <label for="description">Description</label>
@@ -15,8 +19,12 @@
         theme="snow"
         contentType="html"
         ref="description_editor"
+        placeholder="Post description"
         v-model:content="form.data.description"
       />
+      <small class="text-danger" v-if="validation.errors.description">
+        {{ validation.errors.description[0] }}
+      </small>
     </div>
     <div class="form-group">
       <label for="file">Thumbnail</label>
@@ -25,9 +33,18 @@
         @requestForChange="handleImageChange"
         @requestForDelete="handleImageDelete"
       />
+      <small class="text-danger" v-if="validation.errors.thumbnail">
+        {{ validation.errors.thumbnail[0] }}
+      </small>
     </div>
 
-    <button type="submit" class="btn btn-outline-primary">Submit</button>
+    <button
+      type="submit"
+      class="btn btn-outline-primary"
+      :disabled="form.isSubmitting"
+    >
+      Submit
+    </button>
   </form>
 </template>
 
@@ -37,6 +54,8 @@ import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import ImagePickerComponent from "../Global/ImagePickerComponent.vue";
 import axios from "axios";
+import Swal from "sweetalert2";
+
 export default {
   components: {
     ImagePickerComponent,
@@ -47,20 +66,27 @@ export default {
       data: {
         title: "",
         description: "",
-        image: "",
+        thumbnail: "",
       },
       isSubmitting: false,
     });
 
+    const validation = reactive({
+      errors: {},
+      message: "",
+    });
+
+    const description_editor = ref(0);
+
     const image_picker = ref(0);
 
     const handleImageChange = (data) => {
-      form.data.image = data.image;
+      form.data.thumbnail = data.image;
       setImage(data.image);
     };
 
     const handleImageDelete = () => {
-      form.data.image = "";
+      form.data.thumbnail = "";
       setImage("");
     };
 
@@ -77,15 +103,53 @@ export default {
     };
 
     const handleFormSubmit = () => {
+      formErrorReset();
+      form.isSubmitting = true;
+
       axios
         .post("admin/posts/store", form.data)
-        .then((res) => {})
-        .catch((err) => {});
+        .then((res) => {
+          resetForm();
+          Swal.fire({
+            title: res.data.message,
+            timer: 2000,
+          });
+        })
+        .catch((err) => {
+          if (err.response.status == 422) {
+            validation.errors = err.response.data.errors;
+            validation.message = err.response.data.message;
+          } else {
+            Swal.fire({
+              title: err.response.data.message,
+            });
+          }
+        })
+        .finally(() => {
+          form.isSubmitting = false;
+        });
+    };
+
+    const formErrorReset = () => {
+      validation.errors = {};
+      validation.message = "";
+    };
+
+    const resetForm = () => {
+      form.data = {
+        title: "",
+        description: "",
+        thumbnail: "",
+      };
+      description_editor.value.setHTML("");
+      image_picker.value.deleteImage();
     };
 
     return {
       form,
+      validation,
       image_picker,
+      description_editor,
       handleImageChange,
       setData,
       handleImageDelete,
