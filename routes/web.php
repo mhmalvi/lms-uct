@@ -5,6 +5,7 @@ use App\Http\Controllers\ClassroomMembersController;
 use App\Http\Controllers\ClassroomsController;
 use App\Http\Controllers\ClassroomPostsController;
 use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,5 +59,9 @@ Route::middleware('auth:web,admin')->group(function () {
         Route::get('{classroom:unique_id}/students', [ClassroomMembersController::class, 'getStudents']);
     });
 
+    
+
     Route::get('calendar-events/list', [CalendarEventsController::class, 'getList']);
 });
+
+
