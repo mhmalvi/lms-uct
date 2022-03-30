@@ -1,6 +1,15 @@
 @extends('admin.layouts.app')
 
-@section("title", "Manage Posts")
+@section('title', 'Manage Classroom')
+
+@section('link')
+    <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-outline-dark">
+        <span class="material-icons mr-1">
+            add_circle_outline
+        </span>
+        Add New
+    </a>
+@endsection
 
 @section('breadcrumb')
     <div class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left px-5">
@@ -15,17 +24,17 @@
                     </li>
                     @if (request()->segment(1))
                         <li class="breadcrumb-item">
-                            {{Str::upper(request()->segment(1))}}
+                            {{ Str::upper(request()->segment(1)) }}
                         </li>
                     @endif
                     @if (request()->segment(2))
                         <li class="breadcrumb-item">
-                            {{Str::upper(request()->segment(2))}}
+                            {{ Str::upper(request()->segment(2)) }}
                         </li>
                     @endif
                     @if (request()->segment(3))
                         <li class="breadcrumb-item">
-                            {{Str::upper(request()->segment(3))}}
+                            {{ Str::upper(request()->segment(3)) }}
                         </li>
                     @endif
                 </ol>
@@ -38,7 +47,7 @@
     <div class="container page__container">
         <div class="row">
             <div class="col-md-12">
-                
+                <post-list-component admin="true" />
             </div>
         </div>
     </div>

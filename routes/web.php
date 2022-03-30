@@ -1,11 +1,8 @@
 <?php
 
 use App\Http\Controllers\CalendarEventsController;
-use App\Http\Controllers\ClassroomMembersController;
-use App\Http\Controllers\ClassroomsController;
-use App\Http\Controllers\ClassroomPostsController;
 use App\Http\Controllers\CoursesController;
-use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,26 +39,14 @@ Route::middleware('auth:web,admin')->group(function () {
         Route::delete('avatar/delete', [ProfileController::class, 'avatarDelete']);
     });
 
-    Route::prefix('classrooms')->name('classrooms.')->group(function () {
-        Route::get('/', [ClassroomsController::class, 'index'])->name('index');
-        Route::get('{classroom:unique_id}/posts/list', [ClassroomPostsController::class, 'getPaginatedList']);
-        Route::get('{classroom:unique_id}/teachers/list', [ClassroomPostsController::class, 'getTeacherList']);
-        Route::get('list', [ClassroomsController::class, 'getPaginatedList']);
-
-        Route::get('{classroom:unique_id}', [ClassroomsController::class, 'show']);
-        /**
-         * For the vue routes situated in ClassroomsController@show
-         */
-        Route::get('{classroom:unique_id}/posts', [ClassroomsController::class, 'show']);
-        Route::get('{classroom:unique_id}/students', [ClassroomsController::class, 'show']);
-        Route::get('{classroom:unique_id}/teachers', [ClassroomsController::class, 'show']);
-
-        Route::get('{classroom:unique_id}/students', [ClassroomMembersController::class, 'getStudents']);
-    });
-
-    
-
     Route::get('calendar-events/list', [CalendarEventsController::class, 'getList']);
 });
 
 
+Route::middleware('auth:web')->prefix('classroom')->name('posts.')->group(function () {
+    Route::get('/', [PostsController::class, 'index'])->name('index');
+
+    Route::get('all', [PostsController::class, 'getList']);
+
+    Route::get('{post}', [PostsController::class, 'show']);
+});

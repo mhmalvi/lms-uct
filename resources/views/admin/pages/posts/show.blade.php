@@ -1,13 +1,21 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Create Classroom post')
+@section('title', 'View Classroom Post')
+
+@section('link')
+    <a href="{{ route('admin.posts.index') }}" class="btn btn-sm btn-outline-dark">
+        <span class="material-icons mr-1">
+            arrow_back
+        </span>
+        Back
+    </a>
+@endsection
 
 @section('breadcrumb')
     <div class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left px-5">
         <div class="flex d-flex flex-column flex-sm-row align-items-center mb-24pt mb-md-0">
             <div class="mb-24pt mb-sm-0 mr-sm-24pt">
                 <h2 class="mb-0">
-                    Create Posts
                 </h2>
                 <ol class="breadcrumb p-0 m-0">
                     <li class="breadcrumb-item">
@@ -38,7 +46,7 @@
     <div class="container page__container">
         <div class="row">
             <div class="col-md-10 mx-auto py-5">
-                <create-post></create-post>
+                <view-post-component post_data="{{ json_encode($post) }}" />
             </div>
         </div>
     </div>

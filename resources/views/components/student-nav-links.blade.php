@@ -1,17 +1,15 @@
 <ul class="sidebar-menu">
     <li class="sidebar-menu-item">
-        <a class="sidebar-menu-button"
-            href="{{ route('dashboard') }}">
+        <a class="sidebar-menu-button" href="{{ route('dashboard') }}">
             <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">home</span>
             <span class="sidebar-menu-text">Dashboard</span>
         </a>
     </li>
 
     <li class="sidebar-menu-item">
-        <a class="sidebar-menu-button"
-            href="{{ route('classrooms.index') }}">
+        <a class="sidebar-menu-button" href="{{ route('posts.index') }}">
             <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">class</span>
-            <span class="sidebar-menu-text">My Classrooms</span>
+            <span class="sidebar-menu-text">Classroom</span>
         </a>
     </li>
 
