@@ -1,10 +1,23 @@
 <div class="multisteps-form__panel js-active" data-animation="slideHorz">
     <div class="wizard-forms">
-        <div class="inner pb-100 clearfix">
-            <div class="form-content pera-content">
+        <div class="inner clearfix">
+            <div class="container form-content pera-content p-md-3">
                 <div class="step-inner-content">
-                    <h3>LLN Assessment</h3>
-                    <div class="step-box">
+                    <h4 class="py-2 text-center">Language Literacy and Numeracy Indication</h4>
+
+                    <div class="instruction-text">
+                        <p>
+                            This document is designed to provide us with some idea as to your literacy and numeracy skills to 
+                            ensure that you will be able to meet the English Language requirements for the First Aid training.  
+                            All questions must be attempted. 
+                        </p>
+                        <p>
+                            There is no pass mark, but rather the process advises us of your English Language and numeracy skills and knowledge, 
+                            this provides us with an indication of the degree of support you may require and if we can provide this.
+                        </p>
+                    </div>
+
+                    <div class="step-box pt-2">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
@@ -12,7 +25,7 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-6"><label for="name">Name</label><input
-                                                        type="text" class="form-control required" name="name" required
+                                                        type="text" class="form-control" name="name"
                                                         placeholder="Name" /></div>
                                                 <div class="col-6"><label for="date">Date</label><input
                                                         type="date" class="form-control" name="date"
@@ -33,6 +46,23 @@
 
                                 <div class="card">
                                     <div class="card-body">
+                                        <div class="card-title instruction-text">
+                                            <h5>ENGLISH LITERACY EXAM</h5>
+                                            <p>
+                                                Read the following passage and answers the questions from information in the passage.
+                                            </p>
+                                            <p>
+                                                There was a little detective agency in Africa; it was at the foot of a large mountain.  
+                                                These were its assets: a tiny white vatwo desks, two chairs, a telephone, and an old typewriter.  
+                                                Then there was a teapot, in which the lady detective brewed redbush tea.  There were three mugs, 
+                                                one for the detective, one for the secretary and one for a client.  This agency was in a beautiful 
+                                                little town.
+                                            </p>
+                                            <p>
+                                                When you walked out of the front door you could see an acacia tree, throne tree and the edge of the desert.  
+                                                As you walked down the front stairs onto the red gravely road an old Ford truck was parked in the driveway.
+                                            </p>
+                                        </div>
                                         <div class="form-group"><label>What country do you
                                                 find the agency?</label>
                                             <input type="text" class="form-control" name="country_agency" />
@@ -155,19 +185,20 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- /.inner -->
+                                <div class="actions">
+                                    <ul>
+                                        <li class="disable" aria-disabled="true"><span class="js-btn-next" title="NEXT">Backward <i
+                                                    class="fa fa-arrow-right"></i></span></li>
+                                        <li><span class="js-btn-next" title="NEXT">NEXT <i class="fa fa-arrow-right"></i></span></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- /.inner -->
-        <div class="actions">
-            <ul>
-                <li class="disable" aria-disabled="true"><span class="js-btn-next" title="NEXT">Backward <i
-                            class="fa fa-arrow-right"></i></span></li>
-                <li><span class="js-btn-next" title="NEXT">NEXT <i class="fa fa-arrow-right"></i></span></li>
-            </ul>
         </div>
     </div>
 </div>

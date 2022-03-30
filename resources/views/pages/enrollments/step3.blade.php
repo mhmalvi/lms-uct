@@ -1,9 +1,9 @@
 <div class="multisteps-form__panel" data-animation="slideHorz">
     <div class="wizard-forms">
-        <div class="inner pb-100 clearfix">
-            <div class="form-content pera-content">
+        <div class="innerclearfix">
+            <div class="container form-content pera-content p-md-3">
                 <div class="step-inner-content">
-                    <h2>Enrollement</h2>
+                    <h2 class="py-2">Enrollement</h2>
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -202,6 +202,7 @@
                                             you satisfy the course
                                             entry requirements (if any)? </label><select id="couseEntry"
                                             name="couseEntry" class="form-control">
+                                            <option value="" disabled selected>Please select...</option>
                                             <option value="">Yes</option>
                                             <option value="">No</option>
                                         </select></div>
@@ -217,6 +218,7 @@
                                             you speak
                                             English? </label><select name="speakEnglish" id="speakEnglish"
                                             class="form-control">
+                                            <option value="" disabled selected>Please select...</option>
                                             <option value="">Very well</option>
                                             <option value="">Well</option>
                                             <option value="">Not well</option>
@@ -242,6 +244,7 @@
                                             highest completed school
                                             year?</label><select name="schoolCompletedYear" id="schoolCompletedYear"
                                             class="form-control">
+                                            <option value="" disabled selected>Please select...</option>
                                             <option value="">Year 12</option>
                                             <option value="">Year 11</option>
                                             <option value="">Year 10</option>
@@ -267,6 +270,7 @@
                                             successfully completed any of the following
                                             qualifications?</label><select name="completedQualification"
                                             id="completedQualification" class="form-control">
+                                            <option value="" disabled selected>Please select...</option>
                                             <option value="">Advanced Diploma or
                                                 Associate Degree </option>
                                             <option value="">Bachelor Degree or higher
@@ -286,6 +290,7 @@
                                     <div class="form-group"><label for="attendingSecondarySchool">Are you still
                                             attending secondary school?</label><select name="attendingSecondarySchool"
                                             id="attendingSecondarySchool" class="form-control">
+                                            <option value="" disabled selected>Please select...</option>
                                             <option value="">Yes</option>
                                             <option value="">No</option>
                                         </select></div>
@@ -299,6 +304,7 @@
                                             impairment or long-term condition?
                                         </label><select name="disabilityCondition" id="disabilityCondition"
                                             class="form-control">
+                                            <option value="" disabled selected>Please select...</option>
                                             <option value="">Yes</option>
                                             <option value="">No</option>
                                         </select></div>
@@ -313,6 +319,7 @@
                                             please select the area(s) in the following
                                             list: </label><select name="presenceOfDisability" id="presenceOfDisability"
                                             class="form-control">
+                                            <option value="" disabled selected>Please select...</option>
                                             <option value="">Acquired brain injury
                                             </option>
                                             <option value="">Hearing/deaf</option>
@@ -335,6 +342,7 @@
                                             successfully completing the training course?
                                         </label><select name="anythingPreventFromCourse" id="anythingPreventFromCourse"
                                             class="form-control">
+                                            <option value="" disabled selected>Please select...</option>
                                             <option value="">Yes</option>
                                             <option value="">No</option>
                                         </select></div>
@@ -344,6 +352,7 @@
                                             you need help with reading
                                             and writing or maths? </label><select name="needHelp" id="needHelp"
                                             class="form-control">
+                                            <option value="" disabled selected>Please select...</option>
                                             <option value="">Yes</option>
                                             <option value="">No</option>
                                         </select></div>
@@ -358,6 +367,7 @@
                                             do you wish to complete this course?
                                         </label><select name="wishToCompleteCourse" id="wishToCompleteCourse"
                                             class="form-control">
+                                            <option value="" disabled selected>Please select...</option>
                                             <option value="">Get a job</option>
                                             <option value="">Try for a different career
                                             </option>
@@ -387,26 +397,34 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="form-group"><label for="currentEmploymentStatus">Which
+                                    <div class="form-group">
+                                        <label for="currentEmploymentStatus">Which
                                             situation,
                                             as listed below,
                                             best describes your current employment
                                             status?</label><select name="currentEmploymentStatus"
                                             id="currentEmploymentStatus" class="form-control">
-                                            <option value="">Employed (as an unpaid
+                                            <option value="" disabled selected>Please select...</option>
+                                            <option value="Employed (as an unpaid
+                                                family worker) ">Employed (as an unpaid
                                                 family worker) </option>
-                                            <option value="">Employee full time</option>
-                                            <option value="">Employee part time</option>
-                                            <option value="">Unemployed and seeking full
+                                            <option value="Employee full time">Employee full time</option>
+                                            <option value="Employee part time">Employee part time</option>
+                                            <option value="Unemployed and seeking full
+                                                time work">Unemployed and seeking full
                                                 time work </option>
-                                            <option value="">An employer</option>
-                                            <option value="">Not employed – not seeking
+                                            <option value="An employer">An employer</option>
+                                            <option value="Not employed – not seeking
+                                                employment/retired">Not employed – not seeking
                                                 employment/retired </option>
-                                            <option value="">Self employed (not
+                                            <option value="Self employed (not
+                                                employing others) ">Self employed (not
                                                 employing others) </option>
-                                            <option value="">Unemployed and seeking part
+                                            <option value="Unemployed and seeking part
+                                                time work">Unemployed and seeking part
                                                 time work </option>
-                                        </select></div>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -446,18 +464,31 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="currentEmploymentStatus">
+                                        Do you wish to apply for Recognition of Prior Learning (RPL) or Credit Transfer (CT)?  
+                                    </label>
+                                    <select name="currentEmploymentStatus" id="currentEmploymentStatus" class="form-control">
+                                        <option value="" disabled selected>Please select...</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                    <!-- ./inner -->
+                    <div class="actions">
+                        <ul>
+                            <li><span class="js-btn-prev" title="BACK"><i class="fa fa-arrow-left"></i>BACK
+                                </span></li>
+                            <li><button type="submit" title="NEXT">SUBMIT <i class="fa fa-arrow-right"></i></button></li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- ./inner -->
-        <div class="actions">
-            <ul>
-                <li><span class="js-btn-prev" title="BACK"><i class="fa fa-arrow-left"></i>BACK
-                    </span></li>
-                <li><button type="submit" title="NEXT">SUBMIT <i class="fa fa-arrow-right"></i></button></li>
-            </ul>
         </div>
     </div>
 </div>
