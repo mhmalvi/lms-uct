@@ -23,20 +23,6 @@ Route::view('/', 'index')->middleware('guest')->name('learnque');
 
 Route::view('dashboard', 'pages.dashboard')->middleware('auth')->name('dashboard');
 
-// Route::view('courses', 'pages.courses')->middleware('auth');
-// Route::view('my-courses', 'pages.my-courses')->middleware('auth');
-// Route::view('my-paths', 'pages.my-paths')->middleware('auth');
-// Route::view('path-details', 'pages.path-details')->middleware('auth');
-// Route::view('course-preview', 'pages.course-preview')->middleware('auth');
-// Route::view('lesson-preview', 'pages.lesson-preview')->middleware('auth');
-// Route::view('take-lesson', 'pages.take-lesson')->middleware('auth');
-// Route::view('take-quiz', 'pages.take-quiz')->middleware('auth');
-// Route::view('quiz-results', 'pages.quiz-results')->middleware('auth');
-// Route::view('quiz-results-details', 'pages.quiz-results-details')->middleware('auth');
-// Route::view('path-assessment', 'pages.path-assessment')->middleware('auth');
-// Route::view('path-assessment-result', 'pages.path-assessment-result')->middleware('auth');
-// Route::view('paths', 'pages.paths')->middleware('auth');
-
 Route::get('course/{course:uuid}', [CoursesController::class, 'show']);
 
 require __DIR__ . '/auth.php';
