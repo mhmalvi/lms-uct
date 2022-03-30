@@ -1,6 +1,28 @@
 <template>
   <form @submit.prevent="handleFormSubmit">
     <div class="form-group">
+      <label for="unit_code">Unit Code</label>
+      <input
+        type="text"
+        class="form-control"
+        id="unit_code"
+        v-model="form.data.unit_code"
+        placeholder="Enter unit code"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="unit_title">Unit Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="unit_title"
+        v-model="form.data.unit_title"
+        placeholder="Enter unit title"
+      />
+    </div>
+
+    <div class="form-group">
       <label for="title">Title</label>
       <input
         type="text"
@@ -13,6 +35,7 @@
         {{ validation.errors.title[0] }}
       </small>
     </div>
+
     <div class="form-group">
       <label for="description">Description</label>
       <QuillEditor
@@ -64,6 +87,8 @@ export default {
   setup(_) {
     const form = reactive({
       data: {
+        unit_code: "",
+        unit_title: "",
         title: "",
         description: "",
         thumbnail: "",

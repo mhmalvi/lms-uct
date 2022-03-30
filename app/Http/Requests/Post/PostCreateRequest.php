@@ -26,6 +26,8 @@ class PostCreateRequest extends PostRequest
     public function rules()
     {
         return [
+            'unit_code' => "required",
+            'unit_title' => "required",
             'title' => "required",
             'description' => "required",
         ];
@@ -35,6 +37,8 @@ class PostCreateRequest extends PostRequest
     {
         $post = new Post();
 
+        $post->unit_code = $this->unit_code;
+        $post->unit_title = $this->unit_title;
         $post->title = $this->title;
         $post->description = $this->description;
 

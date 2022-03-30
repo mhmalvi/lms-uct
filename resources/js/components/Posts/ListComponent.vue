@@ -21,7 +21,7 @@
               <h3>
                 {{ post.title }}
               </h3>
-              <div>
+              <div v-if="admin">
                 <a
                   href="javascript:void(0)"
                   @click="attemptDelete(post.id)"
@@ -52,13 +52,16 @@ import { reactive, onMounted } from "vue";
 import Swal from "sweetalert2";
 
 export default {
-  setup() {
+  props: ["admin"],
+  setup({ admin }) {
     const state = reactive({
       posts: [],
       loading: false,
+      list_api: "/posts/all",
     });
 
     onMounted(() => {
+      if (admin) state.list_api = "/admin" + state.list_api;
       getPosts();
     });
 
@@ -66,7 +69,8 @@ export default {
       state.loading = true;
 
       try {
-        const response = await axios.get("/admin/posts/all");
+        const response = await axios.get(state.list_api);
+
         state.posts = response.data.data;
       } catch (err) {
         Swal.fire({
@@ -103,6 +107,7 @@ export default {
 
     return {
       state,
+      admin,
       attemptDelete,
     };
   },
