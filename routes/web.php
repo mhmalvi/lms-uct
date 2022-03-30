@@ -6,6 +6,7 @@ use App\Http\Controllers\ClassroomsController;
 use App\Http\Controllers\ClassroomPostsController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\EnrollmentsController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,7 @@ Route::view('/', 'index')->middleware('guest')->name('learnque');
 Route::view('dashboard', 'pages.dashboard')->middleware('auth')->name('dashboard');
 Route::view('ptr', 'pages.ptr-form');
 Route::view('enrollment', 'pages.enrollment-form');
-
+Route::get('payment', [PaymentController::class, 'paymentPage']);
 // Route::view('courses', 'pages.courses')->middleware('auth');
 // Route::view('my-courses', 'pages.my-courses')->middleware('auth');
 // Route::view('my-paths', 'pages.my-paths')->middleware('auth');
@@ -79,5 +80,9 @@ Route::middleware('auth:web')->group(function () {
         Route::get('{classroom:unique_id}/students', [ClassroomMembersController::class, 'getStudents']);
     });
 
+    
+
     Route::get('calendar-events/list', [CalendarEventsController::class, 'getList']);
 });
+
+

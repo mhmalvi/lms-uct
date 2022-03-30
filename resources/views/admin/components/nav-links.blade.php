@@ -5,30 +5,25 @@
     </a>
 </li>
 <li class="sidebar-menu-item">
-    <a class="sidebar-menu-button" href="{{ route('admin.classrooms') }}">
-        <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">class</span>
-        <span class="sidebar-menu-text">Classrooms</span>
-    </a>
-</li>
-<li class="sidebar-menu-item">
-    <a class="sidebar-menu-button" data-toggle="collapse" href="#course_menu">
-        <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">library_books</span>
-        Course
+    <a class="sidebar-menu-button js-sidebar-collapse" data-toggle="collapse" href="#post_menu">
+        <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">school</span>
+        Posts
         <span class="ml-auto sidebar-menu-toggle-icon"></span>
     </a>
-    <ul class="sidebar-submenu collapse sm-indent" id="course_menu">
+    <ul class="sidebar-submenu collapse sm-indent" id="post_menu">
         <li class="sidebar-menu-item">
-            <a class="sidebar-menu-button" href="{{ route('admin.categories.index') }}">
-                <span class="sidebar-menu-text">Manage Categories</span>
+            <a class="sidebar-menu-button" href="{{route('admin.posts.index')}}">
+                <span class="sidebar-menu-text">All Posts</span>
             </a>
         </li>
         <li class="sidebar-menu-item">
-            <a class="sidebar-menu-button" href="{{ route('admin.courses.index') }}">
-                <span class="sidebar-menu-text">Manage Courses</span>
+            <a class="sidebar-menu-button" href="{{route('admin.posts.create')}}">
+                <span class="sidebar-menu-text">Add New</span>
             </a>
         </li>
     </ul>
 </li>
+
 <li class="sidebar-menu-item">
     <a class="sidebar-menu-button js-sidebar-collapse" data-toggle="collapse" href="#student_menu">
         <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">school</span>
