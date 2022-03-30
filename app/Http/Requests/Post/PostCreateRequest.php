@@ -28,7 +28,6 @@ class PostCreateRequest extends PostRequest
         return [
             'title' => "required",
             'description' => "required",
-            'thumbnail' => "required",
         ];
     }
 
@@ -38,13 +37,19 @@ class PostCreateRequest extends PostRequest
 
         $post->title = $this->title;
         $post->description = $this->description;
-        $image_handler = new ImageHandler();
-        $image = $image_handler->setImage($this->thumbnail)
-            ->setName(Str::slug($this->title))
-            ->setPath('posts')
-            ->storeFromImageData();
 
-        $post->thumbnail = $image;
+        if ($this->thumbnail) {
+            $image_handler = new ImageHandler();
+
+            $image_name = time() . '_' . Str::slug($this->title);
+
+            $image_name = $image_handler->setImage($this->thumbnail)
+                ->setName($image_name)
+                ->setPath('posts')
+                ->storeFromImageData();
+
+            $post->thumbnail = $image_name;
+        }
 
         $post->save();
     }

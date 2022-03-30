@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\PostCreateRequest;
+use App\Http\Requests\Post\PostDeleteRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class PostsController extends Controller
 
     public function getList()
     {
-        return Post::paginate(10);
+        return Post::latest()->paginate(10);
     }
 
     /**
@@ -47,6 +48,26 @@ class PostsController extends Controller
                 'message' => "Something went wrong!",
                 'error' => $th->getMessage()
             ], 500);
+        }
+    }
+
+
+    /**
+     * Delete
+     */
+    public function destroy(Post $post, PostDeleteRequest $request)
+    {
+        try {
+            $request->delete($post);
+
+            return response()->json([
+                'message' => "Post deleted successfully",
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => "Something went wrong while deleting the post!",
+                'error' => $th->getMessage(),
+            ]);
         }
     }
 }

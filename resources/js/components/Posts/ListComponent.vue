@@ -1,26 +1,44 @@
 <template>
-  <div>
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
+  <div class="mt-2">
+    <div class="row" v-if="state.loading">
+      <div class="col-md-12">
+        <p class="text-center">
+          <i class="fas fa-circle-notch fa-spin"></i>
+          Loading
+        </p>
+      </div>
+    </div>
+    <div class="row" v-else-if="state.posts.length == 0">
+      <div class="col-md-12">
+        <h4 class="text-center text-muted">No post here</h4>
+      </div>
+    </div>
+    <div class="row" v-else>
+      <div class="col-md-8 mx-auto">
+        <div class="card" v-for="(post, index) in state.posts" :key="index">
           <div class="card-body">
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
+            <div class="d-flex justify-content-between">
+              <h3>
+                {{ post.title }}
+              </h3>
+              <div>
+                <a
+                  href="javascript:void(0)"
+                  @click="attemptDelete(post.id)"
+                  class="btn-link"
+                  >Delete</a
+                >
+              </div>
+            </div>
 
-                <tbody>
-                  <tr v-for="(post, index) in state.posts" :key="index">
-                    <td>#</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
+            <p class="card-text" v-html="post.description"></p>
+
+            <div v-if="post.thumbnail_url">
+              <img
+                :src="post.thumbnail_url"
+                alt="Thumbnail"
+                class="card-img-bottom"
+              />
             </div>
           </div>
         </div>
@@ -30,21 +48,62 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
+import Swal from "sweetalert2";
 
 export default {
   setup() {
     const state = reactive({
       posts: [],
+      loading: false,
+    });
+
+    onMounted(() => {
+      getPosts();
     });
 
     const getPosts = async () => {
-      axios.get("/api/posts");
-      state.posts = response.data.data;
+      state.loading = true;
+
+      try {
+        const response = await axios.get("/admin/posts/all");
+        state.posts = response.data.data;
+      } catch (err) {
+        Swal.fire({
+          title: err.response.data.message,
+        });
+      } finally {
+        state.loading = false;
+      }
+    };
+
+    const attemptDelete = (post_id) => {
+      if (confirm("Are you sure you want to delete this post?")) {
+        deletePost(post_id);
+      }
+    };
+
+    const deletePost = async (post_id) => {
+      try {
+        const response = await axios.delete(`/admin/posts/${post_id}`);
+
+        Swal.fire({
+          title: response.data.message,
+          icon: "success",
+        });
+
+        getPosts();
+      } catch (err) {
+        Swal.fire({
+          title: err.response.data.message,
+          icon: "error",
+        });
+      }
     };
 
     return {
       state,
+      attemptDelete,
     };
   },
 };
