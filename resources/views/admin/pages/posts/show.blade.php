@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'View Post')
+@section('title', 'View Classroom Post')
 
 @section('link')
     <a href="{{ route('admin.posts.index') }}" class="btn btn-sm btn-outline-dark">

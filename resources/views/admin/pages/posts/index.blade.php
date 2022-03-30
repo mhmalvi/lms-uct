@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Manage Posts')
+@section('title', 'Manage Classroom')
 
 @section('link')
     <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-outline-dark">

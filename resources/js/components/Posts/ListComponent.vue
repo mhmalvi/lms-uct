@@ -61,7 +61,7 @@ export default {
     const state = reactive({
       posts: [],
       loading: false,
-      list_api: "/posts/all",
+      list_api: "/classroom/all",
     });
 
     onMounted(() => {
@@ -93,7 +93,7 @@ export default {
 
     const deletePost = async (post_id) => {
       try {
-        const response = await axios.delete(`/admin/posts/${post_id}`);
+        const response = await axios.delete(`/admin/classroom/${post_id}`);
 
         Swal.fire({
           title: response.data.message,
@@ -110,7 +110,7 @@ export default {
     };
 
     const getPostLink = (post_id) => {
-      return (admin ? "/admin" : "") + "/posts/" + post_id;
+      return (admin ? "/admin" : "") + "/classroom/" + post_id;
     };
 
     return {

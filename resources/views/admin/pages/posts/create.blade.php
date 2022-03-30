@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section("title", "Create Posts")
+@section('title', 'Create Classroom post')
 
 @section('breadcrumb')
     <div class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left px-5">
@@ -15,17 +15,17 @@
                     </li>
                     @if (request()->segment(1))
                         <li class="breadcrumb-item">
-                            {{Str::upper(request()->segment(1))}}
+                            {{ Str::upper(request()->segment(1)) }}
                         </li>
                     @endif
                     @if (request()->segment(2))
                         <li class="breadcrumb-item">
-                            {{Str::upper(request()->segment(2))}}
+                            {{ Str::upper(request()->segment(2)) }}
                         </li>
                     @endif
                     @if (request()->segment(3))
                         <li class="breadcrumb-item">
-                            {{Str::upper(request()->segment(3))}}
+                            {{ Str::upper(request()->segment(3)) }}
                         </li>
                     @endif
                 </ol>

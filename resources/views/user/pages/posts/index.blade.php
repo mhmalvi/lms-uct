@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Posts')
+@section('title', 'Classroom')
 
 @section('content')
     <post-list-component />

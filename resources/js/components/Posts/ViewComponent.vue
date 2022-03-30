@@ -5,7 +5,9 @@
         {{ post.title }}
       </h3>
 
-      <span v-html="post.description"></span>
+      <p class="text-muted">{{ post.unit_code }} - {{ post.unit_title }}</p>
+
+      <div v-html="post.description"></div>
 
       <img :src="post.thumbnail_url" alt="Thumbnail" class="card-thumbnail" />
     </div>
