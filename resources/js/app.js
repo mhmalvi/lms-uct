@@ -34,9 +34,9 @@ import UpdateNewsNoticeComponent from "./components/NewsNotices/NewsNoticeUpdate
 
 import AvatarHeaderComponent from "./components/AvatarHeaderComponent.vue";
 // import LiveClass from "./components/LiveClass/CreateClass.vue";
-import LiveClassListComponent from "./components/LiveClass/LiveClassListComponent.vue";
-import CreateLiveClassComponent from "./components/LiveClass/CreateLiveClassComponent.vue";
-import UpdateLiveClassComponent from "./components/LiveClass/UpdateLiveClassComponent.vue";
+// import LiveClassListComponent from "./components/LiveClass/LiveClassListComponent.vue";
+// import CreateLiveClassComponent from "./components/LiveClass/CreateLiveClassComponent.vue";
+// import UpdateLiveClassComponent from "./components/LiveClass/UpdateLiveClassComponent.vue";
 
 //Posts
 import PostListComponent from "./components/Posts/ListComponent.vue";
@@ -72,14 +72,13 @@ app.component("user-edit-profile", UserEditProfile);
 app.component("classroom-items-grid-list", ClassroomItemsGridList);
 app.component("classroom-view", ClassroomView);
 
-app.component("live-class-list-component", LiveClassListComponent);
-app.component("create-live-class-component", CreateLiveClassComponent);
-app.component("edit-live-class-component", UpdateLiveClassComponent);
-
 app.component("post-list-component", PostListComponent);
 app.component("create-post", PostcreateComponent);
 app.component("view-post-component", ViewPostComponent);
 // End of Admin components
+// app.component("live-class-list-component", LiveClassListComponent);
+// app.component("create-live-class-component", CreateLiveClassComponent);
+// app.component("edit-live-class-component", UpdateLiveClassComponent);
 // End of Admin components
 
 // Students components

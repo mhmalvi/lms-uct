@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EnrollUsersController;
 use App\Http\Controllers\Admin\NewsNoticesController;
-use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\LiveClassesController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\StudentsController;

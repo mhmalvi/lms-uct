@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserEnrollment;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
@@ -20,7 +22,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        return view('user.pages.register');
     }
 
     /**
@@ -46,6 +48,13 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+        UserEnrollment::create([
+            'user_id' => $user->id,
+            'form_id' => Session::get('enrolled_form_id'),
+        ]);
+
+        Session::forget('enrolled_form_id');
 
         Auth::login($user);
 
