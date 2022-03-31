@@ -44,7 +44,7 @@
 @endsection
 
 @section('content')
-    <div class="container page__container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-10 mx-auto py-5">
                 <create-post></create-post>
