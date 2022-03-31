@@ -29,7 +29,7 @@ Route::post('make-bank-payment', [PaymentController::class, 'makeBankPayment']);
 Route::get('success/{uid}', [PaymentController::class, 'success'])->name('success');
 
 Route::get('course/{course:uuid}', [CoursesController::class, 'show']);
-Route::get('enrolment', [EnrollmentsController::class, 'index']);
+Route::get('enrolment', [EnrollmentsController::class, 'index'])->name('enrolment');
 Route::post('enrolment', [EnrollmentsController::class, 'store'])->name('enrollment.store');
 
 /**
