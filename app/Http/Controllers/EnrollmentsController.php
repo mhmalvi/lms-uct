@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Mail\SendEnrollmentSubmissionMail;
 use App\Models\EnrollmentForm;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class EnrollmentsController extends Controller
 {
@@ -23,6 +25,20 @@ class EnrollmentsController extends Controller
         unset($_temp[0]);
         unset($_temp[1]);
         $course_title = implode(' ', $_temp);
+
+        $email = $request->email;
+        $password = Str::random(6);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $email,
+            'password' => bcrypt($password),
+        ]);
+
+        Session::put('userCredentials', [
+            'email' => $email,
+            'password' => $password,
+        ]);
 
         $form = new EnrollmentForm;
 
