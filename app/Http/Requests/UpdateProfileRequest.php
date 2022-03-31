@@ -31,6 +31,17 @@ class UpdateProfileRequest extends FormRequest
 
     public function update($user)
     {
+        if (!$user->info) {
+            $user->info()->create([
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'contact' => $this->contact,
+                'address' => $this->address,
+                'about' => $this->bio,
+            ]);
+            return;
+        }
+
         $user->info->first_name = $this->first_name;
         $user->info->last_name = $this->last_name;
         $user->info->contact = $this->contact;
