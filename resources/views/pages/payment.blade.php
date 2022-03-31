@@ -21,13 +21,13 @@
     <div class="row mt-4" id="gusti_shoho_hide_hobi">
         <div class="col-md-12">
             <div id="paypal">
-                <h3>Make Payment</h3>
+                <h3>Pay with paypal</h3>
                 <input type="hidden" id="uid" value="{{request()->uid}}">
                 <input type="number" id="amount" placeholder="Enter amount" class="form-control" required>
                 <div class="my-3" id="paypal-button-container"></div> 
             </div>
             <div id="bank">
-                <h3>Bank Payment</h3> 
+                <h3>Pay with bank</h3> 
                 <form  id="bankPayment">
                     <input type="hidden" name="uid" value="{{request()->uid}}">
                         <div class="form-group">
