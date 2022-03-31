@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\PostCreateRequest;
 use App\Http\Requests\Post\PostDeleteRequest;
+use App\Http\Requests\Post\PostUpdateRequest;
 use App\Http\Resources\PostsCollection;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -55,6 +56,34 @@ class PostsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Post created successfully',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => "Something went wrong!",
+                'error' => $th->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Edit
+     */
+    public function edit(Post $post)
+    {
+        return view('admin.pages.posts.edit', compact('post'));
+    }
+
+    /**
+     * Update
+     */
+    public function update(Post $post, PostUpdateRequest $request)
+    {
+        try {
+            $request->update($post);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Post updated successfully',
             ]);
         } catch (\Throwable $th) {
             return response()->json([

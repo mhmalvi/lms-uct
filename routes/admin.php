@@ -150,4 +150,6 @@ Route::prefix("posts")->name("posts.")->group(function () {
     Route::delete('{post}', [PostsController::class, 'destroy']);
 
     Route::get('{post}', [PostsController::class, 'show'])->name('show');
+    Route::get('{post}/edit', [PostsController::class, 'edit']);
+    Route::patch('{post}', [PostsController::class, 'update']);
 });

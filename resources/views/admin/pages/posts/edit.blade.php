@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Create Classroom post')
+@section('title', 'Edit Classroom post')
 
 @section('link')
     <a href="{{ route('admin.posts.index') }}" class="btn btn-sm btn-outline-dark">
@@ -16,7 +16,7 @@
         <div class="flex d-flex flex-column flex-sm-row align-items-center mb-24pt mb-md-0">
             <div class="mb-24pt mb-sm-0 mr-sm-24pt">
                 <h2 class="mb-0">
-                    Create Posts
+                    Edit Posts
                 </h2>
                 <ol class="breadcrumb p-0 m-0">
                     <li class="breadcrumb-item">
@@ -47,7 +47,7 @@
     <div class="container page__container">
         <div class="row">
             <div class="col-md-10 mx-auto py-5">
-                <create-post></create-post>
+                <edit-post-component post_data="{{ json_encode($post) }}" />
             </div>
         </div>
     </div>

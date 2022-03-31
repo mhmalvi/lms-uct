@@ -43,16 +43,7 @@ class PostCreateRequest extends PostRequest
         $post->description = $this->description;
 
         if ($this->thumbnail) {
-            $image_handler = new ImageHandler();
-
-            $image_name = time() . '_' . Str::slug($this->title);
-
-            $image_name = $image_handler->setImage($this->thumbnail)
-                ->setName($image_name)
-                ->setPath('posts')
-                ->storeFromImageData();
-
-            $post->thumbnail = $image_name;
+            $post->thumbnail = $this->saveImage($this->title, $this->thumbnail);
         }
 
         $post->save();

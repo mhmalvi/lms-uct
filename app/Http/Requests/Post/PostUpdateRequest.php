@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Post;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Post;
 
-class PostUpdateRequest extends FormRequest
+class PostUpdateRequest extends PostRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class PostUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,32 @@ class PostUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'unit_code' => "required",
+            'unit_title' => "required",
+            'title' => "required",
+            'description' => "required",
         ];
+    }
+
+    public function update(Post $post)
+    {
+        $post->unit_code = $this->unit_code;
+        $post->unit_title = $this->unit_title;
+        $post->title = $this->title;
+        $post->description = $this->description;
+
+        if (substr($post->thumbnail, 0, 4) !== 'http') {
+            if ($post->thumbnail) {
+                $this->deleteImage($post);
+            }
+
+            if ($this->thumbnail != '') {
+                $this->thumbnail = $this->saveImage($post->title, $this->thumbnail);
+            }
+
+            $post->thumbnail = $this->thumbnail;
+        }
+
+        $post->save();
     }
 }

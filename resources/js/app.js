@@ -44,6 +44,7 @@ import PostcreateComponent from "./components/Posts/CreateComponent.vue";
 import ViewPostComponent from "./components/Posts/ViewComponent.vue";
 
 import AdminPostListComponent from "./components/Posts/Admin/ListComponent.vue";
+import EditPostComponent from "./components/Posts/EditComponent.vue";
 
 /**
  * importing students components
@@ -79,6 +80,7 @@ app.component("create-live-class-component", CreateLiveClassComponent);
 app.component("edit-live-class-component", UpdateLiveClassComponent);
 
 app.component("admin-post-list-component", AdminPostListComponent);
+app.component("edit-post-component", EditPostComponent);
 
 // End of Admin components
 
