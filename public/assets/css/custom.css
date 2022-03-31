@@ -66,3 +66,9 @@
 .action-links a:nth-child(even) {
     margin: 0px 10px;
 }
+.form-check-style {
+    margin-bottom: 0;
+    padding: 10px 50px;
+    border: 1px solid red;
+    cursor: pointer;
+}
