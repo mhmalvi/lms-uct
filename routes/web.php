@@ -26,6 +26,9 @@ Route::get('course/{course:uuid}', [CoursesController::class, 'show']);
 Route::get('enrolment', [EnrollmentsController::class, 'index']);
 Route::post('enrolment', [EnrollmentsController::class, 'store'])->name('enrollment.store');
 
+/**
+ * For both admin and users
+ */
 Route::middleware(('auth:web,admin'))->group(function () {
     /**
      * User profile routes
@@ -36,7 +39,10 @@ Route::middleware(('auth:web,admin'))->group(function () {
         Route::put('avatar/update', [ProfileController::class, 'avatarUpdate']);
         Route::delete('avatar/delete', [ProfileController::class, 'avatarDelete']);
     });
+
+    Route::get('calendar-events/list', [CalendarEventsController::class, 'getList']);
 });
+
 
 Route::middleware('auth:web')->group(function () {
     Route::view('dashboard', 'pages.dashboard')->name('dashboard');
@@ -56,7 +62,6 @@ Route::middleware('auth:web')->group(function () {
         Route::get('{classroom:unique_id}/teachers', [ClassroomsController::class, 'show']);
         Route::get('{classroom:unique_id}/students', [ClassroomMembersController::class, 'getStudents']);
     });
-    Route::get('calendar-events/list', [CalendarEventsController::class, 'getList']);
 });
 
 
