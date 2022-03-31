@@ -47,28 +47,11 @@ Route::middleware(('auth:web,admin'))->group(function () {
 Route::middleware('auth:web')->group(function () {
     Route::view('dashboard', 'pages.dashboard')->name('dashboard');
 
-    Route::prefix('classroom')->name('classroom.')->group(function () {
-        Route::get('/', [ClassroomsController::class, 'index'])->name('index');
-        Route::get('{classroom:unique_id}/posts/list', [ClassroomPostsController::class, 'getPaginatedList']);
-        Route::get('{classroom:unique_id}/teachers/list', [ClassroomPostsController::class, 'getTeacherList']);
-        Route::get('list', [ClassroomsController::class, 'getPaginatedList']);
-
-        Route::get('{classroom:unique_id}', [ClassroomsController::class, 'show']);
-        /**
-         * For the vue routes situated in ClassroomsController@show
-         */
-        Route::get('{classroom:unique_id}/posts', [ClassroomsController::class, 'show']);
-        Route::get('{classroom:unique_id}/students', [ClassroomsController::class, 'show']);
-        Route::get('{classroom:unique_id}/teachers', [ClassroomsController::class, 'show']);
-        Route::get('{classroom:unique_id}/students', [ClassroomMembersController::class, 'getStudents']);
+    Route::prefix('classroom')->name('posts.')->group(function () {
+        Route::get('/', [PostsController::class, 'index'])->name('index');
+        Route::get('all', [PostsController::class, 'getList']);
+        Route::get('{post}', [PostsController::class, 'show']);
     });
-});
-
-
-Route::middleware('auth:web')->prefix('classroom')->name('posts.')->group(function () {
-    Route::get('/', [PostsController::class, 'index'])->name('index');
-    Route::get('all', [PostsController::class, 'getList']);
-    Route::get('{post}', [PostsController::class, 'show']);
 });
 
 require __DIR__ . '/auth.php';

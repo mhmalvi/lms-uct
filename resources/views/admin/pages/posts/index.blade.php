@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Manage Classroom')
+@section('title', 'Manage Posts')
 
 @section('link')
     <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-outline-dark">
@@ -47,7 +47,7 @@
     <div class="container page__container">
         <div class="row">
             <div class="col-md-12">
-                <post-list-component admin="true" />
+                <admin-post-list-component />
             </div>
         </div>
     </div>

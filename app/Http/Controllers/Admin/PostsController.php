@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\PostCreateRequest;
 use App\Http\Requests\Post\PostDeleteRequest;
+use App\Http\Resources\PostsCollection;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,11 @@ class PostsController extends Controller
 
     public function getList()
     {
-        return Post::latest()->paginate(10);
+        $per_page = request()->has('per_page') ? request()->get('per_page') : 10;
+
+        return new PostsCollection(
+            Post::latest()->paginate($per_page)
+        );
     }
 
     /**

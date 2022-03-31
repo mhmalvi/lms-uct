@@ -33,15 +33,16 @@ import CreateNewsNoticeComponent from "./components/NewsNotices/NewsNoticeCreate
 import UpdateNewsNoticeComponent from "./components/NewsNotices/NewsNoticeUpdateComponent.vue";
 
 import AvatarHeaderComponent from "./components/AvatarHeaderComponent.vue";
-// import LiveClass from "./components/LiveClass/CreateClass.vue";
-// import LiveClassListComponent from "./components/LiveClass/LiveClassListComponent.vue";
-// import CreateLiveClassComponent from "./components/LiveClass/CreateLiveClassComponent.vue";
-// import UpdateLiveClassComponent from "./components/LiveClass/UpdateLiveClassComponent.vue";
+import LiveClassListComponent from "./components/LiveClass/LiveClassListComponent.vue";
+import CreateLiveClassComponent from "./components/LiveClass/CreateLiveClassComponent.vue";
+import UpdateLiveClassComponent from "./components/LiveClass/UpdateLiveClassComponent.vue";
 
 //Posts
 import PostListComponent from "./components/Posts/ListComponent.vue";
 import PostcreateComponent from "./components/Posts/CreateComponent.vue";
 import ViewPostComponent from "./components/Posts/ViewComponent.vue";
+
+import AdminPostListComponent from "./components/Posts/Admin/ListComponent.vue";
 
 /**
  * importing students components
@@ -72,19 +73,22 @@ app.component("user-edit-profile", UserEditProfile);
 app.component("classroom-items-grid-list", ClassroomItemsGridList);
 app.component("classroom-view", ClassroomView);
 
-app.component("post-list-component", PostListComponent);
-app.component("create-post", PostcreateComponent);
-app.component("view-post-component", ViewPostComponent);
-// End of Admin components
-// app.component("live-class-list-component", LiveClassListComponent);
-// app.component("create-live-class-component", CreateLiveClassComponent);
-// app.component("edit-live-class-component", UpdateLiveClassComponent);
+app.component("live-class-list-component", LiveClassListComponent);
+app.component("create-live-class-component", CreateLiveClassComponent);
+app.component("edit-live-class-component", UpdateLiveClassComponent);
+
+app.component("admin-post-list-component", AdminPostListComponent);
+
 // End of Admin components
 
 // Students components
 app.component("student-classroom-list", ClassroomList);
 // app.component("student-classroom-list", StudentClassroomList);
 app.component("student-classroom-view", StudentClassroomView);
+
+app.component("post-list-component", PostListComponent);
+app.component("create-post", PostcreateComponent);
+app.component("view-post-component", ViewPostComponent);
 // End of students components
 
 // for both admin, students and teachers
