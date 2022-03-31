@@ -123,14 +123,22 @@ export default {
     const form = reactive({
       username: user.username,
       email: user.email,
-      first_name: user.info.first_name ?? "",
-      last_name: user.info.last_name ?? "",
-      contact: user.info.contact ?? "",
-      address: user.info.address ?? "",
-      bio: user.info.about ?? "",
+      first_name: "",
+      last_name: "",
+      contact: "",
+      address: "",
+      bio: "",
     });
 
     onMounted(() => {
+      if (user.info) {
+        form.first_name = user.info.first_name ?? "";
+        form.last_name = user.info.last_name ?? "";
+        form.contact = user.info.contact ?? "";
+        form.address = user.info.address ?? "";
+        form.bio = user.info.about ?? "";
+      }
+
       if (user.avatar) {
         avatar_component.value.setImage(user.avatar);
       }
