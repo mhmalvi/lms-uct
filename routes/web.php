@@ -80,9 +80,9 @@ Route::middleware('auth:web')->group(function () {
         Route::get('{classroom:unique_id}/students', [ClassroomMembersController::class, 'getStudents']);
     });
 
-    
+
 
     Route::get('calendar-events/list', [CalendarEventsController::class, 'getList']);
 });
 
-
+Route::view('/test-email', 'user.emails.enrollment_submission');

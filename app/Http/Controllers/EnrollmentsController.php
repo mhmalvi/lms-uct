@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendEnrollmentSubmissionMail;
 use App\Models\EnrollmentForm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class EnrollmentsController extends Controller
@@ -35,6 +37,13 @@ class EnrollmentsController extends Controller
         );
 
         $form->save();
+
+        // Mail::to('jakariablaine120@gmail.com')
+        //     ->send(
+        //         new SendEnrollmentSubmissionMail(
+        //             $request->all()
+        //         )
+        //     );
 
         if ($course_code == 'HLTAID003') {
             Session::put('enrolled_form_id', $form->id);
