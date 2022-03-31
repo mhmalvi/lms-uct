@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendEnrollmentSubmissionMail;
 use App\Models\EnrollmentForm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class EnrollmentsController extends Controller
@@ -16,6 +18,7 @@ class EnrollmentsController extends Controller
     public function store(Request $request)
     {
         // exploding from 'code - title' into ['code', '-', 'title']
+        // example: "ASD123 - Course title" -> ["ASD123", "-", "Course", "title"]
         $_temp = explode(' ', $request->selected_course);
         $course_code = $_temp[0];
         unset($_temp[0]);
@@ -34,20 +37,17 @@ class EnrollmentsController extends Controller
             ])
         );
 
+        Mail::to('jakariablaine120@gmail.com')
+            ->send(
+                new SendEnrollmentSubmissionMail(
+                    $request->all()
+                )
+            );
+
         if ($form->save()) {
             return redirect()->to("/payment/" . $form->uid);
         } else {
             abort(503);
         }
-
-
-
-        // if ($course_code == 'HLTAID003') {
-        //     // Session::put('enrolled_form_id', $form->id);
-
-        //     return redirect()->to("/payment/".$form->uid);
-        // }
-
-        // return redirect()->route("learnque");
     }
 }

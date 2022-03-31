@@ -7,13 +7,14 @@
                     <div class="instruction-text">
                         <h5>Introduction</h5>
                         <p>
-                            A Pre-Training Review ensures that the learning and assessment strategy meets your individual needs. The pre-training review ensures:
+                            A Pre-Training Review ensures that the learning and assessment strategy meets your
+                            individual needs. The pre-training review ensures:
                         </p>
                         <ul>
                             <li>Understand your objectives for undertaking this course</li>
                             <li>
-                                Explores your current competencies and provides opportunities 
-                                for these to be assessed through Recognition of Prior Learning (RPL), 
+                                Explores your current competencies and provides opportunities
+                                for these to be assessed through Recognition of Prior Learning (RPL),
                                 Recognition of Current Competency (RCC) or Credit Transfer (CT)
                             </li>
                         </ul>
@@ -21,53 +22,56 @@
                     <div class="instruction-text pt-3">
                         <h5>Instructions for all Students</h5>
                         <p>
-                            Prior to completing Pre-Training Review, make sure you have sufficient information about the course. 
-                            In particular, you must have access to the following information; 
+                            Prior to completing Pre-Training Review, make sure you have sufficient information about the
+                            course.
+                            In particular, you must have access to the following information;
                         </p>
                         <ul>
                             <li>
-                                Training and Assessment arrangements i.e. duration of the course, 
-                                training and assessment modes, days of training, assessments to be completed 
+                                Training and Assessment arrangements i.e. duration of the course,
+                                training and assessment modes, days of training, assessments to be completed
                             </li>
                             <li>
-                                Employment prospects - You should conduct your own research and have strong 
-                                evidence of employability options on completion of the course 
+                                Employment prospects - You should conduct your own research and have strong
+                                evidence of employability options on completion of the course
                             </li>
                             <li>
-                                Recognition of prior learning and credit transfer application process 
+                                Recognition of prior learning and credit transfer application process
                             </li>
                             <li>
-                                Fees and charges applicable for the training 
+                                Fees and charges applicable for the training
                             </li>
                             <li>
-                                Your rights and obligations as a student at <strong>Unique College of Technology UCT</strong> - Entry requirements into the course
+                                Your rights and obligations as a student at <strong>Unique College of Technology
+                                    UCT</strong> - Entry requirements into the course
                             </li>
                         </ul>
                     </div>
                     <div class="instruction-text pt-3">
                         <h5>Instructions for completing PTR</h5>
                         <p>
-                            Please ensure each question is answered as accurately as possible. 
-                            If you require more space to write your response to a question please 
-                            attach a second sheet and number the responses. 
+                            Please ensure each question is answered as accurately as possible.
+                            If you require more space to write your response to a question please
+                            attach a second sheet and number the responses.
                         </p>
                         <ul>
                             <li>
-                                Training and Assessment arrangements i.e. duration of the course, 
-                                training and assessment modes, days of training, assessments to be completed 
+                                Training and Assessment arrangements i.e. duration of the course,
+                                training and assessment modes, days of training, assessments to be completed
                             </li>
                             <li>
-                                Employment prospects - You should conduct your own research and have strong 
-                                evidence of employability options on completion of the course 
+                                Employment prospects - You should conduct your own research and have strong
+                                evidence of employability options on completion of the course
                             </li>
                             <li>
-                                Recognition of prior learning and credit transfer application process 
+                                Recognition of prior learning and credit transfer application process
                             </li>
                             <li>
-                                Fees and charges applicable for the training 
+                                Fees and charges applicable for the training
                             </li>
                             <li>
-                                Your rights and obligations as a student at <strong>Unique College of Technology UCT</strong> - Entry requirements into the course
+                                Your rights and obligations as a student at <strong>Unique College of Technology
+                                    UCT</strong> - Entry requirements into the course
                             </li>
                         </ul>
                     </div>
@@ -154,38 +158,44 @@
                                     help us to determine,
                                     you’re learning and styles and if we are able to deliver
                                     courses that meet your learning styles. </label>
-                                <div class="form-check"><input class="form-check-input" type="checkbox"
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="support1"
                                         value="Power Points explained to me during classes" id="support11" /><label
                                         class="form-check-label" for="support11">Power Points explained to me during
-                                        classes </label></div>
+                                        classes </label>
+                                </div>
                                 <div class="form-check"><input class="form-check-input" type="checkbox"
-                                        value="Pictures and diagrams " id="support12" /><label class="form-check-label"
-                                        for="support12">Pictures and diagrams </label></div>
+                                        name="support1" value="Pictures and diagrams " id="support12" /><label
+                                        class="form-check-label" for="support12">Pictures and diagrams </label></div>
                                 <div class="form-check"><input class="form-check-input" type="checkbox"
-                                        value="Group discussions with others " id="support13" /><label
+                                        name="support1" value="Group discussions with others " id="support13" /><label
                                         class="form-check-label" for="support13">Group discussions with others
                                     </label></div>
                                 <div class="form-check"><input class="form-check-input" type="checkbox"
-                                        value="Conducting my own research " id="support14" /><label
+                                        name="support1" value="Conducting my own research " id="support14" /><label
                                         class="form-check-label" for="support14">Conducting my own research </label>
                                 </div>
                                 <div class="form-check"><input class="form-check-input" type="checkbox"
-                                        value="Listening to the lectures/ trainers " id="support15" /><label
-                                        class="form-check-label" for="support15">Listening to the lectures/ trainers
+                                        name="support1" value="Listening to the lectures/ trainers "
+                                        id="support15" /><label class="form-check-label" for="support15">Listening to
+                                        the lectures/ trainers
                                     </label></div>
                                 <div class="form-check"><input class="form-check-input" type="checkbox"
+                                        name="support1"
                                         value="Practical application of skills and knowledge in a workplace or similar or watching videos "
                                         id="support16" /><label class="form-check-label" for="support16">Practical
                                         application of skills and
                                         knowledge in a workplace or similar or watching
                                         videos </label></div>
                                 <div class="form-check"><input class="form-check-input" type="checkbox"
+                                        name="support1"
                                         value="Working through real examples such as a case study or scenario "
                                         id="support17" /><label class="form-check-label" for="support17">Working through
                                         real examples such
                                         as a case study or scenario </label></div>
                                 <div class="form-check"><input class="form-check-input" type="checkbox" value=""
-                                        id="support18" /><label class="form-check-label" for="support18">Other </label>
+                                        name="support1" id="support18" /><label class="form-check-label"
+                                        for="support18">Other </label>
                                 </div>
                             </div>
                         </div>
@@ -196,27 +206,28 @@
                                     additional support do you think you will need in order
                                     to complete this course successfully? </label>
                                 <div class="form-check"><input class="form-check-input" type="checkbox"
-                                        value="English language support" id="support21" /><label
+                                        name="support2" value="English language support" id="support21" /><label
                                         class="form-check-label" for="support21">English language support </label>
                                 </div>
                                 <div class="form-check"><input class="form-check-input" type="checkbox"
-                                        value="Reading support " id="support22" /><label class="form-check-label"
-                                        for="support22">Reading
+                                        name="support2" value="Reading support " id="support22" /><label
+                                        class="form-check-label" for="support22">Reading
                                         support </label></div>
                                 <div class="form-check"><input class="form-check-input" type="checkbox"
-                                        value="Writing support" id="support23" /><label class="form-check-label"
-                                        for="support23">Writing
+                                        name="support2" value="Writing support" id="support23" /><label
+                                        class="form-check-label" for="support23">Writing
                                         support </label></div>
                                 <div class="form-check"><input class="form-check-input" type="checkbox"
-                                        value="One-on-one guidance" id="support24" /><label class="form-check-label"
-                                        for="support24">One-on-one
+                                        name="support2" value="One-on-one guidance" id="support24" /><label
+                                        class="form-check-label" for="support24">One-on-one
                                         guidance </label></div>
                                 <div class="form-check"><input class="form-check-input" type="checkbox"
-                                        value="Additional resources" id="support25" /><label class="form-check-label"
-                                        for="support25">Additional
+                                        name="support2" value="Additional resources" id="support25" /><label
+                                        class="form-check-label" for="support25">Additional
                                         resources </label></div>
                                 <div class="form-check"><input class="form-check-input" type="checkbox" value=""
-                                        id="support26" /><label class="form-check-label" for="support26">Other </label>
+                                        name="support2" id="support26" /><label class="form-check-label"
+                                        for="support26">Other </label>
                                 </div>
                             </div>
                         </div>
@@ -227,17 +238,22 @@
                                 <div class="instruction-text pt-3">
                                     <h5>Instructions</h5>
                                     <p>
-                                        Please review the information provided the students on this form and if the information provided in not clear enough, 
-                                        interview the student and ask for explanation. The information provided through the pre-training review is important to 
-                                        determine the suitability of course, learning style of the student, additional support required etc.
+                                        Please review the information provided the students on this form and if the
+                                        information provided in not clear enough,
+                                        interview the student and ask for explanation. The information provided through
+                                        the pre-training review is important to
+                                        determine the suitability of course, learning style of the student, additional
+                                        support required etc.
                                     </p>
                                     <p>
-                                        Please note LLN assessment is conducted separately and students are required to meet minimum LLN level requirements. 
+                                        Please note LLN assessment is conducted separately and students are required to
+                                        meet minimum LLN level requirements.
                                         Please refer to LLN assessment for details.
                                     </p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="assesment1">Is the course chosen aligned to the student’s employment history/ career objectives and aspirations?</label>
+                                    <label for="assesment1">Is the course chosen aligned to the student’s employment
+                                        history/ career objectives and aspirations?</label>
                                     <div class="d-block">
                                         <div class="form-check form-check-inline"><input class="form-check-input"
                                                 type="radio" name="assesment1" id="assesment11" value="Yes" /><label
@@ -251,7 +267,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="assesment2">
-                                        Student is fully aware of the course training and assessment arrangements i.e. 
+                                        Student is fully aware of the course training and assessment arrangements i.e.
                                         attendance requirements, training and assessment method?
                                     </label>
                                     <div class="d-block">
@@ -282,7 +298,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="assesment4">
-                                       Training and assessment strategy is suitable based on the students learning needs and learning styles?
+                                        Training and assessment strategy is suitable based on the students learning
+                                        needs and learning styles?
                                     </label>
                                     <div class="d-block">
                                         <div class="form-check form-check-inline"><input class="form-check-input"
@@ -297,7 +314,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="assesment5">
-                                       Student is aware of RPL and CT arrangements and application process?
+                                        Student is aware of RPL and CT arrangements and application process?
                                     </label>
                                     <div class="d-block">
                                         <div class="form-check form-check-inline"><input class="form-check-input"
@@ -312,7 +329,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="assesment6">
-                                       Authorised Person’s declaration
+                                        Authorised Person’s declaration
                                     </label>
                                     <div class="d-block">
                                         <div class="form-check form-check-inline"><input class="form-check-input"
@@ -327,7 +344,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="assesment7">
-                                       Based on the information provided on this form, student meets the requirements for this course, subject to LLN.
+                                        Based on the information provided on this form, student meets the requirements
+                                        for this course, subject to LLN.
                                     </label>
                                     <div class="d-block">
                                         <div class="form-check form-check-inline"><input class="form-check-input"
@@ -340,21 +358,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="assesment8">
-                                       Based on the information provided on this form, student meets the requirements for this course, subject to LLN.
-                                    </label>
-                                    <div class="d-block">
-                                        <div class="form-check form-check-inline"><input class="form-check-input"
-                                                type="radio" name="assesment8" id="assesment81" value="Yes" /><label
-                                                class="form-check-label" for="assesment81">Yes</label>
-                                        </div>
-                                        <div class="form-check form-check-inline"><input class="form-check-input"
-                                                type="radio" name="assesment8" id="assesment82" value="No" /><label
-                                                class="form-check-label" for="assesment82">No</label>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -363,7 +366,8 @@
                         <ul>
                             <li><span class="js-btn-prev" title="BACK"><i class="fa fa-arrow-left"></i>BACK
                                 </span></li>
-                            <li><span class="js-btn-next" title="NEXT">NEXT <i class="fa fa-arrow-right"></i></span></li>
+                            <li><span class="js-btn-next" title="NEXT">NEXT <i
+                                        class="fa fa-arrow-right"></i></span></li>
                         </ul>
                     </div>
                 </div>
