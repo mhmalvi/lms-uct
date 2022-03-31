@@ -36,7 +36,11 @@ class EnrollmentsController extends Controller
             ])
         );
 
-        $form->save();
+        if ($form->save()) {
+            return redirect()->to("/payment/" . $form->uid);
+        } else {
+            abort(503);
+        }
 
         // Mail::to('jakariablaine120@gmail.com')
         //     ->send(
@@ -47,9 +51,13 @@ class EnrollmentsController extends Controller
 
         if ($course_code == 'HLTAID003') {
             Session::put('enrolled_form_id', $form->id);
-
-            return redirect()->to("/register");
         }
+
+        // if ($course_code == 'HLTAID003') {
+        //     // Session::put('enrolled_form_id', $form->id);
+
+        //     return redirect()->to("/payment/".$form->uid);
+        // }
 
         return redirect()->route("learnque");
     }
