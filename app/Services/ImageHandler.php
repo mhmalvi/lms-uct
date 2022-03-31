@@ -64,9 +64,13 @@ class ImageHandler
             Storage::makeDirectory('public/' . $this->path);
         }
 
-        Image::make($this->image)
-            ->fit($this->width, $this->height)
-            ->save(storage_path('app/public/' . $this->path . '/' . $filename));
+        $image = Image::make($this->image);
+
+        if ($this->height != null) {
+            $image->fit($this->width, $this->height);
+        }
+
+        $image->save(storage_path('app/public/' . $this->path . '/' . $filename));
 
         return $filename;
     }

@@ -34,7 +34,9 @@
               <tr v-for="(post, index) in state.posts" :key="index">
                 <td>#</td>
                 <td>
-                  {{ post.title }}
+                  <a :href="getViewLink(post)" class="text-primary">
+                    {{ post.title }}
+                  </a>
                   <div>
                     <a :href="getEditLink(post)" class="btn-link">Edit</a>
                     <a
@@ -121,6 +123,10 @@ export default {
       }
     };
 
+    const getViewLink = (post) => {
+      return "/admin/posts/" + post.id;
+    };
+
     const getEditLink = (post) => {
       return "/admin/posts/" + post.id + "/edit";
     };
@@ -155,6 +161,7 @@ export default {
 
     return {
       state,
+      getViewLink,
       getEditLink,
       attemptDelete,
       getPage,
