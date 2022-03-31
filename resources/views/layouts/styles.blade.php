@@ -12,6 +12,8 @@
 <!-- Material Design Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
 <!-- Font Awesome Icons -->
 <link type="text/css" href="{{asset('assets/css/fontawesome.css')}}" rel="stylesheet">
 

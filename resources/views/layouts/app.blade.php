@@ -27,13 +27,13 @@
 
     <!-- Drawer Layout -->
     <div class="mdk-drawer-layout js-mdk-drawer-layout" data-push data-responsive-width="992px">
-        <div class="mdk-drawer-layout__content page-content" id="app">
+        <div class="mdk-drawer-layout__content page-content">
 
             @include('layouts.header')
 
             @include('components.breadcrumb')
 
-            <div class="container page__container">
+            <div class="container page__container" id="app">
                 @yield('content')
             </div>
 
@@ -46,8 +46,8 @@
     </div>
 
     <!-- Scripts -->
-    @include('layouts.scripts')
     <script src="{{ asset('js/app.js') }}" defer></script>
+    @include('layouts.scripts')
 </body>
 
 </html>
