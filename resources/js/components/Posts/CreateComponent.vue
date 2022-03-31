@@ -1,73 +1,76 @@
 <template>
   <form @submit.prevent="handleFormSubmit">
-    <div class="form-group">
-      <label for="unit_code">Unit Code</label>
-      <input
-        type="text"
-        class="form-control"
-        id="unit_code"
-        v-model="form.data.unit_code"
-        placeholder="Enter unit code"
-      />
-    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            v-model="form.data.title"
+            id="title"
+            placeholder="Post title"
+          />
+          <small class="text-danger" v-if="validation.errors.title">
+            {{ validation.errors.title[0] }}
+          </small>
+        </div>
 
-    <div class="form-group">
-      <label for="unit_title">Unit Title</label>
-      <input
-        type="text"
-        class="form-control"
-        id="unit_title"
-        v-model="form.data.unit_title"
-        placeholder="Enter unit title"
-      />
-    </div>
+        <div class="form-group">
+          <QuillEditor
+            theme="snow"
+            contentType="html"
+            ref="description_editor"
+            placeholder="Post description"
+            v-model:content="form.data.description"
+          />
+          <small class="text-danger" v-if="validation.errors.description">
+            {{ validation.errors.description[0] }}
+          </small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <cid class="card-body">
+            <div class="form-group">
+              <label for="unit_code">Unit Code</label>
+              <input
+                type="text"
+                class="form-control"
+                id="unit_code"
+                v-model="form.data.unit_code"
+                placeholder="Enter unit code"
+              />
+            </div>
+            <div class="form-group">
+              <label for="unit_title">Unit Title</label>
+              <input
+                type="text"
+                class="form-control"
+                id="unit_title"
+                v-model="form.data.unit_title"
+                placeholder="Enter unit title"
+              />
+            </div>
+          </cid>
+        </div>
 
-    <div class="form-group">
-      <label for="title">Title</label>
-      <input
-        type="text"
-        class="form-control"
-        v-model="form.data.title"
-        id="title"
-        placeholder="Post title"
-      />
-      <small class="text-danger" v-if="validation.errors.title">
-        {{ validation.errors.title[0] }}
-      </small>
+        <div class="card">
+          <div class="card-body">
+            <div class="form-group">
+              <label for="file">Thumbnail</label>
+              <ImagePickerComponent
+                ref="image_picker"
+                @requestForChange="handleImageChange"
+                @requestForDelete="handleImageDelete"
+              />
+              <small class="text-danger" v-if="validation.errors.thumbnail">
+                {{ validation.errors.thumbnail[0] }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="form-group">
-      <label for="description">Description</label>
-      <QuillEditor
-        theme="snow"
-        contentType="html"
-        ref="description_editor"
-        placeholder="Post description"
-        v-model:content="form.data.description"
-      />
-      <small class="text-danger" v-if="validation.errors.description">
-        {{ validation.errors.description[0] }}
-      </small>
-    </div>
-    <div class="form-group">
-      <label for="file">Thumbnail</label>
-      <ImagePickerComponent
-        ref="image_picker"
-        @requestForChange="handleImageChange"
-        @requestForDelete="handleImageDelete"
-      />
-      <small class="text-danger" v-if="validation.errors.thumbnail">
-        {{ validation.errors.thumbnail[0] }}
-      </small>
-    </div>
-
-    <button
-      type="submit"
-      class="btn btn-outline-primary"
-      :disabled="form.isSubmitting"
-    >
-      Submit
-    </button>
   </form>
 </template>
 
