@@ -1,5 +1,5 @@
 @extends('layouts.guest')
-
+<script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
 @section('content')
 <div class="container">
     <div class="row">
@@ -15,14 +15,22 @@
         </div>
     </div>
     <div class="row mt-4" id="gusti_shoho_hide_hobi">
-        <div class="col-md-12 col-lg-12">
+        <div class="col-md-6 col-lg-6">
             <div class="card">
                 <div class="card-body">
                     <div id="paypal">
-                        <h1>Hey bro, I'm paypal</h1>
+                        <h3>Make Payment</h3>
+                        <div class="row">
+                            <div class="col-md-5 col-lg-5 col-sm-5">
+                                <input type="number" class="form-control">
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-sm-3" id="paypal-button-container"></div> 
+                           
+                        </div>
                     </div>
                     <div id="bank">
-                         <h1>Hey vai, I'm bank</h1>   
+                         <h3>Bank Payment</h3> 
+
                     </div>
                 </div>
             </div>
@@ -56,3 +64,7 @@
     }
 </script>  
 @endpush
+
+  <!-- Include the PayPal JavaScript SDK -->
+
+
