@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'index')->middleware('guest')->name('learnque');
 
 Route::view('dashboard', 'pages.dashboard')->middleware('auth')->name('dashboard');
-Route::view('enrollment', 'pages.enrollment-form');
 Route::get('payment/{uid}', [PaymentController::class, 'paymentPage']);
 Route::post('make-paypal-payment', [PaymentController::class, 'makePayPalPayment']);
 Route::post('make-bank-payment', [PaymentController::class, 'makeBankPayment']);

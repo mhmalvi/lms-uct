@@ -8,7 +8,7 @@
                 <p class="m-0">Login to access your Account </p>
             </div>
 
-            <a href="index.html" class="btn btn-light btn-block mb-24pt">
+            <a href="{{route('enrolment')}}" class="btn btn-light btn-block mb-24pt">
                 Click here to enroll now
             </a>
 
