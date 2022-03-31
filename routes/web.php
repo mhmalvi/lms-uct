@@ -29,7 +29,7 @@ Route::view('enrollment', 'pages.enrollment-form');
 Route::get('payment/{uid}', [PaymentController::class, 'paymentPage']);
 Route::post('make-paypal-payment', [PaymentController::class, 'makePayPalPayment']);
 Route::post('make-bank-payment', [PaymentController::class, 'makeBankPayment']);
-Route::get('success', [PaymentController::class, 'success'])->name('success');
+Route::get('success/{uid}', [PaymentController::class, 'success'])->name('success');
 // Route::view('courses', 'pages.courses')->middleware('auth');
 // Route::view('my-courses', 'pages.my-courses')->middleware('auth');
 // Route::view('my-paths', 'pages.my-paths')->middleware('auth');

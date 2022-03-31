@@ -43,14 +43,16 @@ class PaymentController extends Controller
 
         if($order){
             return response()->json([
-                'status' => 'completed',
-                'messaage' => "Thank you for your payment!"
+                'status'    => 'completed',
+                'uid'       => $order->uid,
+                'messaage'  => "Thank you for your payment!"
             ]);
 
         } else {
 
             return response()->json([
                 'status'    => 'completed',
+                'uid'       => $order->uid,
                 'messaage'  => "Opps! Payment failed"
             ]); 
 
