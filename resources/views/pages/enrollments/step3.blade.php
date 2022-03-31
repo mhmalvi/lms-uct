@@ -129,7 +129,8 @@
                                     <div class="form-group">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="checkbox" id="identifier"
-                                                value="identifier" /><label class="form-check-label" for="identifier">I
+                                                value="identifier" name="identifier" /><label class="form-check-label"
+                                                for="identifier">I
                                                 wish Unique College
                                                 of Technology UCT Pty Ltd permission to
                                                 source a unique student identifier on
@@ -158,8 +159,9 @@
                                             name="dayTimeTelephone" id="dayTimeTelephone" /></div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group"><label for="mobile">Mobile</label><input type="text"
-                                            class="form-control" id="mobile" name="mobile" /></div>
+                                    <div class="form-group"><label for="emergencyMobile">Mobile</label><input
+                                            type="text" class="form-control" id="emergencyMobile"
+                                            name="emergencyMobile" /></div>
                                 </div>
                             </div>
                         </div>
@@ -460,16 +462,18 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="email">Email</label><input type="email"
-                                            class="form-control" name="email" />
+                                            class="form-control" name="businessEmail" />
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="currentEmploymentStatus">
-                                        Do you wish to apply for Recognition of Prior Learning (RPL) or Credit Transfer (CT)?  
+                                        Do you wish to apply for Recognition of Prior Learning (RPL) or Credit Transfer
+                                        (CT)?
                                     </label>
-                                    <select name="currentEmploymentStatus" id="currentEmploymentStatus" class="form-control">
+                                    <select name="currentEmploymentStatus" id="currentEmploymentStatus"
+                                        class="form-control">
                                         <option value="" disabled selected>Please select...</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
@@ -484,7 +488,8 @@
                         <ul>
                             <li><span class="js-btn-prev" title="BACK"><i class="fa fa-arrow-left"></i>BACK
                                 </span></li>
-                            <li><button type="submit" title="NEXT">SUBMIT <i class="fa fa-arrow-right"></i></button></li>
+                            <li><button type="submit" title="NEXT">SUBMIT <i class="fa fa-arrow-right"></i></button>
+                            </li>
                         </ul>
                     </div>
                 </div>

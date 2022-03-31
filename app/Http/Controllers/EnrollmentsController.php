@@ -36,18 +36,19 @@ class EnrollmentsController extends Controller
             ])
         );
 
+        Mail::to('jakariablaine120@gmail.com')
+            ->send(
+                new SendEnrollmentSubmissionMail(
+                    $request->all()
+                )
+            );
+
         if ($form->save()) {
             return redirect()->to("/payment/" . $form->uid);
         } else {
             abort(503);
         }
 
-        // Mail::to('jakariablaine120@gmail.com')
-        //     ->send(
-        //         new SendEnrollmentSubmissionMail(
-        //             $request->all()
-        //         )
-        //     );
 
         if ($course_code == 'HLTAID003') {
             Session::put('enrolled_form_id', $form->id);
