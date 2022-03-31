@@ -22,11 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'index')->middleware('guest')->name('learnque');
 
 Route::view('dashboard', 'pages.dashboard')->middleware('auth')->name('dashboard');
-
 Route::get('course/{course:uuid}', [CoursesController::class, 'show']);
-
-require __DIR__ . '/auth.php';
-
 Route::get('enrolment', [EnrollmentsController::class, 'index']);
 Route::post('enrolment', [EnrollmentsController::class, 'store'])->name('enrollment.store');
 
@@ -58,20 +54,16 @@ Route::middleware('auth:web')->group(function () {
         Route::get('{classroom:unique_id}/posts', [ClassroomsController::class, 'show']);
         Route::get('{classroom:unique_id}/students', [ClassroomsController::class, 'show']);
         Route::get('{classroom:unique_id}/teachers', [ClassroomsController::class, 'show']);
-
         Route::get('{classroom:unique_id}/students', [ClassroomMembersController::class, 'getStudents']);
     });
-
-
-
     Route::get('calendar-events/list', [CalendarEventsController::class, 'getList']);
 });
 
 
 Route::middleware('auth:web')->prefix('classroom')->name('posts.')->group(function () {
     Route::get('/', [PostsController::class, 'index'])->name('index');
-
     Route::get('all', [PostsController::class, 'getList']);
-
     Route::get('{post}', [PostsController::class, 'show']);
 });
+
+require __DIR__ . '/auth.php';
