@@ -37,9 +37,9 @@ class EnrollmentsController extends Controller
         $form->save();
 
         if ($course_code == 'HLTAID003') {
-            Session::put('enrolled_form_id', $form->id);
+            // Session::put('enrolled_form_id', $form->id);
 
-            return redirect()->to("/register");
+            return redirect()->to("/payment/".$form->uid);
         }
 
         return redirect()->route("learnque");
