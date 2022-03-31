@@ -51,7 +51,7 @@
 
 <li class="sidebar-menu-item">
     <a class="sidebar-menu-button js-sidebar-collapse" data-toggle="collapse" href="#news_notice_menu">
-        <i class="bi bi-chat-square-text sidebar-menu-icon sidebar-menu-icon--left"></i>
+        <i class="bi bi-newspaper sidebar-menu-icon sidebar-menu-icon--left"></i>
         News & Notice
         <span class="ml-auto sidebar-menu-toggle-icon"></span>
     </a>
