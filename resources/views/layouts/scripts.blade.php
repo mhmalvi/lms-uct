@@ -25,4 +25,8 @@
 
 <script src="https://apis.google.com/js/api.js" type="text/javascript"></script>
 
+<script src="{{asset('assets/js/taha-de.js')}}"></script>
+
+
+
 @stack('js')

@@ -22,6 +22,11 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'index')->middleware('guest')->name('learnque');
 
 Route::view('dashboard', 'pages.dashboard')->middleware('auth')->name('dashboard');
+Route::view('enrollment', 'pages.enrollment-form');
+Route::get('payment/{uid}', [PaymentController::class, 'paymentPage']);
+Route::post('make-paypal-payment', [PaymentController::class, 'makePayPalPayment']);
+Route::post('make-bank-payment', [PaymentController::class, 'makeBankPayment']);
+Route::get('success', [PaymentController::class, 'success'])->name('success');
 Route::get('course/{course:uuid}', [CoursesController::class, 'show']);
 Route::get('enrolment', [EnrollmentsController::class, 'index']);
 Route::post('enrolment', [EnrollmentsController::class, 'store'])->name('enrollment.store');
