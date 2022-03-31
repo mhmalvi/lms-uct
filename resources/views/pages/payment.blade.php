@@ -99,7 +99,7 @@
         success: function(response, textStatus, jqXHR) {
             console.log(response);
             if(response.status == 'completed'){
-                location.href = base_url+'/success';
+                location.href = base_url+'/success/'+response.uid;
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
