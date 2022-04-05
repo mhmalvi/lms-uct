@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\CalendarEventsController;
-use App\Http\Controllers\ClassroomMembersController;
-use App\Http\Controllers\ClassroomsController;
-use App\Http\Controllers\ClassroomPostsController;
+use Dompdf\Dompdf;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoursesController;
-use App\Http\Controllers\EnrollmentsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClassroomsController;
+use App\Http\Controllers\EnrollmentsController;
+use App\Http\Controllers\PDFGenerateController;
+use App\Http\Controllers\CalendarEventsController;
+use App\Http\Controllers\ClassroomPostsController;
+use App\Http\Controllers\ClassroomMembersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +52,8 @@ require __DIR__ . '/auth.php';
 
 Route::get('enrolment', [EnrollmentsController::class, 'index']);
 Route::post('enrolment', [EnrollmentsController::class, 'store'])->name('enrollment.store');
+Route::get('generate-pdf', [PDFGenerateController::class, 'generatePDF']);
+
 
 Route::middleware(('auth:web,admin'))->group(function () {
     /**
