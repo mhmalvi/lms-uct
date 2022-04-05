@@ -3,5 +3,7 @@
 @section('title', 'Edit Profile')
 
 @section('content')
-    <user-edit-profile user_data="{{ json_encode($user) }}" />
+    <div class="container page__container">
+        <user-edit-profile user_data="{{ json_encode($user) }}" />
+    </div>
 @endsection

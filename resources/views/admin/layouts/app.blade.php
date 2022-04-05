@@ -27,7 +27,7 @@
 
     <!-- Drawer Layout -->
     <div class="mdk-drawer-layout js-mdk-drawer-layout" data-push data-responsive-width="992px">
-        <div class="mdk-drawer-layout__content page-content" id="app">
+        <div class="mdk-drawer-layout__content page-content">
             <div class="action-loading d-none" id="action-loading">
                 <div class="is-loading"></div>
             </div>
@@ -37,8 +37,9 @@
                 @include('components.breadcrumb')
             </div>
 
-            @yield('content')
-
+            <div id="app">
+                @yield('content')
+            </div>
         </div>
 
         <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
@@ -49,7 +50,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
     @include('layouts.scripts')
 </body>
 

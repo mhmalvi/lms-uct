@@ -209,14 +209,6 @@ export default {
       setImage("");
     };
 
-    const formIsValid = computed(() => {
-      return (
-        form.data.title.length > 0 &&
-        form.data.post_type &&
-        form.data.post_type.length > 0
-      );
-    });
-
     const setImage = (image) => {
       image_picker.value.setImage(image);
     };
@@ -228,6 +220,14 @@ export default {
       description_editor.value.setHTML(data.description);
       setImage(data.image_url);
     };
+
+    const formIsValid = computed(() => {
+      return (
+        form.data.title.length > 0 &&
+        form.data.post_type &&
+        form.data.post_type.length > 0
+      );
+    });
 
     const handleFormSubmit = () => {
       form.isSubmitting = true;

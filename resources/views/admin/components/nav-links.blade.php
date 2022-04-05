@@ -6,7 +6,7 @@
 </li>
 <li class="sidebar-menu-item">
     <a class="sidebar-menu-button js-sidebar-collapse" data-toggle="collapse" href="#post_menu">
-        <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">school</span>
+        <i class="bi bi-chat-left-text sidebar-menu-icon sidebar-menu-icon--left"></i>
         Posts
         <span class="ml-auto sidebar-menu-toggle-icon"></span>
     </a>
@@ -26,7 +26,7 @@
 
 <li class="sidebar-menu-item">
     <a class="sidebar-menu-button js-sidebar-collapse" data-toggle="collapse" href="#student_menu">
-        <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">school</span>
+        <i class="bi bi-people sidebar-menu-icon sidebar-menu-icon--left"></i>
         Users
         <span class="ml-auto sidebar-menu-toggle-icon"></span>
     </a>
@@ -51,7 +51,7 @@
 
 <li class="sidebar-menu-item">
     <a class="sidebar-menu-button js-sidebar-collapse" data-toggle="collapse" href="#news_notice_menu">
-        <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">question_answer</span>
+        <i class="bi bi-newspaper sidebar-menu-icon sidebar-menu-icon--left"></i>
         News & Notice
         <span class="ml-auto sidebar-menu-toggle-icon"></span>
     </a>
