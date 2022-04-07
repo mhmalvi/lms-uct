@@ -1,0 +1,188 @@
+<template>
+  <form @submit.prevent="handleFormSubmit">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            v-model="form.data.title"
+            id="title"
+            placeholder="Post title"
+          />
+          <small class="text-danger" v-if="validation.errors.title">
+            {{ validation.errors.title[0] }}
+          </small>
+        </div>
+
+        <div class="form-group">
+          <QuillEditor
+            theme="snow"
+            contentType="html"
+            ref="description_editor"
+            placeholder="Post description"
+            v-model:content="form.data.description"
+          />
+          <small class="text-danger" v-if="validation.errors.description">
+            {{ validation.errors.description[0] }}
+          </small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <cid class="card-body">
+            <div class="form-group">
+              <label for="unit_code">Unit Code</label>
+              <input
+                type="text"
+                class="form-control"
+                id="unit_code"
+                v-model="form.data.unit_code"
+                placeholder="Enter unit code"
+              />
+            </div>
+            <div class="form-group">
+              <label for="unit_title">Unit Title</label>
+              <input
+                type="text"
+                class="form-control"
+                id="unit_title"
+                v-model="form.data.unit_title"
+                placeholder="Enter unit title"
+              />
+            </div>
+          </cid>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="form-group">
+              <label for="file">Thumbnail</label>
+              <ImagePickerComponent
+                ref="image_picker"
+                @requestForChange="handleImageChange"
+                @requestForDelete="handleImageDelete"
+              />
+              <small class="text-danger" v-if="validation.errors.thumbnail">
+                {{ validation.errors.thumbnail[0] }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</template>
+
+<script>
+import { reactive, ref, computed, watch, onMounted } from "vue";
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
+import ImagePickerComponent from "../Global/ImagePickerComponent.vue";
+import axios from "axios";
+import Swal from "sweetalert2";
+
+export default {
+  components: {
+    ImagePickerComponent,
+    QuillEditor,
+  },
+  setup(_) {
+    const form = reactive({
+      data: {
+        unit_code: "",
+        unit_title: "",
+        title: "",
+        description: "",
+        thumbnail: "",
+      },
+      isSubmitting: false,
+    });
+
+    const validation = reactive({
+      errors: {},
+      message: "",
+    });
+
+    const description_editor = ref(0);
+
+    const image_picker = ref(0);
+
+    const handleImageChange = (data) => {
+      form.data.thumbnail = data.image;
+      setImage(data.image);
+    };
+
+    const handleImageDelete = () => {
+      form.data.thumbnail = "";
+      setImage("");
+    };
+
+    const setImage = (image) => {
+      image_picker.value.setImage(image);
+    };
+
+    const setData = async (data) => {
+      form.data = data;
+      form.data.image = data.image_url;
+
+      description_editor.value.setHTML(data.description);
+      setImage(data.image_url);
+    };
+
+    const handleFormSubmit = () => {
+      formErrorReset();
+      form.isSubmitting = true;
+
+      axios
+        .post("admin/posts/store", form.data)
+        .then((res) => {
+          resetForm();
+          Swal.fire({
+            title: res.data.message,
+            timer: 2000,
+          });
+        })
+        .catch((err) => {
+          if (err.response.status == 422) {
+            validation.errors = err.response.data.errors;
+            validation.message = err.response.data.message;
+          } else {
+            Swal.fire({
+              title: err.response.data.message,
+            });
+          }
+        })
+        .finally(() => {
+          form.isSubmitting = false;
+        });
+    };
+
+    const formErrorReset = () => {
+      validation.errors = {};
+      validation.message = "";
+    };
+
+    const resetForm = () => {
+      form.data = {
+        title: "",
+        description: "",
+        thumbnail: "",
+      };
+      description_editor.value.setHTML("");
+      image_picker.value.deleteImage();
+    };
+
+    return {
+      form,
+      validation,
+      image_picker,
+      description_editor,
+      handleImageChange,
+      setData,
+      handleImageDelete,
+      handleFormSubmit,
+    };
+  },
+};
+</script>

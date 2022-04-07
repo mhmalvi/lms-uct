@@ -2,7 +2,7 @@
     <div class="sidebar sidebar-dark-pickled-bluewood sidebar-left" data-perfect-scrollbar>
         <!-- Sidebar Content -->
         <a href="javascript:void(0)" class="sidebar-brand">
-            <span>Learnque</span>
+            <span>UCT LMS</span>
         </a>
 
         <div class="sidebar-heading">User Type</div>
@@ -15,22 +15,17 @@
                 @include('admin.components.nav-links')
             @endif
 
-            {{-- @include('components.teacher-nav-links') --}}
-
-            {{-- Account --}}
             <li class="sidebar-menu-item">
-                <a class="sidebar-menu-button" data-toggle="collapse" href="#account_menu">
-                    <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">account_box</span>
-                    Account
-                    <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                <a class="sidebar-menu-button" href="{{ route('profile.edit') }}">
+                    <i class="bi bi-person-circle sidebar-menu-icon sidebar-menu-icon--left"></i>
+                    <span class="sidebar-menu-text">My Profile</span>
                 </a>
-                <ul class="sidebar-submenu collapse sm-indent" id="account_menu">
-                    <li class="sidebar-menu-item">
-                        <a class="sidebar-menu-button" href="{{ route('profile.edit') }}">
-                            <span class="sidebar-menu-text">Edit Profile</span>
-                        </a>
-                    </li>
-                </ul>
+            </li>
+            <li class="sidebar-menu-item">
+                <a class="sidebar-menu-button" href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('logout').submit()">
+                    <i class="bi bi-box-arrow-right sidebar-menu-icon sidebar-menu-icon--left"></i>
+                    <span class="sidebar-menu-text">Logout</span>
+                </a>
             </li>
         </ul>
     </div>

@@ -37,7 +37,8 @@ class DatabaseSeeder extends Seeder
             'uuid' => Str::orderedUuid(),
             'name' => 'Student',
             'email' => 'student@quadque.tech',
-            'password' => Hash::make('123123')
+            'password' => Hash::make('123123'),
+            'user_type' => 'student'
         ]);
     }
 }

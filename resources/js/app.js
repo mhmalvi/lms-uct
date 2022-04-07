@@ -10,14 +10,6 @@ import UserLogin from "./components/Auth/Users/LoginComponent.vue";
 import AdminLogin from "./components/Auth/Admin/LoginComponent.vue";
 
 // Import the components here
-import CreateCategories from "./components/Categories/CreateCategories.vue";
-import ListCategories from "./components/Categories/ListCategories.vue";
-import EditCategory from "./components/Categories/EditCategory.vue";
-
-import CourseList from "./components/Courses/ListCourses.vue";
-import CreateCourses from "./components/Courses/CreateCourses.vue";
-import UpdateCourse from "./components/Courses/UpdateCourse.vue";
-
 import EnrollUserForm from "./components/Users/EnrollUserForm.vue";
 import StudentsList from "./components/Users/StudentsList.vue";
 import StudentEditForm from "./components/Users/StudentEditForm.vue";
@@ -41,10 +33,16 @@ import CreateNewsNoticeComponent from "./components/NewsNotices/NewsNoticeCreate
 import UpdateNewsNoticeComponent from "./components/NewsNotices/NewsNoticeUpdateComponent.vue";
 
 import AvatarHeaderComponent from "./components/AvatarHeaderComponent.vue";
-// import LiveClass from "./components/LiveClass/CreateClass.vue";
-// import LiveClassListComponent from "./components/LiveClass/LiveClassListComponent.vue";
-// import CreateLiveClassComponent from "./components/LiveClass/CreateLiveClassComponent.vue";
-// import UpdateLiveClassComponent from "./components/LiveClass/UpdateLiveClassComponent.vue";
+import LiveClassListComponent from "./components/LiveClass/LiveClassListComponent.vue";
+import CreateLiveClassComponent from "./components/LiveClass/CreateLiveClassComponent.vue";
+import UpdateLiveClassComponent from "./components/LiveClass/UpdateLiveClassComponent.vue";
+
+//Posts
+import PostListComponent from "./components/Posts/ListComponent.vue";
+import PostcreateComponent from "./components/Posts/CreateComponent.vue";
+import ViewPostComponent from "./components/Posts/ViewComponent.vue";
+
+import AdminPostListComponent from "./components/Posts/Admin/ListComponent.vue";
 
 /**
  * importing students components
@@ -63,14 +61,6 @@ axios.defaults.baseURL = document.head.querySelector(
 // Register all components here
 
 // Admin components
-app.component("create-categories", CreateCategories);
-app.component("list-categories", ListCategories);
-app.component("edit-category", EditCategory);
-
-app.component("course-list", CourseList);
-app.component("create-courses", CreateCourses);
-app.component("update-course", UpdateCourse);
-
 app.component("enrole-user-form", EnrollUserForm);
 app.component("students-list", StudentsList);
 app.component("student-edit-form", StudentEditForm);
@@ -83,15 +73,22 @@ app.component("user-edit-profile", UserEditProfile);
 app.component("classroom-items-grid-list", ClassroomItemsGridList);
 app.component("classroom-view", ClassroomView);
 
-// app.component("live-class-list-component", LiveClassListComponent);
-// app.component("create-live-class-component", CreateLiveClassComponent);
-// app.component("edit-live-class-component", UpdateLiveClassComponent);
+app.component("live-class-list-component", LiveClassListComponent);
+app.component("create-live-class-component", CreateLiveClassComponent);
+app.component("edit-live-class-component", UpdateLiveClassComponent);
+
+app.component("admin-post-list-component", AdminPostListComponent);
+
 // End of Admin components
 
 // Students components
 app.component("student-classroom-list", ClassroomList);
 // app.component("student-classroom-list", StudentClassroomList);
 app.component("student-classroom-view", StudentClassroomView);
+
+app.component("post-list-component", PostListComponent);
+app.component("create-post", PostcreateComponent);
+app.component("view-post-component", ViewPostComponent);
 // End of students components
 
 // for both admin, students and teachers
