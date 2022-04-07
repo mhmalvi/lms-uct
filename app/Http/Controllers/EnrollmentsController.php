@@ -48,8 +48,9 @@ class EnrollmentsController extends Controller
         //     'password' => $password,
         // ]);
 
+        $token = rand(100000, 999999);
         $form = new EnrollmentForm;
-        $form->token = rand(100000, 999999);
+        $form->token = $token;
         $form->course = $request->selected_course;
         $form->form_data = json_encode(
             $request->except([
@@ -64,7 +65,7 @@ class EnrollmentsController extends Controller
         //     );
 
         if ($form->save()) {
-            return View("pages.payment", compact('courseFee'));
+            return View("pages.payment", compact('courseFee', "token"));
         } else {
             abort(503);
         }

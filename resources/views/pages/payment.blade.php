@@ -48,7 +48,7 @@
             <div class="col-md-12">
                 <div id="paypal">
                     <h3>Pay with paypal</h3>
-                    <input type="hidden" id="uid" value="{{request()->uid}}">
+                    <input type="hidden" id="uid" value="{{$token}}">
                     <input type="hidden" id="amount" value="{{$courseFee}}" readonly required>
                     <input type="number"  placeholder="You are paying ${{$courseFee}}" class="form-control" value="You are paying ${{$courseFee}}" readonly>
                     <div class="my-3" id="paypal-button-container"></div> 
@@ -56,7 +56,7 @@
                 <div id="bank">
                     <h3>Pay with bank</h3> 
                     <form  id="bankPayment" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="uid" value="{{request()->uid}}">
+                        <input type="hidden" name="uid" value="{{$token}}">
                         <div class="form-group">
                             <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name" required>
                         </div>

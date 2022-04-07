@@ -16,8 +16,7 @@ class CreateEnrollmentFormsTable extends Migration
         Schema::create('enrollment_forms', function (Blueprint $table) {
             $table->id();
             $table->string('token')->unique();
-            $table->string('course_code');
-            $table->string('course_title');
+            $table->string('course');
             $table->longText('form_data');
             $table->timestamps();
         });
