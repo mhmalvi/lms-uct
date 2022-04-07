@@ -14,13 +14,10 @@ class PDFGenerateController extends Controller
 
     public function generatePDF($form_id)
     {
-        // return $form_id;
-        
-        $item =  EnrollmentForm::find($form_id);
-        $formData = json_decode(json_encode($item->form_data, true));  
-        $formObject = json_decode($formData);
+        $item         = EnrollmentForm::find($form_id);
+        $formData     = json_decode(json_encode($item->form_data, true));  
+        $formObject   = json_decode($formData);
         $data['data'] = $formObject;
-        // $this->data =  $formObject;
         
         $pdf = PDF::loadView('pages.pdfgenerate', $data);
         // $pdf->setPaper('A4','landscape');
