@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EnrollmentRequest;
 use App\Mail\SendEnrollmentSubmissionMail;
 use App\Models\EnrollmentForm;
 use App\Models\User;
@@ -17,7 +18,7 @@ class EnrollmentsController extends Controller
         return view('pages.enrollments.index');
     }
 
-    public function store(Request $request)
+    public function store(EnrollmentRequest $request)
     {
         // exploding from 'code - title' into ['code', '-', 'title']
         $_temp = explode(' ', $request->selected_course);
