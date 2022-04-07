@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\SendEnrollmentSubmissionMail;
-use App\Models\EnrollmentForm;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\EnrollmentForm;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
+use App\Mail\SendEnrollmentSubmissionMail;
+use App\Http\Controllers\PDFGenerateController;
 
 class EnrollmentsController extends Controller
 {
@@ -30,11 +31,11 @@ class EnrollmentsController extends Controller
         $email = $request->email;
         $password = Str::random(6);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $email,
-            'password' => bcrypt($password),
-        ]);
+        // User::create([
+        //     'name' => $request->name,
+        //     'email' => $email,
+        //     'password' => bcrypt($password),
+        // ]);
 
         Session::put('userCredentials', [
             'email' => $email,
@@ -53,12 +54,15 @@ class EnrollmentsController extends Controller
             ])
         );
 
-        Mail::to('jakariablaine120@gmail.com')
-            ->send(
-                new SendEnrollmentSubmissionMail(
-                    $request->all()
-                )
-            );
+        // Mail::to('jakariablaine120@gmail.com')
+        //     ->send(
+        //         new SendEnrollmentSubmissionMail($request->all())
+        //     );
+
+            
+        // $pdfTemplate = new PDFGenerateController();
+        // $pdfTemplate->setData($request->all());
+        // $pdfTemplate->generatePDF();
 
         if ($form->save()) {
             return redirect()->to("/payment/" . $form->uid);

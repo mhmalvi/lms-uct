@@ -2,22 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EnrollmentForm;
 use PDF;
 use Illuminate\Http\Request;
 
 class PDFGenerateController extends Controller
 {
-    public function generatePDF()
-    {
-        $data = [
-            'title' => 'Welcome to ibm.vic.edu.au',
-            'date' => date('m/d/Y')
-        ];
+    public $data;
 
-        // dd($data);
-          
+   
+
+    public function generatePDF($form_id)
+    {
+        // return $form_id;
+        
+        $item =  EnrollmentForm::find($form_id);
+        $formData = json_decode(json_encode($item->form_data, true));  
+        $formObject = json_decode($formData);
+        $data['data'] = $formObject;
+        // $this->data =  $formObject;
+        
         $pdf = PDF::loadView('pages.pdfgenerate', $data);
-    
-        return $pdf->download('uctlms.pdf');
+        // $pdf->setPaper('A4','landscape');
+        return $pdf->download('enrollmentform.pdf');
     }
 }

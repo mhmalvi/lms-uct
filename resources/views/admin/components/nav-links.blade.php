@@ -5,6 +5,12 @@
     </a>
 </li>
 <li class="sidebar-menu-item">
+    <a class="sidebar-menu-button" href="{{ route('admin.enrollment-form') }}">
+        <i class="bi bi-file-earmark-fill sidebar-menu-icon sidebar-menu-icon--left"></i>
+        <span class="sidebar-menu-text">Enroll Form</span>
+    </a>
+</li>
+<li class="sidebar-menu-item">
     <a class="sidebar-menu-button js-sidebar-collapse" data-toggle="collapse" href="#post_menu">
         <i class="bi bi-chat-left-text sidebar-menu-icon sidebar-menu-icon--left"></i>
         Posts
