@@ -27,6 +27,7 @@ class CreateOrdersTable extends Migration
             $table->float('amount', 20, 2)->nullable();
             $table->string('currency')->nullable();
             $table->string('transaction_id')->nullable();
+            $table->string("paymentSlip")->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

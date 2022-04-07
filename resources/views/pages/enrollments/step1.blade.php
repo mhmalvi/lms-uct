@@ -43,17 +43,23 @@
                                     <label for="courses">Course/UoC</label>
                                     <select id="courses" class="form-control required @error('selected_course') is-invalid @enderror" name="selected_course">
                                         <option value="">Select a course...</option>
-                                        <option value="HLTAID003 - Provide first aid">
-                                            HLTAID003 - Provide first aid
+                                        <option value="HLTAID009-Provide cardiopulmonary resuscitation">
+                                            HLTAID009 Provide Cardiopulmonary Resuscitation
                                         </option>
-                                        <option value="CPCCWHS1001 - Prepare to work safely in the construction industry">
-                                            CPCCWHS1001 - Prepare to work safely in the construction industry
+                                        <option value="HLTAID011 - Provide first aid">
+                                            HLTAID011 Provide First Aid
                                         </option>
-                                        <option value="SITHFABO02 - Provide responsible service of alcohol">
-                                            SITHFABO02 - Provide responsible service of alcohol
+                                        <option value="HLTAID012-Provide an emergency first aid response in an education and care setting">
+                                            HLTAID012 Provide an Emergency First Aid Response in an Education and Care Setting
                                         </option>
-                                        <option value="SITHGAM001 - Provide responsible gambling services">
-                                            SITHGAM001 - Provide responsible gambling services
+                                        <option value="CPCCWHS1001-Prepare to work safely in the construction industry">
+                                            CPCCWHS1001 - Prepare to Work Safely in the Construction Industry
+                                        </option>
+                                        <option value="SITHFABO02-Provide responsible service of alcohol">
+                                            SITHFABO02 - Provide Responsible Service of Alcohol
+                                        </option>
+                                        <option value="SITHGAM001-Provide responsible gambling services">
+                                            SITHGAM001 - Provide Responsible Gambling Services
                                         </option>
                                     </select>
                                     @error('selected_course')

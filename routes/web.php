@@ -1,15 +1,8 @@
 <?php
 
-<<<<<<< HEAD
-use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoursesController;
-=======
-use App\Http\Controllers\CalendarEventsController;
-use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\PostsController;
-use App\Http\Controllers\EnrollmentsController;
->>>>>>> 65f05469bbc29c9454ac7a411a4c256563d152db
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClassroomsController;
@@ -33,7 +26,7 @@ use App\Http\Controllers\ClassroomMembersController;
 Route::view('/', 'index')->middleware('guest')->name('learnque');
 
 Route::view('dashboard', 'pages.dashboard')->middleware('auth')->name('dashboard');
-Route::get('payment/{uid}', [PaymentController::class, 'paymentPage']);
+Route::get('payment', [PaymentController::class, 'paymentPage'])->name("makePayment");
 Route::post('make-paypal-payment', [PaymentController::class, 'makePayPalPayment']);
 Route::post('make-bank-payment', [PaymentController::class, 'makeBankPayment']);
 Route::get('success/{uid}', [PaymentController::class, 'success'])->name('success');

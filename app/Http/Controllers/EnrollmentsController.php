@@ -2,51 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EnrollmentRequest;
-use App\Mail\SendEnrollmentSubmissionMail;
-use App\Models\EnrollmentForm;
 use App\Models\User;
+use Illuminate\Support\Str;
+use Facade\FlareClient\View;
 use Illuminate\Http\Request;
+use App\Models\EnrollmentForm;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
+use App\Http\Requests\EnrollmentRequest;
+use Illuminate\Support\Facades\Redirect;
+use App\Mail\SendEnrollmentSubmissionMail;
 
 class EnrollmentsController extends Controller
 {
+    private $fees = [
+        "HLTAID009" => 80,
+        "HLTAID011" => 130,
+        "HLTAID012" => 150,
+        "CPCCWHS1001" => 140,
+        "SITHFABO02" => 160,
+        "SITHGAM001" => 120
+    ];
+
     public function index()
     {
         return view('pages.enrollments.index');
     }
 
-    public function store(EnrollmentRequest $request)
+    public function store(Request $request)
     {
-        // exploding from 'code - title' into ['code', '-', 'title']
-        // example: "ASD123 - Course title" -> ["ASD123", "-", "Course", "title"]
-        $_temp = explode(' ', $request->selected_course);
-        $course_code = $_temp[0];
-        unset($_temp[0]);
-        unset($_temp[1]);
-        $course_title = implode(' ', $_temp);
-
-        $email = $request->email;
-        $password = Str::random(6);
-
-        User::create([
-            'name' => $request->name,
-            'email' => $email,
-            'password' => bcrypt($password),
-        ]);
-
-        Session::put('userCredentials', [
-            'email' => $email,
-            'password' => $password,
-        ]);
+        $string = $request->selected_course;
+        $str_arr = explode("-", $string);
+        $courseFee = $this->fees[$str_arr[0]];
 
         $form = new EnrollmentForm;
-
-        $form->uid = rand(100000, 999999);
-        $form->course_code = $course_code;
-        $form->course_title = $course_title;
+        $form->token = rand(100000, 999999);
+        $form->course = $request->selected_course;
         $form->form_data = json_encode(
             $request->except([
                 '_token',
@@ -54,15 +45,8 @@ class EnrollmentsController extends Controller
             ])
         );
 
-        Mail::to('jakariablaine120@gmail.com')
-            ->send(
-                new SendEnrollmentSubmissionMail(
-                    $request->all()
-                )
-            );
-
         if ($form->save()) {
-            return redirect()->to("/payment/" . $form->uid);
+            return View("pages.payment", compact('courseFee'));
         } else {
             abort(503);
         }

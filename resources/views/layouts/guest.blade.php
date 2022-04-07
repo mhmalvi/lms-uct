@@ -34,7 +34,7 @@
         </div>
 
 
-        <div class="layout-login-centered-boxed__form card" id="app">
+        <div class="layout-login-centered-boxed__form card p-4" id="app">
             @yield('content')
         </div>
 
