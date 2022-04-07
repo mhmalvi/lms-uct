@@ -9,9 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\EnrollmentForm;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\EnrollmentRequest;
-use Illuminate\Support\Facades\Redirect;
 use App\Mail\SendEnrollmentSubmissionMail;
+use App\Http\Controllers\PDFGenerateController;
 
 class EnrollmentsController extends Controller
 {
@@ -35,6 +34,20 @@ class EnrollmentsController extends Controller
         $str_arr = explode("-", $string);
         $courseFee = $this->fees[$str_arr[0]];
 
+        // $email = $request->email;
+        // $password = Str::random(6);
+
+        // User::create([
+        //     'name' => $request->name,
+        //     'email' => $email,
+        //     'password' => bcrypt($password),
+        // ]);
+
+        // Session::put('userCredentials', [
+        //     'email' => $email,
+        //     'password' => $password,
+        // ]);
+
         $form = new EnrollmentForm;
         $form->token = rand(100000, 999999);
         $form->course = $request->selected_course;
@@ -44,6 +57,11 @@ class EnrollmentsController extends Controller
                 'selected_course',
             ])
         );
+
+        // Mail::to('jakariablaine120@gmail.com')
+        //     ->send(
+        //         new SendEnrollmentSubmissionMail($request->all())
+        //     );
 
         if ($form->save()) {
             return View("pages.payment", compact('courseFee'));
