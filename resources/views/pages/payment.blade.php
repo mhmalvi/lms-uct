@@ -1,5 +1,5 @@
 @extends('layouts.guest')
-<script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AZqLIrlgOuyKDO8gBaDXFNMLdwdd22FT8Z7tPEyPUKvzXaYKcmYHA8pkkDOu1gtk5Up7rKgSg_F5thxo&currency=USD"></script>
 @section('content')
 <div class="container">
     <div class="row">
