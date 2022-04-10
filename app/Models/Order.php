@@ -14,6 +14,7 @@ class Order extends Model
         'bank_account',
         'email',
         'phone',
+        'paymentSlip',
         'address_line_1',
         'admin_area_2',
         'admin_area_1',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Str;
+use Facade\FlareClient\View;
 use Illuminate\Http\Request;
 use App\Models\EnrollmentForm;
 use Illuminate\Support\Facades\Mail;
@@ -13,6 +14,15 @@ use App\Http\Controllers\PDFGenerateController;
 
 class EnrollmentsController extends Controller
 {
+    private $fees = [
+        "HLTAID009" => 80,
+        "HLTAID011" => 130,
+        "HLTAID012" => 150,
+        "CPCCWHS1001" => 140,
+        "SITHFABO02" => 160,
+        "SITHGAM001" => 120
+    ];
+
     public function index()
     {
         return view('pages.enrollments.index');
@@ -20,16 +30,12 @@ class EnrollmentsController extends Controller
 
     public function store(Request $request)
     {
-        // exploding from 'code - title' into ['code', '-', 'title']
-        // example: "ASD123 - Course title" -> ["ASD123", "-", "Course", "title"]
-        $_temp = explode(' ', $request->selected_course);
-        $course_code = $_temp[0];
-        unset($_temp[0]);
-        unset($_temp[1]);
-        $course_title = implode(' ', $_temp);
+        $string = $request->selected_course;
+        $str_arr = explode("-", $string);
+        $courseFee = $this->fees[$str_arr[0]];
 
-        $email = $request->email;
-        $password = Str::random(6);
+        // $email = $request->email;
+        // $password = Str::random(6);
 
         // User::create([
         //     'name' => $request->name,
@@ -37,16 +43,15 @@ class EnrollmentsController extends Controller
         //     'password' => bcrypt($password),
         // ]);
 
-        Session::put('userCredentials', [
-            'email' => $email,
-            'password' => $password,
-        ]);
+        // Session::put('userCredentials', [
+        //     'email' => $email,
+        //     'password' => $password,
+        // ]);
 
+        $token = rand(100000, 999999);
         $form = new EnrollmentForm;
-
-        $form->uid = rand(100000, 999999);
-        $form->course_code = $course_code;
-        $form->course_title = $course_title;
+        $form->token = $token;
+        $form->course = $request->selected_course;
         $form->form_data = json_encode(
             $request->except([
                 '_token',
@@ -59,13 +64,8 @@ class EnrollmentsController extends Controller
         //         new SendEnrollmentSubmissionMail($request->all())
         //     );
 
-            
-        // $pdfTemplate = new PDFGenerateController();
-        // $pdfTemplate->setData($request->all());
-        // $pdfTemplate->generatePDF();
-
         if ($form->save()) {
-            return redirect()->to("/payment/" . $form->uid);
+            return View("pages.payment", compact('courseFee', "token"));
         } else {
             abort(503);
         }

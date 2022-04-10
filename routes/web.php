@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\EnrollmentForm;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CoursesController;
@@ -28,7 +27,7 @@ use App\Http\Controllers\Admin\EnrollmentFormController;
 Route::view('/', 'index')->middleware('guest')->name('learnque');
 
 Route::view('dashboard', 'pages.dashboard')->middleware('auth')->name('dashboard');
-Route::get('payment/{uid}', [PaymentController::class, 'paymentPage']);                 
+Route::get('payment/{uid}', [PaymentController::class, 'paymentPage']);
 Route::post('make-paypal-payment', [PaymentController::class, 'makePayPalPayment']);
 Route::post('make-bank-payment', [PaymentController::class, 'makeBankPayment']);
 Route::get('success/{uid}', [PaymentController::class, 'success'])->name('success');
@@ -55,15 +54,15 @@ Route::middleware(('auth:web,admin'))->group(function () {
         Route::delete('avatar/delete', [ProfileController::class, 'avatarDelete']);
     });
 
-    
-    
+
+
     Route::get('calendar-events/list', [CalendarEventsController::class, 'getList']);
 });
 
 
 Route::middleware('auth:web')->group(function () {
     Route::view('dashboard', 'pages.dashboard')->name('dashboard');
-   
+
     Route::prefix('classroom')->name('posts.')->group(function () {
         Route::get('/', [PostsController::class, 'index'])->name('index');
         Route::get('all', [PostsController::class, 'getList']);

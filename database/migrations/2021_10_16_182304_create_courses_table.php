@@ -20,11 +20,13 @@ class CreateCoursesTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null')->onUpdate('cascade');
+            $table->foreign('category_id')->references('id')
+                ->on('categories')->onDelete('set null')->onUpdate('cascade');
             $table->longText('description')->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('alt')->nullable();
             $table->boolean('publish')->default(1);
+            $table->decimal("fees")->default("0");
             $table->timestamps();
             $table->softDeletesTz($column = 'deleted_at', $precision = 0);
         });
