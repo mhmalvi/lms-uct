@@ -10,4 +10,9 @@ class EnrollmentForm extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function order()
+    {
+        return $this->hasOne(Order::class, "uid", "token");
+    }
 }

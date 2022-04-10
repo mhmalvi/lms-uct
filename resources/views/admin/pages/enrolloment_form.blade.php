@@ -13,20 +13,32 @@
                        <th>Phone</th>
                        <th>Address</th>
                        <th>Download PDF</th>
+                       <th>Bank Receipt</th>
                    </tr>
                </thead>
                <tbody>
                 @foreach ($enrollments as $item)
-                @php
-                 $formData = json_decode(json_encode($item->form_data, true));  
-                 $formObject = json_decode($formData);
-                @endphp
+                    @php
+                    $formData = json_decode(json_encode($item->form_data, true));  
+                    $formObject = json_decode($formData);
+                    @endphp
                    <tr>
                        <td>{{$formObject->name}}</td>
                        <td>{{$formObject->email}}</td>
                        <td>{{$formObject->phone}}</td>
                        <td>{{$formObject->address}}</td>
-                       <td><a href="/generate-pdf/{{$item->id}}"><i class="bi bi-filetype-pdf"></i></a></td>
+                       <td>
+                           <a class="btn btn-outline-success" href="/generate-pdf/{{$item->id}}">
+                                <i class="bi bi-filetype-pdf"></i>&nbsp;
+                                Download
+                            </a>
+                        </td>
+                       <td>
+                            <a class="btn btn-outline-success" href="{{route("bankSlip", $item->order->paymentSlip)}}">
+                                <i class="bi bi-file-earmark-arrow-down-fill"></i>&nbsp;
+                                Download
+                            </a>
+                       </td>
                    </tr>
                 @endforeach
                </tbody>
@@ -34,12 +46,3 @@
         </div>
     </div>
 @endsection
-
-@push('css')
-    <style>
-        .bi-filetype-pdf{
-            font-size: 35px;
-            color: green;
-        }
-    </style>
-@endpush

@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
 
             return response()->json(['message' => 'success', 'redirectTo' => RouteServiceProvider::ADMIN], 201);
         } catch (\Throwable $th) {
-            return response()->json(['message' => $th->getMessage()], 503);
+            return response()->json(['message' => "Internal server error"], 503);
         }
     }
 

@@ -17,44 +17,49 @@
 
 @section('content')
     <div class="container">
-        <div class="alert alert-info" role="alert">
-            <h5 class="alert-heading">Well done!</h5>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor sapien, 
-                fermentum et dignissim et, ornare sit amet odio.
-            </p>
-            <hr>
-            <p class="mb-0">
-                Pellentesque tortor sapien, fermentum et dignissim et, ornare sit amet odio.
-            </p>
+        <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Well done!</h4>
+          <p>Please choose a payment method to complete the enrollment for <strong>{{$selectedCourse}}</strong></p>
+          <hr>
+          <p class="mb-0">Your enrollment will not complete until the funds have cleared in our account.</p>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 py-2">
                 <div class="form-check form-check-inline w-100">
                     <input class="form-check-input d-none custom-check" onchange="showPaymentMethod('paypal')" 
                         type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                    <label class="form-check-label form-check-style w-100 custom-check-label" for="inlineRadio1">PayPal</label>
+                    <label class="form-check-label form-check-style w-100 custom-check-label text-center" for="inlineRadio1">PayPal</label>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 py-2">
                 <div class="form-check form-check-inline w-100">
                     <input class="form-check-input d-none custom-check" onchange="showPaymentMethod('bank')" 
                         type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label form-check-style w-100 custom-check-label" for="inlineRadio2">Bank</label>
+                    <label class="form-check-label form-check-style w-100 custom-check-label text-center" for="inlineRadio2">Bank</label>
                 </div>
             </div>
         </div>
         <div class="row mt-4" id="gusti_shoho_hide_hobi">
             <div class="col-md-12">
                 <div id="paypal">
-                    <h3>Pay with paypal</h3>
+                    <h3>Pay ${{$courseFee}} with paypal</h3>
+                    
                     <input type="hidden" id="uid" value="{{$token}}">
                     <input type="hidden" id="amount" value="{{$courseFee}}" readonly required>
                     <input type="number"  placeholder="You are paying ${{$courseFee}}" class="form-control" value="You are paying ${{$courseFee}}" readonly>
                     <div class="my-3" id="paypal-button-container"></div> 
                 </div>
                 <div id="bank">
-                    <h3>Pay with bank</h3> 
+                    <h3>Pay ${{$courseFee}} with bank</h3> 
+                    
+                    <div class="alert alert-info" role="alert">
+                        <h5 class="alert-heading">Bank Transfer Details</h5>
+                        <hr>
+                        <p><strong>Account Name:</strong> UCT</p>
+                        <p><strong>BSB:</strong> 062334</p>
+                        <p><strong>Account Number:</strong> 1171 3248</p>
+                    </div>
+                    
                     <form  id="bankPayment" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="uid" value="{{$token}}">
                         <div class="form-group">
@@ -129,5 +134,3 @@
 
 
   <!-- Include the PayPal JavaScript SDK -->
-
-

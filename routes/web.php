@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DownloadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CoursesController;
@@ -37,6 +38,7 @@ Route::get('enrolment', [EnrollmentsController::class, 'index'])->name('enrolmen
 Route::post('enrolment', [EnrollmentsController::class, 'store'])->name('enrollment.store');
 Route::get('generate-pdf/{form_id}', [PDFGenerateController::class, 'generatePDF'])->name('generate-pdf');
 // Route::get('/downloadPDF/{id}','DisneyplusController@downloadPDF');
+Route::get("/download-slip/{slip}", [DownloadController::class, "bankReceipt"])->name("bankSlip");
 
 
 

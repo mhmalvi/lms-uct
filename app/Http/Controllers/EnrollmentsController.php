@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Mail\SendEnrollmentSubmissionMail;
 use App\Http\Controllers\PDFGenerateController;
+use App\Http\Requests\EnrollmentRequest;
 
 class EnrollmentsController extends Controller
 {
@@ -19,7 +20,7 @@ class EnrollmentsController extends Controller
         "HLTAID011" => 130,
         "HLTAID012" => 150,
         "CPCCWHS1001" => 140,
-        "SITHFABO02" => 160,
+        "SITHFAB002" => 160,
         "SITHGAM001" => 120
     ];
 
@@ -28,25 +29,15 @@ class EnrollmentsController extends Controller
         return view('pages.enrollments.index');
     }
 
-    public function store(Request $request)
+    public function store(EnrollmentRequest $request)
     {
-        $string = $request->selected_course;
-        $str_arr = explode("-", $string);
-        $courseFee = $this->fees[$str_arr[0]];
+        $selectedCourse = $request->selected_course;
+        $str_arr = explode("-", $selectedCourse);
+        $courseFee = 0;
 
-        // $email = $request->email;
-        // $password = Str::random(6);
-
-        // User::create([
-        //     'name' => $request->name,
-        //     'email' => $email,
-        //     'password' => bcrypt($password),
-        // ]);
-
-        // Session::put('userCredentials', [
-        //     'email' => $email,
-        //     'password' => $password,
-        // ]);
+        if (array_key_exists($str_arr[0], $this->fees)) {
+            $courseFee = $this->fees[trim($str_arr[0])];
+        }
 
         $token = rand(100000, 999999);
         $form = new EnrollmentForm;
@@ -59,13 +50,9 @@ class EnrollmentsController extends Controller
             ])
         );
 
-        // Mail::to('jakariablaine120@gmail.com')
-        //     ->send(
-        //         new SendEnrollmentSubmissionMail($request->all())
-        //     );
 
         if ($form->save()) {
-            return View("pages.payment", compact('courseFee', "token"));
+            return View("pages.payment", compact('courseFee', "token", "selectedCourse"));
         } else {
             abort(503);
         }

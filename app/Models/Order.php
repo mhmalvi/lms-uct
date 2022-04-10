@@ -24,4 +24,9 @@ class Order extends Model
         'transaction_id',
         'status',
     ];
+
+    public function enrollmentForm()
+    {
+        return $this->belongsTo(EnrollmentForm::class, "token", "uid");
+    }
 }

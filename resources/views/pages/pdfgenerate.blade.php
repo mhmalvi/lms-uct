@@ -28,6 +28,7 @@
 
         * {
             font-family: "Roboto", sans-serif;
+            font-size: 10px;
         }
 
         .text-center {
@@ -46,6 +47,10 @@
             margin-right: 0;
             padding-left: 20px;
             padding-right: 20px;
+        }
+
+        .question{
+            color: #92241d;
         }
 
         .submission-item .question {

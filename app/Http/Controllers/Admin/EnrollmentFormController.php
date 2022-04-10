@@ -10,7 +10,8 @@ class EnrollmentFormController extends Controller
 {
     public function getEnrolForm()
     {
-        $data['enrollments'] = EnrollmentForm::paginate(20);
+        $data['enrollments'] = EnrollmentForm::with("order")->paginate(20);
+
         return view('admin.pages.enrolloment_form', $data);
     }
 }
