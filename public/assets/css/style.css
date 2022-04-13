@@ -1448,3 +1448,7 @@ select.form-control option[value=""][disabled] {
 .instruction-text p {
     font-size: 14px !important;
 }
+
+.progress-bar {
+    background-color: #99241d !important;
+}

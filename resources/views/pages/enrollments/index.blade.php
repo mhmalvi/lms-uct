@@ -37,28 +37,30 @@
         }
 
     </style>
-
-    </link>
 </head>
 
 <body>
-    <div class="clearfix"></div>
     <div class="wrapper">
         <div class="container-fluid px-0">
             <div class="row">
                 <div class="col-md-4">
                     <div class="steps-area steps-area-fixed">
-                        <div class="image-holder"><img src="{{ asset('assets/img/side-img.jpg') }}" alt="" /></div>
+                        <div class="image-holder">
+                            <img src="{{ asset('assets/img/side-img.jpg') }}" alt="" />
+                        </div>
                         <div class="steps clearfix">
                             <ul class="tablist multisteps-form__progress">
-                                <li class="multisteps-form__progress-btn js-active current"><span>1</span></li>
-                                <li class="multisteps-form__progress-btn"><span>2</span></li>
-                                <li class="multisteps-form__progress-btn last"><span>3</span></li>
+                                <li class="multisteps-form__progress-btn js-active current d-none"><span>1</span></li>
+                                <li class="multisteps-form__progress-btn d-none"><span>2</span></li>
+                                <li class="multisteps-form__progress-btn last d-none"><span>3</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8">
+                    <div class="text-center">
+                        <img src="{{ asset('assets/img/uct-logo.png') }}" class="p-3" width="180px">
+                    </div>
                     <form class="multisteps-form__form" action="{{ route('enrollment.store') }}" id="wizard" method="POST">
                         @csrf
                         <div class="form-area position-relative">

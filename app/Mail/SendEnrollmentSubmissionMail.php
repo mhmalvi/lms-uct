@@ -18,9 +18,8 @@ class SendEnrollmentSubmissionMail extends Mailable
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct()
     {
-        $this->data = $data;
     }
 
     /**

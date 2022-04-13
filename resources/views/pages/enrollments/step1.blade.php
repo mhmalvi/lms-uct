@@ -4,6 +4,14 @@
             <div class="container form-content pera-content p-md-3">
                 <div class="step-inner-content text-justify">
                     <h4 class="py-2 text-center">Language Literacy and Numeracy Indication</h4>
+                    <div class="wizard-topper">
+                        <div class="wizard-progress">
+                            <span>1 of 3 Completed</span>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 35%;"></div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="instruction-text pt-5">
                         <p>
@@ -21,15 +29,13 @@
                         </p>
                     </div>
 
-
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <p>Please fill up all the required field</p>
                         </div>
                     @endif
 
-
-                    <div class="step-box">
+                    <div class="step-box pt-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">

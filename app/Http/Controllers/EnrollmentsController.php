@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Mail\SendEnrollmentSubmissionMail;
 use App\Http\Controllers\PDFGenerateController;
+use App\Http\Requests\EnrollmentRequest;
 
 class EnrollmentsController extends Controller
 {
@@ -28,7 +29,7 @@ class EnrollmentsController extends Controller
         return view('pages.enrollments.index');
     }
 
-    public function store(Request $request)
+    public function store(EnrollmentRequest $request)
     {
         $string = $request->selected_course;
         $str_arr = explode("-", $string);

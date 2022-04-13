@@ -4,7 +4,17 @@
             <div class="container form-content pera-content p-md-3">
                 <div class="step-inner-content">
                     <h4 class="py-2 text-center">Pre-Training Review</h4>
-                    <div class="instruction-text">
+
+                    <div class="wizard-topper">
+                        <div class="wizard-progress">
+                            <span>2 of 3 Completed</span>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="instruction-text pt-5">
                         <h5>Introduction</h5>
                         <p>
                             A Pre-Training Review ensures that the learning and assessment strategy meets your
@@ -75,6 +85,7 @@
                             </li>
                         </ul>
                     </div>
+
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">

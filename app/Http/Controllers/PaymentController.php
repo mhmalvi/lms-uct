@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendEnrollmentSubmissionMail;
 use App\Models\Order;
 use App\Uploads\FileUpload;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -43,6 +45,8 @@ class PaymentController extends Controller
         $data = $request->all();
         $data['paymentSlip'] = $fileName;
         $order = Order::create($data);
+
+        Mail::to('dev.quadque@gmail.com')->cc('tousif@quadque.tech')->send(new SendEnrollmentSubmissionMail());
 
         if ($order) {
             return response()->json([

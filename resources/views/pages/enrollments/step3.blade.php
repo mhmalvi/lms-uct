@@ -5,6 +5,15 @@
                 <div class="step-inner-content">
                     <h2 class="py-2">Enrollement</h2>
 
+                    <div class="wizard-topper">
+                        <div class="wizard-progress">
+                            <span>3 of 3 Completed</span>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="step-box">
                         <div class="card">
                             <div class="card-body">
