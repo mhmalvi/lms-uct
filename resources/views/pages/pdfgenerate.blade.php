@@ -71,6 +71,7 @@
             <h3 class="text-center">UCT Enrollment Form Submission</h3>
             <hr />
 
+            <h4>Language Literacy and Numeracy Indication</h4>
             <div class="row">
                 <!-- This is a submission item -->
                 <div class="submission-item">
@@ -161,6 +162,7 @@
                     <p class="answer">Answer: {{ @$data->explain_importance_of_read_signs }}</p>
                 </div>
                 <!-- End of the submission item -->
+                H
                 <!-- This is a submission item -->
                 <div class="submission-item">
                     <p class="question">
@@ -201,6 +203,9 @@
                     <p class="answer">Answer: {{ @$data->how_many_residents }}</p>
                 </div>
                 <!-- End of the submission item -->
+
+                <h4>Pre-Training Review</h4>
+
                 <!-- This is a submission item -->
                 <div class="submission-item">
                     <p class="question">
@@ -362,6 +367,7 @@
                     </div>
                 @endif
                 <!-- End of the submission item -->
+                <h4>Enrollment</h4>
                 <!-- This is a submission item -->
                 <div class="submission-item">
                     <p class="question">Q: Given name</p>

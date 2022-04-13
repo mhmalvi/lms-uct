@@ -44,27 +44,35 @@
 <body>
     <div class="clearfix"></div>
     <div class="wrapper">
-        <div class="steps-area steps-area-fixed">
-            <div class="image-holder"><img src="{{ asset('assets/img/side-img.jpg') }}" alt="" /></div>
-            <div class="steps clearfix">
-                <ul class="tablist multisteps-form__progress">
-                    <li class="multisteps-form__progress-btn js-active current"><span>1</span></li>
-                    <li class="multisteps-form__progress-btn"><span>2</span></li>
-                    <li class="multisteps-form__progress-btn last"><span>3</span></li>
-                </ul>
+        <div class="container-fluid px-0">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="steps-area steps-area-fixed">
+                        <div class="image-holder"><img src="{{ asset('assets/img/side-img.jpg') }}" alt="" /></div>
+                        <div class="steps clearfix">
+                            <ul class="tablist multisteps-form__progress">
+                                <li class="multisteps-form__progress-btn js-active current"><span>1</span></li>
+                                <li class="multisteps-form__progress-btn"><span>2</span></li>
+                                <li class="multisteps-form__progress-btn last"><span>3</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <form class="multisteps-form__form" action="{{ route('enrollment.store') }}" id="wizard" method="POST">
+                        @csrf
+                        <div class="form-area position-relative">
+                            <!-- div 1 -->
+                            @include('pages.enrollments.step1')
+                            <!-- div 2 -->
+                            @include('pages.enrollments.step2')
+                            <!-- div 3 -->
+                            @include('pages.enrollments.step3')
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <form class="multisteps-form__form" action="{{ route('enrollment.store') }}" id="wizard" method="POST">
-            @csrf
-            <div class="form-area position-relative">
-                <!-- div 1 -->
-                @include('pages.enrollments.step1')
-                <!-- div 2 -->
-                @include('pages.enrollments.step2')
-                <!-- div 3 -->
-                @include('pages.enrollments.step3')
-            </div>
-        </form>
     </div>
     <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>

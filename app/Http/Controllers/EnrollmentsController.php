@@ -54,8 +54,7 @@ class EnrollmentsController extends Controller
         $form->course = $request->selected_course;
         $form->form_data = json_encode(
             $request->except([
-                '_token',
-                'selected_course',
+                '_token'
             ])
         );
 
