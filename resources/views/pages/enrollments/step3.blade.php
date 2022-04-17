@@ -3,7 +3,7 @@
         <div class="innerclearfix">
             <div class="container form-content pera-content p-md-3">
                 <div class="step-inner-content">
-                    <h2 class="py-2">Enrollement</h2>
+                    <h2 class="py-2">Enrollment</h2>
 
                     <div class="wizard-topper">
                         <div class="wizard-progress">
