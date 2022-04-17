@@ -29,6 +29,6 @@ class SendEnrollmentSubmissionMail extends Mailable
      */
     public function build()
     {
-        return $this->view('user.emails.enrollment_submission');
+        return $this->view('mails.paymentConfirmation');
     }
 }

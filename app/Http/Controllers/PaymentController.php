@@ -46,7 +46,7 @@ class PaymentController extends Controller
         $data['paymentSlip'] = $fileName;
         $order = Order::create($data);
 
-        Mail::to('dev.quadque@gmail.com')->cc('tousif@quadque.tech')->send(new SendEnrollmentSubmissionMail());
+        Mail::to('dev.quadque@gmail.com')->send(new SendEnrollmentSubmissionMail());
 
         if ($order) {
             return response()->json([
@@ -55,7 +55,6 @@ class PaymentController extends Controller
                 'messaage'  => "Thank you for your payment!"
             ]);
         } else {
-
             return response()->json([
                 'status'    => 'completed',
                 'uid'       => $order->uid,

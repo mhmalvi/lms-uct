@@ -31,23 +31,13 @@ class EnrollmentsController extends Controller
 
     public function store(EnrollmentRequest $request)
     {
-        $string = $request->selected_course;
-        $str_arr = explode("-", $string);
-        $courseFee = $this->fees[$str_arr[0]];
+        $selectedCourse = $request->selected_course;
+        $str_arr = explode("-", $selectedCourse);
+        $courseFee = 0;
 
-        // $email = $request->email;
-        // $password = Str::random(6);
-
-        // User::create([
-        //     'name' => $request->name,
-        //     'email' => $email,
-        //     'password' => bcrypt($password),
-        // ]);
-
-        // Session::put('userCredentials', [
-        //     'email' => $email,
-        //     'password' => $password,
-        // ]);
+        if (array_key_exists($str_arr[0], $this->fees)) {
+            $courseFee = $this->fees[trim($str_arr[0])];
+        }
 
         $token = rand(100000, 999999);
         $form = new EnrollmentForm;
@@ -55,19 +45,12 @@ class EnrollmentsController extends Controller
         $form->course = $request->selected_course;
         $form->form_data = json_encode(
             $request->except([
-                '_token'
+                '_token',
             ])
         );
 
-        // Mail::to('jakariablaine120@gmail.com')
-        //     ->send(
-        //         new SendEnrollmentSubmissionMail($request->all())
-        //     );
+        $form->save();
 
-        if ($form->save()) {
-            return View("pages.payment", compact('courseFee', "token"));
-        } else {
-            abort(503);
-        }
+        return View("pages.payment", compact('courseFee', "token", "selectedCourse"));
     }
 }
