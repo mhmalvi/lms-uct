@@ -70,4 +70,7 @@ Route::middleware('auth:web')->group(function () {
     });
 });
 
+
+Route::view("test", "test");
+
 require __DIR__ . '/auth.php';
