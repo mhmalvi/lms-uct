@@ -19528,7 +19528,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  setup: function setup(props, context) {
+    function onFormSubmitHandler(e) {
+      var data = Object.fromEntries(new FormData(e.target).entries());
+      context.emit("onClickEvent", data);
+    }
+
+    return {
+      onFormSubmitHandler: onFormSubmitHandler
+    };
+  }
+});
 
 /***/ }),
 
@@ -19547,6 +19558,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LLNComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LLNComponent.vue */ "./resources/js/components/Enrollments/LLNComponent.vue");
 /* harmony import */ var _PTRComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PTRComponent.vue */ "./resources/js/components/Enrollments/PTRComponent.vue");
 /* harmony import */ var _EnrollmentComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EnrollmentComponent.vue */ "./resources/js/components/Enrollments/EnrollmentComponent.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -19559,16 +19579,42 @@ __webpack_require__.r(__webpack_exports__);
   },
   setup: function setup() {
     var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-      count: 1
+      count: 1,
+      lln: {},
+      ptr: {},
+      enrollment: {}
     });
 
-    function doSomething(event) {
+    function doSomething1(event) {
       state.count++;
+      state.lln = event;
     }
+
+    function doSomething2(event) {
+      state.count++;
+      state.ptr = event;
+    }
+
+    function doSomething3(event) {
+      state.enrollment = event;
+      formSubmitHandler();
+    }
+
+    var formSubmitHandler = function formSubmitHandler() {
+      var formData = _objectSpread(_objectSpread(_objectSpread({}, state.lln), state.ptr), state.enrollment);
+
+      axios__WEBPACK_IMPORTED_MODULE_4___default().post("enrolment", formData).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    };
 
     return {
       state: state,
-      doSomething: doSomething
+      doSomething1: doSomething1,
+      doSomething2: doSomething2,
+      doSomething3: doSomething3
     };
   }
 });
@@ -19588,12 +19634,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup(props, context) {
-    function handleClick() {
-      context.emit("onClickEvent", 2);
+    function onFormSubmitHandler(e) {
+      var items = Object.fromEntries(new FormData(e.target).entries());
+
+      for (var item in items) {
+        if (items[item] == "") {
+          var form = document.querySelector("form");
+          var el = document.createElement("span");
+          el.innerText = "This field is required";
+          el.classList.add("text-danger");
+          var target = document.getElementById(item);
+
+          if (target != null) {
+            target.classList.add("is-invalid");
+            target.parentNode.insertBefore(el, target.nextSibling);
+          }
+
+          form.scrollIntoView({
+            behavior: "smooth"
+          });
+        }
+      }
     }
 
     return {
-      handleClick: handleClick
+      onFormSubmitHandler: onFormSubmitHandler
     };
   }
 });
@@ -19613,12 +19678,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup(props, context) {
-    function handleClick() {
-      context.emit("onClickEvent", 2);
+    function onFormSubmitHandler(e) {
+      var data = Object.fromEntries(new FormData(e.target).entries());
+      context.emit("onClickEvent", data);
     }
 
     return {
-      handleClick: handleClick
+      onFormSubmitHandler: onFormSubmitHandler
     };
   }
 });
@@ -19638,17 +19704,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "py-5"
-};
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
   "class": "text-center"
-}, "Enrollment", -1
-/* HOISTED */
-);
-
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+}, "Enrollment"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "py-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "progress"
@@ -19661,15 +19722,734 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   "aria-valuenow": "100",
   "aria-valuemin": "0",
   "aria-valuemax": "100"
-}, " 100% ")])], -1
+}, " 100% ")])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "givenName"
+}, "Given name *"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "givenName"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "sureName"
+}, "Family name (surname) *"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "sureName"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-12"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "address"
+}, "Address"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "address"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "town"
+}, "Town"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "town"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "territory"
+}, "Territory"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "territory"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "code"
+}, "Code"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "code"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "phone"
+}, "Phone "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "phone"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "mobile"
+}, "Mobile"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "mobile"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "email"
+}, "Email"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "email"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "gender"
+}, "Gender"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  "class": "form-control"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  selected: "",
+  disabled: ""
+}, " Please select your gender "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "male"
+}, "Male"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "female"
+}, "Female")])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "dob"
+}, "Date of birth"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "date",
+  "class": "form-control",
+  name: "dob"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "cob"
+}, "Country of Birth"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "cob"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "spoken"
+}, "Language spoken at home?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "spoken"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "usi"
+}, "Do you already possess a unique student identifier (USI)? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "usi"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "origin"
+}, "Are you of Aboriginal or Torres Strait Islander origin? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  "class": "form-control",
+  name: "origin"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  selected: "",
+  disabled: ""
+}, "Please select..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "no"
+}, "No"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "yes aboriginal"
+}, "Yes Aboriginal"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "yes torres strait islander"
+}, " Yes Torres Strait islander ")])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "emergencyContact"
+}, "Emergency contact"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  id: "emergencyContact",
+  name: "emergencyContact"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "emergencyRelation"
+}, "Relationship"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  id: "emergencyRelation",
+  name: "emergencyRelation"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "dayTimeTelephone"
+}, "Daytime telephone"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "dayTimeTelephone",
+  id: "dayTimeTelephone"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-check form-check-inline"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "form-check-input",
+  type: "checkbox",
+  id: "identifier",
+  value: "identifier",
+  name: "identifier"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-check-label",
+  "for": "identifier"
+}, "I wish Unique College of Technology UCT Pty Ltd permission to source a unique student identifier on your behalf ")])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "courseCode"
+}, "Course code"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "courseCode",
+  id: "courseCode"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "courseTitle"
+}, "Course title"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  id: "courseTitle",
+  name: "courseTitle"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "unitName"
+}, "Unit name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  id: "unitName",
+  name: "unitName"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": ""
+}, "Unit code"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "unitCode",
+  id: "unitCode"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "aboutCourse"
+}, "How did you hear about the course? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "aboutCourse",
+  id: "aboutCourse"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "couseEntry"
+}, "Do you satisfy the course entry requirements (if any)? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  id: "couseEntry",
+  name: "couseEntry",
+  "class": "form-control"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  disabled: "",
+  selected: ""
+}, "Please select..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: ""
+}, "Yes"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: ""
+}, "No")])])])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "speakEnglish"
+}, "How well do you speak English? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  name: "speakEnglish",
+  id: "speakEnglish",
+  "class": "form-control"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  disabled: "",
+  selected: ""
+}, "Please select..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: ""
+}, "Very well"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: ""
+}, "Well"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: ""
+}, "Not well"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: ""
+}, "Not at all")])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "schoolCompleted"
+}, "Year school completed (eg.1998)"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  name: "schoolCompleted",
+  id: "schoolCompleted",
+  "class": "form-control"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "schoolTown"
+}, "Town/City"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  name: "schoolTown",
+  id: "schoolTown",
+  "class": "form-control"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "schoolCompletedYear"
+}, "What is your highest completed school year?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  name: "sclCompletedYear",
+  id: "schoolCompletedYear",
+  "class": "form-control"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  disabled: "",
+  selected: ""
+}, "Please select..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: ""
+}, "Year 12"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: ""
+}, "Year 11"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: ""
+}, "Year 10"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: ""
+}, "Year 9"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: ""
+}, "Year 8 or below"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: ""
+}, "never attended school")])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "attendingSchool"
+}, "Are you still attending secondary school?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  name: "attendingSchool",
+  id: "attendingSchool",
+  "class": "form-control"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: ""
+}, "Yes"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: ""
+}, "No")])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "completedQualification"
+}, "Have you successfully completed any of the following qualifications?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  name: "completedQualification",
+  id: "completedQualification",
+  "class": "form-control"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  disabled: "",
+  selected: ""
+}, "Please select..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Advanced Diploma or Associate Degree"
+}, " Advanced Diploma or Associate Degree "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Bachelor Degree or higher degree"
+}, " Bachelor Degree or higher degree "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Diploma or Associate Diploma"
+}, " Diploma or Associate Diploma "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Certificate I"
+}, "Certificate I"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Certificate II"
+}, "Certificate II"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Certificate III or Trade Certificate"
+}, " Certificate III or Trade Certificate "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Certificate I/Advanced/Technical Cert"
+}, " Certificate I/Advanced/Technical Cert "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Other certificate"
+}, "Other certificate")])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "attendingSecondarySchool"
+}, "Are you still attending secondary school?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  name: "attendingSecondarySchool",
+  id: "attendingSecondarySchool",
+  "class": "form-control"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  disabled: "",
+  selected: ""
+}, "Please select..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Yes"
+}, "Yes"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "No"
+}, "No")])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-12"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "disabilityCondition"
+}, "Do you have a disability, impairment or long-term condition? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  name: "disabilityCondition",
+  id: "disabilityCondition",
+  "class": "form-control"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  disabled: "",
+  selected: ""
+}, "Please select..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Yes"
+}, "Yes"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "No"
+}, "No")])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-12"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "presenceOfDisability"
+}, "If you indicated the presence of a disability, impairment or long-term condition, please select the area(s) in the following list: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  name: "presenceOfDisability",
+  id: "presenceOfDisability",
+  "class": "form-control"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  disabled: "",
+  selected: ""
+}, "Please select..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Acquired brain injury"
+}, " Acquired brain injury "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Hearing/deaf"
+}, "Hearing/deaf"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Intellectual"
+}, "Intellectual"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Learning"
+}, "Learning"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Medical Condition"
+}, "Medical Condition"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Mental Illness"
+}, "Mental Illness"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Other disabilit"
+}, "Other disability"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Physical"
+}, "Physical"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Unspecified"
+}, "Unspecified"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Visual/sight"
+}, "Visual/sight"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Chronic Illness"
+}, "Chronic Illness")])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-12"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "anythingPreventFromCourse"
+}, "Is there anything that may prevent you from successfully completing the training course? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  name: "anythingPreventFromCourse",
+  id: "anythingPreventFromCourse",
+  "class": "form-control"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  disabled: "",
+  selected: ""
+}, "Please select..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Yes"
+}, "Yes"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "No"
+}, "No")])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "needHelp"
+}, "Do you need help with reading and writing or maths? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  name: "needHelp",
+  id: "needHelp",
+  "class": "form-control"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  disabled: "",
+  selected: ""
+}, "Please select..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Yes"
+}, "Yes"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "No"
+}, "No")])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "wishToCompleteCourse"
+}, "For what reason/s, as listed below, do you wish to complete this course? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  name: "wishToCompleteCourse",
+  id: "wishToCompleteCourse",
+  "class": "form-control"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  disabled: "",
+  selected: ""
+}, "Please select..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Get a job"
+}, "Get a job"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Try for a different career"
+}, " Try for a different career "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Extra skills for my job"
+}, " Extra skills for my job "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "For self-development"
+}, " For self-development "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Develop my existing business"
+}, " Develop my existing business "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Get a better job or promotion"
+}, " Get a better job or promotion "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Get into another course or study"
+}, " Get into another course or study "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Start my own business"
+}, " Start my own business "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Requirement of my job"
+}, " Requirement of my job "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "For personal interest"
+}, " For personal interest "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Other reasons"
+}, "Other reasons")])])])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-12"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "currentEmploymentStatus"
+}, "Which situation, as listed below, best describes your current employment status?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  name: "currentEmploymentStatus",
+  id: "currentEmploymentStatus",
+  "class": "form-control"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  disabled: "",
+  selected: ""
+}, "Please select..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Employed (as an unpaid\r\n                                                    family worker) "
+}, " Employed (as an unpaid family worker) "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Employee full time"
+}, "Employee full time"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Employee part time"
+}, "Employee part time"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Unemployed and seeking full\r\n                                                    time work"
+}, " Unemployed and seeking full time work "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "An employer"
+}, "An employer"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Not employed – not seeking\r\n                                                    employment/retired"
+}, " Not employed – not seeking employment/retired "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Self employed (not\r\n                                                    employing others) "
+}, " Self employed (not employing others) "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Unemployed and seeking part\r\n                                                    time work"
+}, " Unemployed and seeking part time work ")])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "occupation"
+}, "Occupation"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "occupation"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "businessName"
+}, "Business Name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "businessName"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "postalAddress"
+}, "Postal Address"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "postalAddress"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "contactPhone"
+}, "Contact Phone"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "contactPhone"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "fax"
+}, "Fax"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "fax"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-12"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "currentEmploymentStatus"
+}, " Do you wish to apply for Recognition of Prior Learning (RPL) or Credit Transfer (CT)? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  name: "currentEmploymentStatus",
+  id: "currentEmploymentStatus",
+  "class": "form-control"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  disabled: "",
+  selected: ""
+}, "Please select..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "Yes"
+}, "Yes"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "No"
+}, "No")])])])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn btn-primary",
+  type: "submit"
+}, "Submit")])], -1
 /* HOISTED */
 );
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"my-5\"></div><div class=\"card\"><div class=\"card-body\"><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group\"><label for=\"givenName\">Given name *</label><input type=\"text\" class=\"form-control\" name=\"givenName\"></div></div><div class=\"col-md-6\"><div class=\"form-group\"><label for=\"sureName\">Family name (surname) *</label><input type=\"text\" class=\"form-control\" name=\"sureName\"></div></div></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"form-group pt-4\"><label for=\"address\">Address</label><input type=\"text\" class=\"form-control\" name=\"address\"></div></div></div><div class=\"row\"><div class=\"col-md-4\"><div class=\"form-group pt-4\"><label for=\"town\">Town</label><input type=\"text\" class=\"form-control\" name=\"town\"></div></div><div class=\"col-md-4\"><div class=\"form-group pt-4\"><label for=\"territory\">Territory</label><input type=\"text\" class=\"form-control\" name=\"territory\"></div></div><div class=\"col-md-4\"><div class=\"form-group pt-4\"><label for=\"code\">Code</label><input type=\"text\" class=\"form-control\" name=\"code\"></div></div></div><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"phone\">Phone </label><input type=\"text\" class=\"form-control\" name=\"phone\"></div></div><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"mobile\">Mobile</label><input type=\"text\" class=\"form-control\" name=\"mobile\"></div></div></div><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"email\">Email</label><input type=\"text\" class=\"form-control\" name=\"email\"></div></div><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"gender\">Gender</label><select class=\"form-control\"><option value selected disabled> Please select your gender </option><option value=\"male\">Male</option><option value=\"female\">Female</option></select></div></div></div><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"dob\">Date of birth</label><input type=\"date\" class=\"form-control\" name=\"dob\"></div></div><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"cob\">Country of Birth</label><input type=\"text\" class=\"form-control\" name=\"cob\"></div></div></div><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"spoken\">Language spoken at home?</label><input type=\"text\" class=\"form-control\" name=\"spoken\"></div></div><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"usi\">Do you already possess a unique student identifier (USI)? </label><input type=\"text\" class=\"form-control\" name=\"usi\"></div></div></div><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"origin\">Are you of Aboriginal or Torres Strait Islander origin? </label><select class=\"form-control\"><option value selected disabled>Please select...</option><option value=\"no\">No</option><option value=\"yes aboriginal\">Yes Aboriginal</option><option value=\"yes torres strait islander\"> Yes Torres Strait islander </option></select></div></div><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"emergencyContact\">Emergency contact</label><input type=\"text\" class=\"form-control\" id=\"emergencyContact\" name=\"emergencyContact\"></div></div></div><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"emergencyRelation\">Relationship</label><input type=\"text\" class=\"form-control\" id=\"emergencyRelation\" name=\"emergencyRelation\"></div></div><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"dayTimeTelephone\">Daytime telephone</label><input type=\"text\" class=\"form-control\" name=\"dayTimeTelephone\" id=\"dayTimeTelephone\"></div></div></div><div class=\"form-group pt-4\"><div class=\"form-check form-check-inline\"><input class=\"form-check-input\" type=\"checkbox\" id=\"identifier\" value=\"identifier\" name=\"identifier\"><label class=\"form-check-label\" for=\"identifier\">I wish Unique College of Technology UCT Pty Ltd permission to source a unique student identifier on your behalf </label></div></div></div></div><div class=\"my-5\"></div><div class=\"card\"><div class=\"card-body\"><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group\"><label for=\"courseCode\">Course code</label><input type=\"text\" class=\"form-control\" name=\"courseCode\" id=\"courseCode\"></div></div><div class=\"col-md-6\"><div class=\"form-group\"><label for=\"courseTitle\">Course title</label><input type=\"text\" class=\"form-control\" id=\"courseTitle\" name=\"courseTitle\"></div></div></div><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"unitName\">Unit name</label><input type=\"text\" class=\"form-control\" id=\"unitName\" name=\"unitName\"></div></div><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"\">Unit code</label><input type=\"text\" class=\"form-control\" name=\"unitCode\" id=\"unitCode\"></div></div></div><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"aboutCourse\">How did you hear about the course? </label><input type=\"text\" class=\"form-control\" name=\"aboutCourse\" id=\"aboutCourse\"></div></div><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"couseEntry\">Do you satisfy the course entry requirements (if any)? </label><select id=\"couseEntry\" name=\"couseEntry\" class=\"form-control\"><option value=\"\" disabled selected>Please select...</option><option value=\"\">Yes</option><option value=\"\">No</option></select></div></div></div></div></div><div class=\"my-5\"></div><div class=\"card\"><div class=\"card-body\"><div class=\"row\"><div class=\"col-md-4\"><div class=\"form-group pt-4\"><label for=\"speakEnglish\">How well do you speak English? </label><select name=\"speakEnglish\" id=\"speakEnglish\" class=\"form-control\"><option value=\"\" disabled selected>Please select...</option><option value=\"\">Very well</option><option value=\"\">Well</option><option value=\"\">Not well</option><option value=\"\">Not at all</option></select></div></div><div class=\"col-md-4\"><div class=\"form-group pt-4\"><label for=\"schoolCompleted\">Year school completed (eg.1998)</label><input type=\"text\" name=\"schoolCompleted\" id=\"schoolCompleted\" class=\"form-control\"></div></div><div class=\"col-md-4\"><div class=\"form-group pt-4\"><label for=\"schoolTown\">Town/City</label><input type=\"text\" name=\"schoolTown\" id=\"schoolTown\" class=\"form-control\"></div></div></div><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"schoolCompletedYear\">What is your highest completed school year?</label><select name=\"schoolCompletedYear\" id=\"schoolCompletedYear\" class=\"form-control\"><option value=\"\" disabled selected>Please select...</option><option value=\"\">Year 12</option><option value=\"\">Year 11</option><option value=\"\">Year 10</option><option value=\"\">Year 9</option><option value=\"\">Year 8 or below</option><option value=\"\">never attended school</option></select></div></div><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"attendingSchool\">Are you still attending secondary school?</label><select name=\"attendingSchool\" id=\"attendingSchool\" class=\"form-control\"><option value=\"\">Yes</option><option value=\"\">No</option></select></div></div></div><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"completedQualification\">Have you successfully completed any of the following qualifications?</label><select name=\"completedQualification\" id=\"completedQualification\" class=\"form-control\"><option value=\"\" disabled selected>Please select...</option><option value=\"\">Advanced Diploma or Associate Degree</option><option value=\"\">Bachelor Degree or higher degree</option><option value=\"\">Diploma or Associate Diploma</option><option value=\"\">Certificate I</option><option value=\"\">Certificate II</option><option value=\"\">Certificate III or Trade Certificate</option><option value=\"\">Certificate I/Advanced/Technical Cert</option><option value=\"\">Other certificate</option></select></div></div><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"attendingSecondarySchool\">Are you still attending secondary school?</label><select name=\"attendingSecondarySchool\" id=\"attendingSecondarySchool\" class=\"form-control\"><option value=\"\" disabled selected>Please select...</option><option value=\"\">Yes</option><option value=\"\">No</option></select></div></div></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"form-group pt-4\"><label for=\"disabilityCondition\">Do you have a disability, impairment or long-term condition? </label><select name=\"disabilityCondition\" id=\"disabilityCondition\" class=\"form-control\"><option value=\"\" disabled selected>Please select...</option><option value=\"\">Yes</option><option value=\"\">No</option></select></div></div></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"form-group pt-4\"><label for=\"presenceOfDisability\">If you indicated the presence of a disability, impairment or long-term condition, please select the area(s) in the following list: </label><select name=\"presenceOfDisability\" id=\"presenceOfDisability\" class=\"form-control\"><option value=\"\" disabled selected>Please select...</option><option value=\"\">Acquired brain injury</option><option value=\"\">Hearing/deaf</option><option value=\"\">Intellectual</option><option value=\"\">Learning</option><option value=\"\">Medical Condition</option><option value=\"\">Mental Illness</option><option value=\"\">Other disability</option><option value=\"\">Physical</option><option value=\"\">Unspecified</option><option value=\"\">Visual/sight</option><option value=\"\">Chronic Illness</option></select></div></div></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"form-group pt-4\"><label for=\"anythingPreventFromCourse\">Is there anything that may prevent you from successfully completing the training course? </label><select name=\"anythingPreventFromCourse\" id=\"anythingPreventFromCourse\" class=\"form-control\"><option value=\"\" disabled selected>Please select...</option><option value=\"\">Yes</option><option value=\"\">No</option></select></div></div></div><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"needHelp\">Do you need help with reading and writing or maths? </label><select name=\"needHelp\" id=\"needHelp\" class=\"form-control\"><option value=\"\" disabled selected>Please select...</option><option value=\"\">Yes</option><option value=\"\">No</option></select></div></div><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"wishToCompleteCourse\">For what reason/s, as listed below, do you wish to complete this course? </label><select name=\"wishToCompleteCourse\" id=\"wishToCompleteCourse\" class=\"form-control\"><option value=\"\" disabled selected>Please select...</option><option value=\"\">Get a job</option><option value=\"\">Try for a different career</option><option value=\"\">Extra skills for my job</option><option value=\"\">For self-development</option><option value=\"\">Develop my existing business</option><option value=\"\">Get a better job or promotion</option><option value=\"\">Get into another course or study</option><option value=\"\">Start my own business</option><option value=\"\">Requirement of my job</option><option value=\"\">For personal interest</option><option value=\"\">Other reasons</option></select></div></div></div></div></div><div class=\"my-5\"></div><div class=\"card\"><div class=\"card-body\"><div class=\"row\"><div class=\"col-md-12\"><div class=\"form-group\"><label for=\"currentEmploymentStatus\">Which situation, as listed below, best describes your current employment status?</label><select name=\"currentEmploymentStatus\" id=\"currentEmploymentStatus\" class=\"form-control\"><option value=\"\" disabled selected>Please select...</option><option value=\"Employed (as an unpaid\r\n                                                    family worker) \"> Employed (as an unpaid family worker) </option><option value=\"Employee full time\">Employee full time</option><option value=\"Employee part time\">Employee part time</option><option value=\"Unemployed and seeking full\r\n                                                    time work\"> Unemployed and seeking full time work </option><option value=\"An employer\">An employer</option><option value=\"Not employed – not seeking\r\n                                                    employment/retired\"> Not employed – not seeking employment/retired </option><option value=\"Self employed (not\r\n                                                    employing others) \"> Self employed (not employing others) </option><option value=\"Unemployed and seeking part\r\n                                                    time work\"> Unemployed and seeking part time work </option></select></div></div></div><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"occupation\">Occupation</label><input type=\"text\" class=\"form-control\" name=\"occupation\"></div></div><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"businessName\">Business Name</label><input type=\"text\" class=\"form-control\" name=\"businessName\"></div></div></div><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"postalAddress\">Postal Address</label><input type=\"text\" class=\"form-control\" name=\"postalAddress\"></div></div><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"contactPhone\">Contact Phone</label><input type=\"text\" class=\"form-control\" name=\"contactPhone\"></div></div></div><div class=\"row\"><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"fax\">Fax</label><input type=\"text\" class=\"form-control\" name=\"fax\"></div></div><div class=\"col-md-6\"><div class=\"form-group pt-4\"><label for=\"email\">Email</label><input type=\"email\" class=\"form-control\" name=\"businessEmail\"></div></div></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"form-group pt-4\"><label for=\"currentEmploymentStatus\"> Do you wish to apply for Recognition of Prior Learning (RPL) or Credit Transfer (CT)? </label><select name=\"currentEmploymentStatus\" id=\"currentEmploymentStatus\" class=\"form-control\"><option value=\"\" disabled selected>Please select...</option><option value=\"Yes\">Yes</option><option value=\"No\">No</option></select></div></div></div></div></div><div class=\"my-5\"><button class=\"btn btn-primary\" type=\"button\">Submit</button></div>", 9);
-
-var _hoisted_13 = [_hoisted_2, _hoisted_3, _hoisted_4];
+var _hoisted_2 = [_hoisted_1];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_13);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
+    onSubmit: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $setup.onFormSubmitHandler && $setup.onFormSubmitHandler.apply($setup, arguments);
+    }, ["prevent"]))
+  }, _hoisted_2, 32
+  /* HYDRATE_EVENTS */
+  );
 }
 
 /***/ }),
@@ -19699,11 +20479,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$setup.state.count == 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_LLNComponent, {
-        key: 0,
-        onOnClickEvent: $setup.doSomething
-      }, null, 8
-      /* PROPS */
-      , ["onOnClickEvent"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+        key: 0
+      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1
     /* STABLE */
@@ -19714,7 +20491,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$setup.state.count == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_PTRComponent, {
         key: 0,
-        onOnClickEvent: $setup.doSomething
+        onOnClickEvent: $setup.doSomething2
       }, null, 8
       /* PROPS */
       , ["onOnClickEvent"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
@@ -19727,8 +20504,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$setup.state.count == 3 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_EnrollmentComponent, {
-        key: 0
-      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+        key: 0,
+        onOnClickEvent: $setup.doSomething3
+      }, null, 8
+      /* PROPS */
+      , ["onOnClickEvent"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1
     /* STABLE */
@@ -19763,17 +20543,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _hoisted_1 = {
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "py-5"
-};
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
   "class": "text-center"
-}, "Language Literacy and Numeracy Indication", -1
-/* HOISTED */
-);
-
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+}, "Language Literacy and Numeracy Indication"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "py-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "progress"
@@ -19786,23 +20561,233 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   "aria-valuenow": "33.33",
   "aria-valuemin": "0",
   "aria-valuemax": "100"
-}, "33.33%")])], -1
+}, "33.33%")])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "py-3"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " This document is designed to provide us with some idea as to your literacy and numeracy skills to ensure that you will be able to meet the English Language requirements for the First Aid training. All questions must be attempted. "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " There is no pass mark, but rather the process advises us of your English Language and numeracy skills and knowledge, this provides us with an indication of the degree of support you may require and if we can provide this. ")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "name"
+}, "Name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "name",
+  id: "name",
+  placeholder: "Name"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "courses"
+}, "Course/UoC"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  "class": "form-control",
+  name: "selected_course",
+  id: "selected_course"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "",
+  selected: "",
+  disabled: ""
+}, "Select a course..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "HLTAID009-Provide cardiopulmonary resuscitation"
+}, " HLTAID009 Provide Cardiopulmonary Resuscitation "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "HLTAID011-Provide first aid"
+}, " HLTAID011 Provide First Aid "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "HLTAID012-Provide an emergency first aid response in an education and care setting"
+}, " HLTAID012 Provide an Emergency First Aid Response in an Education and Care Setting "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "CPCCWHS1001-Prepare to work safely in the construction industry"
+}, " CPCCWHS1001 - Prepare to Work Safely in the Construction Industry "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "SITHFABO02-Provide responsible service of alcohol"
+}, " SITHFABO02 - Provide Responsible Service of Alcohol "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "SITHGAM001-Provide responsible gambling services"
+}, " SITHGAM001 - Provide Responsible Gambling Services ")])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-title instruction-text"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "ENGLISH LITERACY EXAM"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " Read the following passage and answers the questions from information in the passage. "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " There was a little detective agency in Africa; it was at the foot of a large mountain. These were its assets: a tiny white vatwo desks, two chairs, a telephone, and an old typewriter. Then there was a teapot, in which the lady detective brewed redbush tea. There were three mugs, one for the detective, one for the secretary and one for a client. This agency was in a beautiful little town. "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " When you walked out of the front door you could see an acacia tree, throne tree and the edge of the desert. As you walked down the front stairs onto the red gravely road an old Ford truck was parked in the driveway. ")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "What country do you find the agency?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "country_agency",
+  id: "country_agency"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "List 5 of the assets the agency had?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+  "class": "form-control",
+  name: "agency_5_assets",
+  id: "agency_5_assets"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Who were the mugs for?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+  "class": "form-control",
+  name: "who_were_the_mugs_for",
+  id: "who_were_the_mugs_for"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "What type of tea was brewed by the lady detective?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+  "class": "form-control",
+  name: "type_of_tea_brewed_by_lady_detective",
+  id: "type_of_tea_brewed_by_lady_detective"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Name the plants you see outside the front door?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+  "class": "form-control",
+  name: "plants_outside_front_door",
+  id: "plants_outside_front_door"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "You have arrived at the local shopping centre and notice that the floor is wet however no sign has been placed in the area. Circle the appropriate sign that should be placed in this area. "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row",
+  id: "wet_floor_sign"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "radio",
+  "class": "input-form-check-input",
+  name: "wet_floor_sign"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: _public_images_enrolments_1_png__WEBPACK_IMPORTED_MODULE_1__["default"],
+  alt: "Option 1"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "radio",
+  "class": "input-form-check-input",
+  name: "wet_floor_sign"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: _public_images_enrolments_2_png__WEBPACK_IMPORTED_MODULE_2__["default"],
+  alt: "Option 2"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "radio",
+  "class": "input-form-check-input",
+  name: "wet_floor_sign"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: _public_images_enrolments_3_png__WEBPACK_IMPORTED_MODULE_3__["default"],
+  alt: "Option 3"
+})])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "It is important not to use the lift in the event of a fire. Circle the sign that indicates this practice. "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "radio",
+  "class": "input-form-check-input",
+  name: "use_lift_in_event_of_fire"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: _public_images_enrolments_21_png__WEBPACK_IMPORTED_MODULE_4__["default"],
+  alt: "Option 1"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "radio",
+  "class": "input-form-check-input",
+  name: "use_lift_in_event_of_fire"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: _public_images_enrolments_22_png__WEBPACK_IMPORTED_MODULE_5__["default"],
+  alt: "Option 2"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "radio",
+  "class": "input-form-check-input",
+  name: "use_lift_in_event_of_fire"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: _public_images_enrolments_23_png__WEBPACK_IMPORTED_MODULE_6__["default"],
+  alt: "Option 3"
+})])])])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Explain why it is important to read all signs in the workplace. "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+  "class": "form-control",
+  name: "explain_importance_of_read_signs",
+  id: "explain_importance_of_read_signs",
+  placeholder: "Explain here..."
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-title"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "NUMERACY EXAM")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, " You are earning $19 per hour. You have worked 37 hours last week. What is the amount prior to tax that you would expect to be paid? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "amount_of_paid",
+  id: "amount_of_paid",
+  placeholder: "$ XX"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, " You have a 25mg tablet and you need give your client usually takes 75mg. How many tablets would you need to give to the client? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "input",
+  "class": "form-control",
+  name: "tablets_to_give_clients",
+  id: "tablets_to_give_clients",
+  placeholder: "X tablets"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, " You are organising a bus trip with clients today and the bus seats 25 clients. On your list are 37 clients. How many clients must you take off that list? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "clients_to_take_off_list",
+  id: "clients_to_take_off_list",
+  placeholder: "X clients"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, " You have 4 staff and 52 clients to care for. Each staff member will have how many residents? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  "class": "form-control",
+  name: "how_many_residents",
+  id: "how_many_residents",
+  placeholder: "X residents"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, " You have to give a client 2 Panadol; each Panadol tablet is 500mg. How many milligrams of Panadol are you giving? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  name: "how_many_panadol",
+  id: "how_many_panadol",
+  "class": "form-control",
+  placeholder: "X mg"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn btn-primary",
+  type: "submit"
+}, " Save & Procced to next step ")])], -1
 /* HOISTED */
 );
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"py-3\"><p> This document is designed to provide us with some idea as to your literacy and numeracy skills to ensure that you will be able to meet the English Language requirements for the First Aid training. All questions must be attempted. </p><p> There is no pass mark, but rather the process advises us of your English Language and numeracy skills and knowledge, this provides us with an indication of the degree of support you may require and if we can provide this. </p></div><div class=\"card\"><div class=\"card-body\"><div class=\"form-group\"><label for=\"name\">Name</label><input type=\"text\" class=\"form-control\" name=\"name\" placeholder=\"Name\"></div><div class=\"form-group\"><label for=\"courses\">Course/UoC</label><select id=\"courses\" class=\"form-control\" name=\"selected_course\"><option value=\"\">Select a course...</option><option value=\"HLTAID009-Provide cardiopulmonary resuscitation\"> HLTAID009 Provide Cardiopulmonary Resuscitation </option><option value=\"HLTAID011 - Provide first aid\"> HLTAID011 Provide First Aid </option><option value=\"HLTAID012-Provide an emergency first aid response in an education and care setting\"> HLTAID012 Provide an Emergency First Aid Response in an Education and Care Setting </option><option value=\"CPCCWHS1001-Prepare to work safely in the construction industry\"> CPCCWHS1001 - Prepare to Work Safely in the Construction Industry </option><option value=\"SITHFABO02-Provide responsible service of alcohol\"> SITHFABO02 - Provide Responsible Service of Alcohol </option><option value=\"SITHGAM001-Provide responsible gambling services\"> SITHGAM001 - Provide Responsible Gambling Services </option></select></div></div></div><div class=\"my-5\"></div><div class=\"card\"><div class=\"card-body\"><div class=\"card-title instruction-text\"><h5>ENGLISH LITERACY EXAM</h5><p> Read the following passage and answers the questions from information in the passage. </p><p> There was a little detective agency in Africa; it was at the foot of a large mountain. These were its assets: a tiny white vatwo desks, two chairs, a telephone, and an old typewriter. Then there was a teapot, in which the lady detective brewed redbush tea. There were three mugs, one for the detective, one for the secretary and one for a client. This agency was in a beautiful little town. </p><p> When you walked out of the front door you could see an acacia tree, throne tree and the edge of the desert. As you walked down the front stairs onto the red gravely road an old Ford truck was parked in the driveway. </p></div><div class=\"form-group\"><label>What country do you find the agency?</label><input type=\"text\" class=\"form-control\" name=\"country_agency\"></div><div class=\"form-group\"><label>List 5 of the assets the agency had?</label><textarea class=\"form-control\" name=\"agency_5_assets\"></textarea></div><div class=\"form-group\"><label>Who were the mugs for?</label><textarea class=\"form-control\" name=\"who_were_the_mugs_for\"></textarea></div><div class=\"form-group\"><label>What type of tea was brewed by the lady detective?</label><textarea class=\"form-control\" name=\"type_of_tea_brewed_by_lady_detective\"></textarea></div><div class=\"form-group\"><label>Name the plants you see outside the front door?</label><textarea class=\"form-control\" name=\"plants_outside_front_door\"></textarea></div></div></div><div class=\"my-5\"></div><div class=\"card\"><div class=\"card-body\"><div class=\"form-group\"><label>You have arrived at the local shopping centre and notice that the floor is wet however no sign has been placed in the area. Circle the appropriate sign that should be placed in this area. </label><div class=\"row\"><div class=\"col-md-4\"><label><input type=\"radio\" class=\"input-form-check-input\" name=\"wet_floor_sign\"><img src=\"" + _public_images_enrolments_1_png__WEBPACK_IMPORTED_MODULE_1__["default"] + "\" alt=\"Option 1\"></label></div><div class=\"col-md-4\"><label><input type=\"radio\" class=\"input-form-check-input\" name=\"wet_floor_sign\"><img src=\"" + _public_images_enrolments_2_png__WEBPACK_IMPORTED_MODULE_2__["default"] + "\" alt=\"Option 2\"></label></div><div class=\"col-md-4\"><label><input type=\"radio\" class=\"input-form-check-input\" name=\"wet_floor_sign\"><img src=\"" + _public_images_enrolments_3_png__WEBPACK_IMPORTED_MODULE_3__["default"] + "\" alt=\"Option 3\"></label></div></div></div><div class=\"form-group\"><label>It is important not to use the lift in the event of a fire. Circle the sign that indicates this practice. </label><div class=\"row\"><div class=\"col-4\"><label><input type=\"radio\" class=\"input-form-check-input\" name=\"use_lift_in_event_of_fire\"><img src=\"" + _public_images_enrolments_21_png__WEBPACK_IMPORTED_MODULE_4__["default"] + "\" alt=\"Option 1\"></label></div><div class=\"col-4\"><label><input type=\"radio\" class=\"input-form-check-input\" name=\"use_lift_in_event_of_fire\"><img src=\"" + _public_images_enrolments_22_png__WEBPACK_IMPORTED_MODULE_5__["default"] + "\" alt=\"Option 2\"></label></div><div class=\"col-4\"><label><input type=\"radio\" class=\"input-form-check-input\" name=\"use_lift_in_event_of_fire\"><img src=\"" + _public_images_enrolments_23_png__WEBPACK_IMPORTED_MODULE_6__["default"] + "\" alt=\"Option 3\"></label></div></div></div></div></div><div class=\"my-5\"></div><div class=\"card\"><div class=\"card-body\"><div class=\"form-group\"><label>Explain why it is important to read all signs in the workplace. </label><textarea class=\"form-control\" name=\"explain_importance_of_read_signs\" placeholder=\"Explain here...\"></textarea></div></div></div><div class=\"my-5\"></div><div class=\"card\"><div class=\"card-body\"><div class=\"card-title\"><h5>NUMERACY EXAM</h5></div><div class=\"form-group\"><label> You are earning $19 per hour. You have worked 37 hours last week. What is the amount prior to tax that you would expect to be paid? </label><input type=\"text\" class=\"form-control\" name=\"amount_of_paid\" placeholder=\"$ XX\"></div><div class=\"form-group\"><label> You have a 25mg tablet and you need give your client usually takes 75mg. How many tablets would you need to give to the client? </label><input type=\"input\" class=\"form-control\" name=\"tablets_to_give_clients\" placeholder=\"X tablets\"></div><div class=\"form-group\"><label> You are organising a bus trip with clients today and the bus seats 25 clients. On your list are 37 clients. How many clients must you take off that list? </label><input type=\"text\" class=\"form-control\" name=\"clients_to_take_off_list\" placeholder=\"X clients\"></div><div class=\"form-group\"><label> You have 4 staff and 52 clients to care for. Each staff member will have how many residents? </label><input type=\"text\" class=\"form-control\" name=\"how_many_residents\" placeholder=\"X residents\"></div><div class=\"form-group\"><label> You have to give a client 2 Panadol; each Panadol tablet is 500mg. How many milligrams of Panadol are you giving? </label><input type=\"text\" name=\"how_many_panadol\" class=\"form-control\" placeholder=\"X mg\"></div></div></div>", 10);
-
-var _hoisted_14 = {
-  "class": "my-5"
-};
+var _hoisted_2 = [_hoisted_1];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, _hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn btn-primary",
-    type: "button",
-    onClick: _cache[0] || (_cache[0] = function () {
-      return $setup.handleClick && $setup.handleClick.apply($setup, arguments);
-    })
-  }, " Save & Procced to next step ")])]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
+    onSubmit: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $setup.onFormSubmitHandler && $setup.onFormSubmitHandler.apply($setup, arguments);
+    }, ["prevent"]))
+  }, _hoisted_2, 32
+  /* HYDRATE_EVENTS */
+  );
 }
 
 /***/ }),
@@ -19820,17 +20805,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "py-5"
-};
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
   "class": "text-center"
-}, "Pre-Training Review", -1
-/* HOISTED */
-);
-
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+}, "Pre-Training Review"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "py-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "progress"
@@ -19843,23 +20823,256 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   "aria-valuenow": "66.66",
   "aria-valuemin": "0",
   "aria-valuemax": "100"
-}, " 66.66% ")])], -1
+}, " 66.66% ")])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "py-3"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Introduction"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " A Pre-Training Review ensures that the learning and assessment strategy meets your individual needs. The pre-training review ensures: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, "Understand your objectives for undertaking this course"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, " Explores your current competencies and provides opportunities for these to be assessed through Recognition of Prior Learning (RPL), Recognition of Current Competency (RCC) or Credit Transfer (CT) ")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "pt-3"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Instructions for all Students"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " Prior to completing Pre-Training Review, make sure you have sufficient information about the course. In particular, you must have access to the following information; "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, " Training and Assessment arrangements i.e. duration of the course, training and assessment modes, days of training, assessments to be completed "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, " Employment prospects - You should conduct your own research and have strong evidence of employability options on completion of the course "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, " Recognition of prior learning and credit transfer application process "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, "Fees and charges applicable for the training"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Your rights and obligations as a student at "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Unique College of Technology UCT"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" - Entry requirements into the course ")])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "pt-3"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Instructions for completing PTR"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " Please ensure each question is answered as accurately as possible. If you require more space to write your response to a question please attach a second sheet and number the responses. "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, " Training and Assessment arrangements i.e. duration of the course, training and assessment modes, days of training, assessments to be completed "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, " Employment prospects - You should conduct your own research and have strong evidence of employability options on completion of the course "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, " Recognition of prior learning and credit transfer application process "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, "Fees and charges applicable for the training"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Your rights and obligations as a student at "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Unique College of Technology UCT"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" - Entry requirements into the course ")])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-title"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Part A: Your expectations and experience")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "expectations"
+}, "What do you hope to gain from undertaking this qualification?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+  name: "expectations",
+  id: "expectations",
+  rows: "5",
+  "class": "form-control"
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-title"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Part B")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "position"
+}, "Please write a brief description of your current position."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+  name: "position",
+  id: "position",
+  rows: "5",
+  "class": "form-control"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group pt-3"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "employed"
+}, "Provide your last 3 job titles and how long you were employed in each position."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", {
+  "class": "table"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
+  "class": "border-0 p-1"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  name: "employed[]",
+  "class": "form-control w-100"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
+  "class": "border-0 p-1"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  name: "employed[]",
+  "class": "form-control w-100"
+})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
+  "class": "border-0 p-1"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "text",
+  name: "employed[]",
+  "class": "form-control w-100"
+})])])])])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "training1"
+}, "Have you acquired any formal training in any of the qualifications you wish to enrol into?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "d-block"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-check form-check-inline"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "form-check-input",
+  type: "radio",
+  name: "training1",
+  id: "radio11",
+  value: "Yes"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-check-label",
+  "for": "radio11"
+}, "Yes")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-check form-check-inline"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "form-check-input",
+  type: "radio",
+  name: "training1",
+  id: "radio12",
+  value: "No"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-check-label",
+  "for": "radio12"
+}, "No")])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "trainin2"
+}, "Do you wish to apply for RPL?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "d-block"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-check form-check-inline"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "form-check-input",
+  type: "radio",
+  name: "training2",
+  id: "radio21",
+  value: "Yes"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-check-label",
+  "for": "radio21"
+}, "Yes")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-check form-check-inline"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "form-check-input",
+  type: "radio",
+  name: "training2",
+  id: "radio22",
+  value: "No"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-check-label",
+  "for": "radio22"
+}, "No")])])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Explain why it is important to read all signs in the workplace. "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+  "class": "form-control",
+  name: "explain_importance_of_read_signs",
+  placeholder: "Explain here..."
+})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Following information will help us to determine, you’re learning and styles and if we are able to deliver courses that meet your learning styles. "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-check"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "form-check-input",
+  type: "checkbox",
+  name: "support1",
+  value: "Power Points explained to me during classes",
+  id: "support11"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-check-label",
+  "for": "support11"
+}, "Power Points explained to me during classes ")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-check"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "form-check-input",
+  type: "checkbox",
+  name: "support1",
+  value: "Pictures and diagrams ",
+  id: "support12"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-check-label",
+  "for": "support12"
+}, "Pictures and diagrams ")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-check"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "form-check-input",
+  type: "checkbox",
+  name: "support1",
+  value: "Group discussions with others ",
+  id: "support13"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-check-label",
+  "for": "support13"
+}, "Group discussions with others ")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-check"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "form-check-input",
+  type: "checkbox",
+  name: "support1",
+  value: "Conducting my own research ",
+  id: "support14"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-check-label",
+  "for": "support14"
+}, "Conducting my own research ")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-check"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "form-check-input",
+  type: "checkbox",
+  name: "support1",
+  value: "Listening to the lectures/ trainers ",
+  id: "support15"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-check-label",
+  "for": "support15"
+}, "Listening to the lectures/ trainers ")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-check"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "form-check-input",
+  type: "checkbox",
+  name: "support1",
+  value: "Practical application of skills and knowledge in a workplace or similar or watching videos ",
+  id: "support16"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-check-label",
+  "for": "support16"
+}, "Practical application of skills and knowledge in a workplace or similar or watching videos ")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-check"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "form-check-input",
+  type: "checkbox",
+  name: "support1",
+  value: "Working through real examples such as a case study or scenario ",
+  id: "support17"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-check-label",
+  "for": "support17"
+}, "Working through real examples such as a case study or scenario ")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "form-check"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "form-check-input",
+  type: "checkbox",
+  value: "",
+  name: "support1",
+  id: "support18"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-check-label",
+  "for": "support18"
+}, "Other ")])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-5"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn btn-primary",
+  type: "submit"
+}, " Save & Procced to next step ")])], -1
 /* HOISTED */
 );
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"py-3\"><h5>Introduction</h5><p> A Pre-Training Review ensures that the learning and assessment strategy meets your individual needs. The pre-training review ensures: </p><ul><li>Understand your objectives for undertaking this course</li><li> Explores your current competencies and provides opportunities for these to be assessed through Recognition of Prior Learning (RPL), Recognition of Current Competency (RCC) or Credit Transfer (CT) </li></ul><div class=\"pt-3\"><h5>Instructions for all Students</h5><p> Prior to completing Pre-Training Review, make sure you have sufficient information about the course. In particular, you must have access to the following information; </p><ul><li> Training and Assessment arrangements i.e. duration of the course, training and assessment modes, days of training, assessments to be completed </li><li> Employment prospects - You should conduct your own research and have strong evidence of employability options on completion of the course </li><li> Recognition of prior learning and credit transfer application process </li><li>Fees and charges applicable for the training</li><li> Your rights and obligations as a student at <strong>Unique College of Technology UCT</strong> - Entry requirements into the course </li></ul></div><div class=\"pt-3\"><h5>Instructions for completing PTR</h5><p> Please ensure each question is answered as accurately as possible. If you require more space to write your response to a question please attach a second sheet and number the responses. </p><ul><li> Training and Assessment arrangements i.e. duration of the course, training and assessment modes, days of training, assessments to be completed </li><li> Employment prospects - You should conduct your own research and have strong evidence of employability options on completion of the course </li><li> Recognition of prior learning and credit transfer application process </li><li>Fees and charges applicable for the training</li><li> Your rights and obligations as a student at <strong>Unique College of Technology UCT</strong> - Entry requirements into the course </li></ul></div></div><div class=\"card\"><div class=\"card-body\"><div class=\"card-title\"><h5>Part A: Your expectations and experience</h5></div><div class=\"form-group\"><label for=\"expectations\">What do you hope to gain from undertaking this qualification?</label><textarea name=\"expectations\" id=\"expectations\" rows=\"5\" class=\"form-control\"></textarea></div></div></div><div class=\"my-5\"></div><div class=\"card\"><div class=\"card-body\"><div class=\"card-title\"><h5>Part B</h5></div><div class=\"form-group\"><label for=\"position\">Please write a brief description of your current position.</label><textarea name=\"position\" id=\"position\" rows=\"5\" class=\"form-control\"></textarea></div><div class=\"form-group pt-3\"><label for=\"employed\">Provide your last 3 job titles and how long you were employed in each position.</label><table class=\"table\"><tbody><tr><td class=\"border-0 p-1\"><input type=\"text\" name=\"employed[]\" class=\"form-control w-100\"></td></tr><tr><td class=\"border-0 p-1\"><input type=\"text\" name=\"employed[]\" class=\"form-control w-100\"></td></tr><tr><td class=\"border-0 p-1\"><input type=\"text\" name=\"employed[]\" class=\"form-control w-100\"></td></tr></tbody></table></div></div></div><div class=\"my-5\"></div><div class=\"card\"><div class=\"card-body\"><div class=\"form-group\"><label for=\"training1\">Have you acquired any formal training in any of the qualifications you wish to enrol into?</label><div class=\"d-block\"><div class=\"form-check form-check-inline\"><input class=\"form-check-input\" type=\"radio\" name=\"training1\" id=\"radio11\" value=\"Yes\"><label class=\"form-check-label\" for=\"radio11\">Yes</label></div><div class=\"form-check form-check-inline\"><input class=\"form-check-input\" type=\"radio\" name=\"training1\" id=\"radio12\" value=\"No\"><label class=\"form-check-label\" for=\"radio12\">No</label></div></div></div><div class=\"form-group\"><label for=\"trainin2\">Do you wish to apply for RPL?</label><div class=\"d-block\"><div class=\"form-check form-check-inline\"><input class=\"form-check-input\" type=\"radio\" name=\"training2\" id=\"radio21\" value=\"Yes\"><label class=\"form-check-label\" for=\"radio21\">Yes</label></div><div class=\"form-check form-check-inline\"><input class=\"form-check-input\" type=\"radio\" name=\"training2\" id=\"radio22\" value=\"No\"><label class=\"form-check-label\" for=\"radio22\">No</label></div></div></div></div></div><div class=\"my-5\"></div><div class=\"card\"><div class=\"card-body\"><div class=\"form-group\"><label>Explain why it is important to read all signs in the workplace. </label><textarea class=\"form-control\" name=\"explain_importance_of_read_signs\" placeholder=\"Explain here...\"></textarea></div></div></div><div class=\"my-5\"></div><div class=\"card\"><div class=\"card-body\"><div class=\"form-group\"><label>Following information will help us to determine, you’re learning and styles and if we are able to deliver courses that meet your learning styles. </label><div class=\"form-check\"><input class=\"form-check-input\" type=\"checkbox\" name=\"support1\" value=\"Power Points explained to me during classes\" id=\"support11\"><label class=\"form-check-label\" for=\"support11\">Power Points explained to me during classes </label></div><div class=\"form-check\"><input class=\"form-check-input\" type=\"checkbox\" name=\"support1\" value=\"Pictures and diagrams \" id=\"support12\"><label class=\"form-check-label\" for=\"support12\">Pictures and diagrams </label></div><div class=\"form-check\"><input class=\"form-check-input\" type=\"checkbox\" name=\"support1\" value=\"Group discussions with others \" id=\"support13\"><label class=\"form-check-label\" for=\"support13\">Group discussions with others </label></div><div class=\"form-check\"><input class=\"form-check-input\" type=\"checkbox\" name=\"support1\" value=\"Conducting my own research \" id=\"support14\"><label class=\"form-check-label\" for=\"support14\">Conducting my own research </label></div><div class=\"form-check\"><input class=\"form-check-input\" type=\"checkbox\" name=\"support1\" value=\"Listening to the lectures/ trainers \" id=\"support15\"><label class=\"form-check-label\" for=\"support15\">Listening to the lectures/ trainers </label></div><div class=\"form-check\"><input class=\"form-check-input\" type=\"checkbox\" name=\"support1\" value=\"Practical application of skills and knowledge in a workplace or similar or watching videos \" id=\"support16\"><label class=\"form-check-label\" for=\"support16\">Practical application of skills and knowledge in a workplace or similar or watching videos </label></div><div class=\"form-check\"><input class=\"form-check-input\" type=\"checkbox\" name=\"support1\" value=\"Working through real examples such as a case study or scenario \" id=\"support17\"><label class=\"form-check-label\" for=\"support17\">Working through real examples such as a case study or scenario </label></div><div class=\"form-check\"><input class=\"form-check-input\" type=\"checkbox\" value=\"\" name=\"support1\" id=\"support18\"><label class=\"form-check-label\" for=\"support18\">Other </label></div></div></div></div>", 10);
-
-var _hoisted_14 = {
-  "class": "my-5"
-};
+var _hoisted_2 = [_hoisted_1];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, _hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn btn-primary",
-    type: "button",
-    onClick: _cache[0] || (_cache[0] = function () {
-      return $setup.handleClick && $setup.handleClick.apply($setup, arguments);
-    })
-  }, " Save & Procced to next step ")])]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
+    onSubmit: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $setup.onFormSubmitHandler && $setup.onFormSubmitHandler.apply($setup, arguments);
+    }, ["prevent"]))
+  }, _hoisted_2, 32
+  /* HYDRATE_EVENTS */
+  );
 }
 
 /***/ }),

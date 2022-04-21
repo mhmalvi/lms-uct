@@ -1,248 +1,264 @@
 <template lang="">
-    <div class="py-5">
-        <h4 class="text-center">Language Literacy and Numeracy Indication</h4>
-        <div class="py-4">
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 33.33%;"
-                aria-valuenow="33.33" aria-valuemin="0" aria-valuemax="100">33.33%</div>
-            </div>
-        </div>
-        <div class="py-3">
-            <p>
-                This document is designed to provide us with some idea as to your literacy and numeracy skills to ensure 
-                that you will be able to meet the English Language requirements for the First Aid training. All questions 
-                must be attempted. 
-            </p>
-
-            <p>
-                There is no pass mark, but rather the process advises us of your English Language and numeracy skills and 
-                knowledge, this provides us with an indication of the degree of support you may require and if we can 
-                provide this. 
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" name="name" placeholder="Name"/>
-                </div>
-                <div class="form-group">
-                    <label for="courses">Course/UoC</label>
-                    <select id="courses" class="form-control" name="selected_course">
-                        <option value="">Select a course...</option>
-                        <option value="HLTAID009-Provide cardiopulmonary resuscitation">
-                            HLTAID009 Provide Cardiopulmonary Resuscitation
-                        </option>
-                        <option value="HLTAID011 - Provide first aid">
-                            HLTAID011 Provide First Aid
-                        </option>
-                        <option value="HLTAID012-Provide an emergency first aid response in an education and care setting">
-                            HLTAID012 Provide an Emergency First Aid Response in an Education and Care Setting
-                        </option>
-                        <option value="CPCCWHS1001-Prepare to work safely in the construction industry">
-                            CPCCWHS1001 - Prepare to Work Safely in the Construction Industry
-                        </option>
-                        <option value="SITHFABO02-Provide responsible service of alcohol">
-                            SITHFABO02 - Provide Responsible Service of Alcohol
-                        </option>
-                        <option value="SITHGAM001-Provide responsible gambling services">
-                            SITHGAM001 - Provide Responsible Gambling Services
-                        </option>
-                    </select>
+    <form @submit.prevent="onFormSubmitHandler">
+        <div class="py-5">
+            <h4 class="text-center">Language Literacy and Numeracy Indication</h4>
+            <div class="py-4">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 33.33%;"
+                    aria-valuenow="33.33" aria-valuemin="0" aria-valuemax="100">33.33%</div>
                 </div>
             </div>
-        </div>
+            <div class="py-3">
+                <p>
+                    This document is designed to provide us with some idea as to your literacy and numeracy skills to ensure 
+                    that you will be able to meet the English Language requirements for the First Aid training. All questions 
+                    must be attempted. 
+                </p>
 
-        <div class="my-5"></div>
-
-        <div class="card">
-            <div class="card-body">
-                <div class="card-title instruction-text">
-                    <h5>ENGLISH LITERACY EXAM</h5>
-                    <p>
-                        Read the following passage and answers the questions from information in
-                        the passage.
-                    </p>
-                    <p>
-                        There was a little detective agency in Africa; it was at the foot of a
-                        large mountain.
-                        These were its assets: a tiny white vatwo desks, two chairs, a
-                        telephone, and an old typewriter.
-                        Then there was a teapot, in which the lady detective brewed redbush tea.
-                        There were three mugs,
-                        one for the detective, one for the secretary and one for a client. This
-                        agency was in a beautiful
-                        little town.
-                    </p>
-                    <p>
-                        When you walked out of the front door you could see an acacia tree,
-                        throne tree and the edge of the desert.
-                        As you walked down the front stairs onto the red gravely road an old
-                        Ford truck was parked in the driveway.
-                    </p>
-                </div>
-
-                <div class="form-group">
-                    <label>What country do you find the agency?</label>
-                    <input type="text" class="form-control" name="country_agency" />
-                </div>
-                <div class="form-group">
-                    <label>List 5 of the assets the agency had?</label>
-                    <textarea class="form-control" name="agency_5_assets"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Who were the mugs for?</label>
-                    <textarea class="form-control" name="who_were_the_mugs_for"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>What type of tea was brewed by the lady detective?</label>
-                    <textarea class="form-control" name="type_of_tea_brewed_by_lady_detective"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Name the plants you see outside the front door?</label>
-                    <textarea class="form-control" name="plants_outside_front_door"></textarea>
-                </div>
+                <p>
+                    There is no pass mark, but rather the process advises us of your English Language and numeracy skills and 
+                    knowledge, this provides us with an indication of the degree of support you may require and if we can 
+                    provide this. 
+                </p>
             </div>
-        </div>
 
-        <div class="my-5"></div>
-
-        <div class="card">
-            <div class="card-body">
-                <div class="form-group">
-                    <label>You have arrived at
-                        the local shopping centre and notice that the
-                        floor is wet however no sign has been placed in
-                        the area. Circle the appropriate sign that
-                        should be placed in this area.
-                    </label>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>
-                                <input type="radio" class="input-form-check-input" name="wet_floor_sign" />
-                                <img src="../../../../public/images/enrolments/1.png" alt="Option 1" />
-                            </label>
-                        </div>
-                        <div class="col-md-4">
-                            <label>
-                                <input type="radio" class="input-form-check-input" name="wet_floor_sign" />
-                                <img src="../../../../public/images/enrolments/2.png" alt="Option 2" />
-                            </label>
-                        </div>
-                        <div class="col-md-4">
-                            <label>
-                                <input type="radio"
-                                    class="input-form-check-input" name="wet_floor_sign"/>
-                                    <img src="../../../../public/images/enrolments/3.png" alt="Option 3" />
-                            </label>
-                        </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group pt-4">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Name"/>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>It is important not
-                        to use the lift in the event of a fire. Circle
-                        the sign that indicates this practice.
-                    </label>
-                    <div class="row">
-                        <div class="col-4">
-                            <label>
-                                <input type="radio" class="input-form-check-input" name="use_lift_in_event_of_fire" />
-                                <img src="../../../../public/images/enrolments/21.png" alt="Option 1" />
-                            </label>
-                        </div>
-                        <div class="col-4">
-                            <label>
-                                <input type="radio" class="input-form-check-input" name="use_lift_in_event_of_fire" />
-                                <img src="../../../../public/images/enrolments/22.png" alt="Option 2" />
-                            </label>
-                        </div>
-                        <div class="col-4">
-                            <label>
-                                <input type="radio" class="input-form-check-input" name="use_lift_in_event_of_fire" />
-                                <img src="../../../../public/images/enrolments/23.png" alt="Option 3" />
-                            </label>
-                        </div>
+                    <div class="form-group pt-4">
+                        <label for="courses">Course/UoC</label>
+                        <select class="form-control" name="selected_course" id="selected_course">
+                            <option value selected disabled>Select a course...</option>
+                            <option value="HLTAID009-Provide cardiopulmonary resuscitation">
+                                HLTAID009 Provide Cardiopulmonary Resuscitation
+                            </option>
+                            <option value="HLTAID011-Provide first aid">
+                                HLTAID011 Provide First Aid
+                            </option>
+                            <option value="HLTAID012-Provide an emergency first aid response in an education and care setting">
+                                HLTAID012 Provide an Emergency First Aid Response in an Education and Care Setting
+                            </option>
+                            <option value="CPCCWHS1001-Prepare to work safely in the construction industry">
+                                CPCCWHS1001 - Prepare to Work Safely in the Construction Industry
+                            </option>
+                            <option value="SITHFABO02-Provide responsible service of alcohol">
+                                SITHFABO02 - Provide Responsible Service of Alcohol
+                            </option>
+                            <option value="SITHGAM001-Provide responsible gambling services">
+                                SITHGAM001 - Provide Responsible Gambling Services
+                            </option>
+                        </select>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="my-5"></div>
+            <div class="my-5"></div>
 
-        <div class="card">
-            <div class="card-body">
-                <div class="form-group"><label>Explain why it is
-                        important to read all signs in the workplace.
-                    </label>
-                    <textarea class="form-control" name="explain_importance_of_read_signs" placeholder="Explain here..."></textarea>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title instruction-text">
+                        <h5>ENGLISH LITERACY EXAM</h5>
+                        <p>
+                            Read the following passage and answers the questions from information in
+                            the passage.
+                        </p>
+                        <p>
+                            There was a little detective agency in Africa; it was at the foot of a
+                            large mountain.
+                            These were its assets: a tiny white vatwo desks, two chairs, a
+                            telephone, and an old typewriter.
+                            Then there was a teapot, in which the lady detective brewed redbush tea.
+                            There were three mugs,
+                            one for the detective, one for the secretary and one for a client. This
+                            agency was in a beautiful
+                            little town.
+                        </p>
+                        <p>
+                            When you walked out of the front door you could see an acacia tree,
+                            throne tree and the edge of the desert.
+                            As you walked down the front stairs onto the red gravely road an old
+                            Ford truck was parked in the driveway.
+                        </p>
+                    </div>
+
+                    <div class="form-group pt-4">
+                        <label>What country do you find the agency?</label>
+                        <input type="text" class="form-control" name="country_agency" id="country_agency"/>
+                    </div>
+                    <div class="form-group pt-4">
+                        <label>List 5 of the assets the agency had?</label>
+                        <textarea class="form-control" name="agency_5_assets" id="agency_5_assets"></textarea>
+                    </div>
+                    <div class="form-group pt-4">
+                        <label>Who were the mugs for?</label>
+                        <textarea class="form-control" name="who_were_the_mugs_for" id="who_were_the_mugs_for"></textarea>
+                    </div>
+                    <div class="form-group pt-4">
+                        <label>What type of tea was brewed by the lady detective?</label>
+                        <textarea class="form-control" name="type_of_tea_brewed_by_lady_detective" id="type_of_tea_brewed_by_lady_detective"></textarea>
+                    </div>
+                    <div class="form-group pt-4">
+                        <label>Name the plants you see outside the front door?</label>
+                        <textarea class="form-control" name="plants_outside_front_door" id="plants_outside_front_door"></textarea>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="my-5"></div>
+            <div class="my-5"></div>
 
-        <div class="card">
-            <div class="card-body">
-                <div class="card-title">
-                    <h5>NUMERACY EXAM</h5>
-                </div>
-                <div class="form-group">
-                    <label>
-                        You are earning $19 per hour. You have worked 37 hours last week.
-                        What is the amount prior to tax that you would expect to be paid?
-                    </label>
-                    <input type="text" class="form-control" name="amount_of_paid" placeholder="$ XX" />
-                </div>
-                <div class="form-group">
-                    <label>
-                        You have a 25mg tablet and you need give your client usually takes 75mg. 
-                        How many tablets would you need to give to the client?
-                    </label>
-                    <input type="input" class="form-control" name="tablets_to_give_clients" placeholder="X tablets" />
-                </div>
-                <div class="form-group">
-                    <label>
-                        You are organising a  bus trip with clients today and the bus seats 25
-                        clients. On your list are 37 clients. How many clients must you take off that
-                        list?
-                    </label>
-                    <input type="text" class="form-control" name="clients_to_take_off_list" placeholder="X clients" />
-                </div>
-                <div class="form-group">
-                    <label>
-                        You have 4 staff and 52 clients to care for. Each staff member will
-                        have how many residents?
-                    </label>
-                    <input type="text" class="form-control" name="how_many_residents" placeholder="X residents" />
-                </div>
-                <div class="form-group">
-                    <label>
-                        You have to give a client 2 Panadol; each Panadol tablet is 500mg. 
-                        How many milligrams of Panadol are you giving?
-                    </label>
-                    <input type="text" name="how_many_panadol" class="form-control" placeholder="X mg" />
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group pt-4">
+                        <label>You have arrived at
+                            the local shopping centre and notice that the
+                            floor is wet however no sign has been placed in
+                            the area. Circle the appropriate sign that
+                            should be placed in this area.
+                        </label>
+
+                        <div class="row" id = "wet_floor_sign">
+                            <div class="col-md-4">
+                                <label>
+                                    <input type="radio" class="input-form-check-input" name="wet_floor_sign"/>
+                                    <img src="../../../../public/images/enrolments/1.png" alt="Option 1" />
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                <label>
+                                    <input type="radio" class="input-form-check-input" name="wet_floor_sign"/>
+                                    <img src="../../../../public/images/enrolments/2.png" alt="Option 2" />
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                <label>
+                                    <input type="radio" class="input-form-check-input" name="wet_floor_sign"/>
+                                    <img src="../../../../public/images/enrolments/3.png" alt="Option 3"/>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group pt-4">
+                        <label>It is important not
+                            to use the lift in the event of a fire. Circle
+                            the sign that indicates this practice.
+                        </label>
+                        <div class="row">
+                            <div class="col-4">
+                                <label>
+                                    <input type="radio" class="input-form-check-input" name="use_lift_in_event_of_fire" />
+                                    <img src="../../../../public/images/enrolments/21.png" alt="Option 1" />
+                                </label>
+                            </div>
+                            <div class="col-4">
+                                <label>
+                                    <input type="radio" class="input-form-check-input" name="use_lift_in_event_of_fire" />
+                                    <img src="../../../../public/images/enrolments/22.png" alt="Option 2" />
+                                </label>
+                            </div>
+                            <div class="col-4">
+                                <label>
+                                    <input type="radio" class="input-form-check-input" name="use_lift_in_event_of_fire" />
+                                    <img src="../../../../public/images/enrolments/23.png" alt="Option 3" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="my-5">
-            <button class="btn btn-primary" type="button" @click="handleClick">
-                Save &amp; Procced to next step
-                </button>
+            <div class="my-5"></div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group"><label>Explain why it is
+                            important to read all signs in the workplace.
+                        </label>
+                        <textarea class="form-control" name="explain_importance_of_read_signs" id="explain_importance_of_read_signs" placeholder="Explain here..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-5"></div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h5>NUMERACY EXAM</h5>
+                    </div>
+                    <div class="form-group pt-4">
+                        <label>
+                            You are earning $19 per hour. You have worked 37 hours last week.
+                            What is the amount prior to tax that you would expect to be paid?
+                        </label>
+                        <input type="text" class="form-control" name="amount_of_paid" id="amount_of_paid" placeholder="$ XX" />
+                    </div>
+                    <div class="form-group pt-4">
+                        <label>
+                            You have a 25mg tablet and you need give your client usually takes 75mg. 
+                            How many tablets would you need to give to the client?
+                        </label>
+                        <input type="input" class="form-control" name="tablets_to_give_clients" id="tablets_to_give_clients" placeholder="X tablets" />
+                    </div>
+                    <div class="form-group pt-4">
+                        <label>
+                            You are organising a  bus trip with clients today and the bus seats 25
+                            clients. On your list are 37 clients. How many clients must you take off that
+                            list?
+                        </label>
+                        <input type="text" class="form-control" name="clients_to_take_off_list" id="clients_to_take_off_list" placeholder="X clients" />
+                    </div>
+                    <div class="form-group pt-4">
+                        <label>
+                            You have 4 staff and 52 clients to care for. Each staff member will
+                            have how many residents?
+                        </label>
+                        <input type="text" class="form-control" name="how_many_residents" id="how_many_residents" placeholder="X residents" />
+                    </div>
+                    <div class="form-group pt-4">
+                        <label>
+                            You have to give a client 2 Panadol; each Panadol tablet is 500mg. 
+                            How many milligrams of Panadol are you giving?
+                        </label>
+                        <input type="text" name="how_many_panadol" id="how_many_panadol" class="form-control" placeholder="X mg" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-5">
+                <button class="btn btn-primary" type="submit">
+                    Save &amp; Procced to next step
+                    </button>
+            </div>
         </div>
-    </div>
+    </form>
 </template>
 <script>
 export default {
   setup(props, context) {
-    function handleClick() {
-      context.emit("onClickEvent", 2);
+    function onFormSubmitHandler(e) {
+      const items = Object.fromEntries(new FormData(e.target).entries());
+
+      for (const item in items) {
+        if (items[item] == "") {
+          var form = document.querySelector("form");
+          var el = document.createElement("span");
+          el.innerText = "This field is required";
+          el.classList.add("text-danger");
+          var target = document.getElementById(item);
+          if (target != null) {
+            target.classList.add("is-invalid");
+            target.parentNode.insertBefore(el, target.nextSibling);
+          }
+          form.scrollIntoView({ behavior: "smooth" });
+        }
+      }
     }
 
     return {
-      handleClick,
+      onFormSubmitHandler,
     };
   },
 };
