@@ -176,7 +176,8 @@
                     <div class="form-group"><label>Explain why it is
                             important to read all signs in the workplace.
                         </label>
-                        <textarea class="form-control" name="explain_importance_of_read_signs" id="explain_importance_of_read_signs" placeholder="Explain here..."></textarea>
+                        <textarea class="form-control" name="explain_importance_of_read_signs" 
+                        id="explain_importance_of_read_signs" placeholder="Explain here..."></textarea>
                     </div>
                 </div>
             </div>
@@ -236,23 +237,43 @@
     </form>
 </template>
 <script>
+import { reactive } from "vue";
 export default {
   setup(props, context) {
+    const formData = reactive({
+      isValidForm: true,
+    });
+
     function onFormSubmitHandler(e) {
       const items = Object.fromEntries(new FormData(e.target).entries());
+      formValidate(items);
 
+      if (formData.isValidForm) {
+        context.emit("onClickEvent", items);
+      }
+    }
+
+    function formValidate(items) {
       for (const item in items) {
         if (items[item] == "") {
-          var form = document.querySelector("form");
           var el = document.createElement("span");
           el.innerText = "This field is required";
           el.classList.add("text-danger");
           var target = document.getElementById(item);
           if (target != null) {
+            formData.isValidForm = false;
             target.classList.add("is-invalid");
             target.parentNode.insertBefore(el, target.nextSibling);
           }
-          form.scrollIntoView({ behavior: "smooth" });
+        } else {
+          formData.isValidForm = true;
+        }
+      }
+
+      for (const item in items) {
+        if (items[item] == "") {
+          document.getElementById(item).scrollIntoView({ behavior: "smooth" });
+          break;
         }
       }
     }

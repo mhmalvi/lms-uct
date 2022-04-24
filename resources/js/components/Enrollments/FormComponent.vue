@@ -1,15 +1,20 @@
 <template>
   <div>
     <transition name="fade">
-      <LLNComponent v-if="state.count == 1" />
+      <LLNComponent v-if="state.count == 1" @onClickEvent="doSomething1" />
     </transition>
     <transition name="fade">
-      <PTRComponent v-if="state.count == 2" @onClickEvent="doSomething2" />
+      <PTRComponent
+        v-if="state.count == 2"
+        @backToPrevious="previousForm"
+        @onClickEvent="doSomething2"
+      />
     </transition>
     <transition name="fade">
       <EnrollmentComponent
         v-if="state.count == 3"
         @onClickEvent="doSomething3"
+        @backToPrevious="previousForm"
       />
     </transition>
   </div>
@@ -39,11 +44,17 @@ export default {
     function doSomething2(event) {
       state.count++;
       state.ptr = event;
+      console.log(event);
     }
 
     function doSomething3(event) {
       state.enrollment = event;
       formSubmitHandler();
+    }
+
+    function previousForm() {
+      state.count--;
+      console.log(state.count);
     }
 
     const formSubmitHandler = () => {
@@ -68,6 +79,7 @@ export default {
       doSomething1,
       doSomething2,
       doSomething3,
+      previousForm,
     };
   },
 };

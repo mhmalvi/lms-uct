@@ -23,13 +23,23 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="givenName">Given name *</label>
-                <input type="text" class="form-control" name="givenName" />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="givenName"
+                  id="givenName"
+                />
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="sureName">Family name (surname) *</label>
-                <input type="text" class="form-control" name="sureName" />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="sureName"
+                  id="sureName"
+                />
               </div>
             </div>
           </div>
@@ -37,7 +47,12 @@
             <div class="col-md-12">
               <div class="form-group pt-4">
                 <label for="address">Address</label
-                ><input type="text" class="form-control" name="address" />
+                ><input
+                  type="text"
+                  class="form-control"
+                  name="address"
+                  id="address"
+                />
               </div>
             </div>
           </div>
@@ -45,19 +60,34 @@
             <div class="col-md-4">
               <div class="form-group pt-4">
                 <label for="town">Town</label
-                ><input type="text" class="form-control" name="town" />
+                ><input
+                  type="text"
+                  class="form-control"
+                  name="town"
+                  id="town"
+                />
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group pt-4">
                 <label for="territory">Territory</label
-                ><input type="text" class="form-control" name="territory" />
+                ><input
+                  type="text"
+                  class="form-control"
+                  name="territory"
+                  id="territory"
+                />
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group pt-4">
                 <label for="code">Code</label
-                ><input type="text" class="form-control" name="code" />
+                ><input
+                  type="text"
+                  class="form-control"
+                  name="code"
+                  id="code"
+                />
               </div>
             </div>
           </div>
@@ -65,13 +95,23 @@
             <div class="col-md-6">
               <div class="form-group pt-4">
                 <label for="phone">Phone </label
-                ><input type="text" class="form-control" name="phone" />
+                ><input
+                  type="text"
+                  class="form-control"
+                  name="phone"
+                  id="phone"
+                />
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group pt-4">
                 <label for="mobile">Mobile</label
-                ><input type="text" class="form-control" name="mobile" />
+                ><input
+                  type="text"
+                  class="form-control"
+                  name="mobile"
+                  id="mobile"
+                />
               </div>
             </div>
           </div>
@@ -79,13 +119,18 @@
             <div class="col-md-6">
               <div class="form-group pt-4">
                 <label for="email">Email</label
-                ><input type="text" class="form-control" name="email" />
+                ><input
+                  type="text"
+                  class="form-control"
+                  name="email"
+                  id="email"
+                />
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group pt-4">
                 <label for="gender">Gender</label>
-                <select class="form-control">
+                <select class="form-control" name="gender" id="gender">
                   <option value selected disabled>
                     Please select your gender
                   </option>
@@ -99,13 +144,13 @@
             <div class="col-md-6">
               <div class="form-group pt-4">
                 <label for="dob">Date of birth</label
-                ><input type="date" class="form-control" name="dob" />
+                ><input type="date" class="form-control" name="dob" id="dob" />
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group pt-4">
                 <label for="cob">Country of Birth</label
-                ><input type="text" class="form-control" name="cob" />
+                ><input type="text" class="form-control" name="cob" id="cob" />
               </div>
             </div>
           </div>
@@ -113,14 +158,19 @@
             <div class="col-md-6">
               <div class="form-group pt-4">
                 <label for="spoken">Language spoken at home?</label
-                ><input type="text" class="form-control" name="spoken" />
+                ><input
+                  type="text"
+                  class="form-control"
+                  name="spoken"
+                  id="spoken"
+                />
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group pt-4">
                 <label for="usi"
                   >Do you already possess a unique student identifier (USI)? </label
-                ><input type="text" class="form-control" name="usi" />
+                ><input type="text" class="form-control" name="usi" id="usi" />
               </div>
             </div>
           </div>
@@ -130,7 +180,7 @@
                 <label for="origin"
                   >Are you of Aboriginal or Torres Strait Islander origin?
                 </label>
-                <select class="form-control" name="origin">
+                <select class="form-control" name="origin" id="origin">
                   <option value selected disabled>Please select...</option>
                   <option value="no">No</option>
                   <option value="yes aboriginal">Yes Aboriginal</option>
@@ -264,8 +314,8 @@
                   >Do you satisfy the course entry requirements (if any)? </label
                 ><select id="couseEntry" name="couseEntry" class="form-control">
                   <option value="" disabled selected>Please select...</option>
-                  <option value="">Yes</option>
-                  <option value="">No</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
                 </select>
               </div>
             </div>
@@ -287,10 +337,10 @@
                   class="form-control"
                 >
                   <option value="" disabled selected>Please select...</option>
-                  <option value="">Very well</option>
-                  <option value="">Well</option>
-                  <option value="">Not well</option>
-                  <option value="">Not at all</option>
+                  <option value="Very well">Very well</option>
+                  <option value="Well">Well</option>
+                  <option value="Not well">Not well</option>
+                  <option value="Not at all">Not at all</option>
                 </select>
               </div>
             </div>
@@ -329,12 +379,14 @@
                   class="form-control"
                 >
                   <option value="" disabled selected>Please select...</option>
-                  <option value="">Year 12</option>
-                  <option value="">Year 11</option>
-                  <option value="">Year 10</option>
-                  <option value="">Year 9</option>
-                  <option value="">Year 8 or below</option>
-                  <option value="">never attended school</option>
+                  <option value="Year 12">Year 12</option>
+                  <option value="Year 11">Year 11</option>
+                  <option value="Year 10">Year 10</option>
+                  <option value="Year 9">Year 9</option>
+                  <option value="Year 8 or below">Year 8 or below</option>
+                  <option value="never attended school">
+                    never attended school
+                  </option>
                 </select>
               </div>
             </div>
@@ -347,8 +399,11 @@
                   id="attendingSchool"
                   class="form-control"
                 >
-                  <option value="">Yes</option>
-                  <option value="">No</option>
+                  <option value selected disabled>
+                    Please select your gender
+                  </option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
                 </select>
               </div>
             </div>
@@ -583,13 +638,23 @@
             <div class="col-md-6">
               <div class="form-group pt-4">
                 <label for="occupation">Occupation</label
-                ><input type="text" class="form-control" name="occupation" />
+                ><input
+                  type="text"
+                  class="form-control"
+                  name="occupation"
+                  id="occupation"
+                />
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group pt-4">
                 <label for="businessName">Business Name</label
-                ><input type="text" class="form-control" name="businessName" />
+                ><input
+                  type="text"
+                  class="form-control"
+                  name="businessName"
+                  id="businessName"
+                />
               </div>
             </div>
           </div>
@@ -597,19 +662,29 @@
             <div class="col-md-4">
               <div class="form-group pt-4">
                 <label for="postalAddress">Postal Address</label
-                ><input type="text" class="form-control" name="postalAddress" />
+                ><input
+                  type="text"
+                  class="form-control"
+                  name="postalAddress"
+                  id="postalAddress"
+                />
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group pt-4">
                 <label for="contactPhone">Contact Phone</label
-                ><input type="text" class="form-control" name="contactPhone" />
+                ><input
+                  type="text"
+                  class="form-control"
+                  name="contactPhone"
+                  id="contactPhone"
+                />
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group pt-4">
                 <label for="fax">Fax</label
-                ><input type="text" class="form-control" name="fax" />
+                ><input type="text" class="form-control" name="fax" id="fax" />
               </div>
             </div>
           </div>
@@ -642,11 +717,47 @@
   </form>
 </template>
 <script>
+import { reactive } from "vue";
+
 export default {
   setup(props, context) {
+    const formData = reactive({
+      isValidForm: true,
+    });
+
     function onFormSubmitHandler(e) {
-      const data = Object.fromEntries(new FormData(e.target).entries());
-      context.emit("onClickEvent", data);
+      const items = Object.fromEntries(new FormData(e.target).entries());
+
+      formValidate(items);
+
+      if (formData.isValidForm) {
+        context.emit("onClickEvent", items);
+      }
+    }
+
+    function formValidate(items) {
+      for (const item in items) {
+        if (items[item] == "") {
+          var el = document.createElement("span");
+          el.innerText = "This field is required";
+          el.classList.add("text-danger");
+          var target = document.getElementById(item);
+          if (target != null) {
+            formData.isValidForm = false;
+            target.classList.add("is-invalid");
+            target.parentNode.insertBefore(el, target.nextSibling);
+          }
+        } else {
+          formData.isValidForm = true;
+        }
+      }
+
+      for (const item in items) {
+        if (items[item] == "") {
+          document.getElementById(item).scrollIntoView({ behavior: "smooth" });
+          break;
+        }
+      }
     }
 
     return {

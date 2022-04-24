@@ -354,11 +354,46 @@
   </form>
 </template>
 <script>
+import { reactive } from "vue";
+
 export default {
   setup(props, context) {
+    const formData = reactive({
+      isValidForm: true,
+    });
+
     function onFormSubmitHandler(e) {
-      const data = Object.fromEntries(new FormData(e.target).entries());
-      context.emit("onClickEvent", data);
+      const items = Object.fromEntries(new FormData(e.target).entries());
+      formValidate(items);
+
+      if (formData.isValidForm) {
+        context.emit("onClickEvent", items);
+      }
+    }
+
+    function formValidate(items) {
+      for (const item in items) {
+        if (items[item] == "") {
+          var el = document.createElement("span");
+          el.innerText = "This field is required";
+          el.classList.add("text-danger");
+          var target = document.getElementById(item);
+          if (target != null) {
+            formData.isValidForm = false;
+            target.classList.add("is-invalid");
+            target.parentNode.insertBefore(el, target.nextSibling);
+          }
+        } else {
+          formData.isValidForm = true;
+        }
+      }
+
+      for (const item in items) {
+        if (items[item] == "") {
+          document.getElementById(item).scrollIntoView({ behavior: "smooth" });
+          break;
+        }
+      }
     }
 
     return {
