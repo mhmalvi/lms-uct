@@ -1,6 +1,8 @@
 <!-- repo-card -->
 ![lms-uct](docs/assets/social-card.png)
 
+![lms-uct — architecture](docs/assets/architecture.png)
+
 # LMS-UCT
 
 A Learning Management System built for the University of Cape Town (UCT) using Laravel 8. The platform provides course management, virtual classrooms, online enrollment with payment processing, calendar scheduling, and PDF certificate generation.
